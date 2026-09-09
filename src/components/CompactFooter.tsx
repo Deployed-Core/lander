@@ -3,7 +3,21 @@ import Link from "next/link";
 export default function CompactFooter() {
   return (
     <footer className="brand-field--flat on-navy" style={{ position: "relative" }}>
+      <style>{`
+        @media (max-width: 900px) {
+          .compact-footer-inner {
+            justify-content: center !important;
+            text-align: center;
+          }
+          .compact-footer-cta {
+            margin-left: 0 !important;
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
       <div
+        className="compact-footer-inner"
         style={{
           maxWidth: 1160,
           margin: "0 auto",
@@ -20,6 +34,7 @@ export default function CompactFooter() {
         </span>
         <Link
           href="/contact"
+          className="compact-footer-cta"
           style={{
             marginLeft: "auto",
             display: "inline-flex",

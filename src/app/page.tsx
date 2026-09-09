@@ -63,13 +63,15 @@ export default function Home() {
         }
         @media (prefers-reduced-motion:reduce){[data-flow]{animation:none !important}}
 
+        @media (max-width:960px){
+          [data-r="flow"]{grid-template-columns:minmax(0,1fr) !important;gap:18px !important}
+          [data-r="conn"]{display:none !important}
+        }
         @media (max-width:900px){
           [data-r="cols2"]{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}
           [data-r="tri"]{grid-template-columns:minmax(0,1fr) !important;gap:16px !important}
           [data-r="side"]{grid-template-columns:minmax(0,1fr) !important;gap:24px !important}
           [data-r="side"] > *{position:static !important}
-          [data-r="flow"]{grid-template-columns:minmax(0,1fr) !important;gap:18px !important}
-          [data-r="conn"]{display:none !important}
           [data-r="foot"]{grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:32px !important}
         }
         @media (max-width:620px){
@@ -117,7 +119,7 @@ export default function Home() {
       </div>
 
       {/* ── Nav ── */}
-      <SiteNav tone="navy-solid" showSignIn={true} />
+      <SiteNav tone="navy-solid" />
 
       {/* ── Hero ── */}
       <section

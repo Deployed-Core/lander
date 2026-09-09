@@ -1,71 +1,118 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-
-const posts = [
-  {
-    date: "4 Sept 2026",
-    title: "Healthcare manpower optimisation",
-    tag: "Industry",
-    description:
-      "How a regional hospital network used AI-driven scheduling to cut agency spend by 34% while improving nurse satisfaction scores.",
-  },
-  {
-    date: "28 Aug 2026",
-    title: "What an assessment week actually looks like",
-    tag: "Deployments",
-    description:
-      "A day-by-day walkthrough of how we map processes, identify leverage points, and build the deployment roadmap.",
-  },
-  {
-    date: "19 Aug 2026",
-    title: "Agentic ops for claims processing",
-    tag: "Deployments",
-    description:
-      "End-to-end automation that handles intake, triage, and adjudication — reducing cycle time from days to minutes.",
-  },
-  {
-    date: "7 Aug 2026",
-    title: "Measuring AI density without scoring people",
-    tag: "Product",
-    description:
-      "Our framework for quantifying organisational AI maturity at the process level, not the individual level.",
-  },
-  {
-    date: "25 Jul 2026",
-    title: "Hand-off, not dependency",
-    tag: "Product",
-    description:
-      "Why every engagement ends with your team owning the system — and how we structure knowledge transfer from week one.",
-  },
-  {
-    date: "11 Jul 2026",
-    title: "Where logistics teams find leverage first",
-    tag: "Industry",
-    description:
-      "The three operational bottlenecks where AI creates outsized returns in supply-chain and distribution businesses.",
-  },
-];
+import { posts } from "@/data/posts";
 
 type Filter = "All posts" | "Deployments" | "Industry" | "Product";
 const filters: Filter[] = ["All posts", "Deployments", "Industry", "Product"];
 
 export default function BlogPage() {
   const [activeFilter, setActiveFilter] = useState<Filter>("All posts");
-  const [visibleCount, setVisibleCount] = useState(6);
+  const stickyWrapRef = useRef<HTMLDivElement>(null);
+  const stickyInnerRef = useRef<HTMLDivElement>(null);
+  const clipRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [scrollOffset, setScrollOffset] = useState(0);
+  const [gridOverflow, setGridOverflow] = useState(0);
+  const rafRef = useRef<number>(0);
 
   const filtered =
     activeFilter === "All posts"
       ? posts
       : posts.filter((p) => p.tag === activeFilter);
 
-  const visible = filtered.slice(0, visibleCount);
   const featured = posts[0];
+
+  const measure = useCallback(() => {
+    if (!clipRef.current || !gridRef.current) return 0;
+    const clipH = clipRef.current.offsetHeight;
+    const gridH = gridRef.current.scrollHeight;
+    const overflow = Math.max(0, gridH - clipH + 40);
+    return overflow;
+  }, []);
+
+  useEffect(() => {
+    const recalc = () => {
+      const ov = measure();
+      setGridOverflow(ov);
+      if (stickyWrapRef.current) {
+        stickyWrapRef.current.style.height = `calc(100vh + ${ov}px)`;
+      }
+    };
+
+    recalc();
+    window.addEventListener("resize", recalc);
+
+    const onScroll = () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      rafRef.current = requestAnimationFrame(() => {
+        if (!stickyWrapRef.current) return;
+        const rect = stickyWrapRef.current.getBoundingClientRect();
+        const progress = Math.max(0, -rect.top);
+        setScrollOffset(progress);
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const timer = setTimeout(recalc, 100);
+
+    return () => {
+      window.removeEventListener("resize", recalc);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+      clearTimeout(timer);
+    };
+  }, [measure, filtered.length]);
+
+  useEffect(() => {
+    const ov = measure();
+    setGridOverflow(ov);
+    if (stickyWrapRef.current) {
+      stickyWrapRef.current.style.height = `calc(100vh + ${ov}px)`;
+    }
+  }, [activeFilter, measure]);
+
+  const clampedOffset = Math.min(scrollOffset, gridOverflow);
 
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
+      <style>{`
+        @media (max-width: 768px) {
+          .featured-card {
+            grid-template-columns: 1fr !important;
+          }
+          .featured-card > div:last-child {
+            padding: var(--space-6) var(--space-6) var(--space-8) !important;
+          }
+          .blog-sticky-inner {
+            position: relative !important;
+            top: auto !important;
+            height: auto !important;
+            overflow: visible !important;
+          }
+          .blog-sticky-wrap {
+            height: auto !important;
+          }
+          .blog-grid-translate {
+            transform: none !important;
+          }
+        }
+        @media (max-width: 900px) {
+          [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 560px) {
+          [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
+          }
+        }
+      `}</style>
+
       <SiteNav active="Blog" tone="light" />
 
       {/* Hero / eyebrow */}
@@ -97,7 +144,7 @@ export default function BlogPage() {
         }}
       >
         <Link
-          href="#"
+          href={`/blog/${featured.slug}`}
           className="featured-card"
           style={{
             display: "grid",
@@ -112,16 +159,26 @@ export default function BlogPage() {
             transition: "box-shadow var(--dur-base) var(--ease-out)",
           }}
         >
-          {/* Image placeholder */}
           <div
             style={{
               aspectRatio: "16 / 10",
-              background: "var(--surface-sunken)",
+              background: featured.gradient,
               borderRadius: "var(--radius-lg) 0 0 var(--radius-lg)",
+              position: "relative",
+              overflow: "hidden",
             }}
-          />
-
-          {/* Content */}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "url(/assets/grain-512.png) repeat",
+                backgroundSize: "512px 512px",
+                opacity: 0.06,
+                mixBlendMode: "soft-light",
+              }}
+            />
+          </div>
           <div
             style={{
               display: "flex",
@@ -130,14 +187,25 @@ export default function BlogPage() {
               padding: "var(--space-10) var(--space-10) var(--space-10) 0",
             }}
           >
-            <span
-              style={{
-                font: "var(--body-sm)",
-                color: "var(--text-muted)",
-              }}
-            >
-              {featured.date}
-            </span>
+            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span
+                style={{
+                  font: "var(--body-sm)",
+                  color: "var(--text-muted)",
+                }}
+              >
+                {featured.date}
+              </span>
+              <span style={{ font: "var(--body-sm)", color: "var(--text-faint)" }}>&middot;</span>
+              <span
+                style={{
+                  font: "var(--body-sm)",
+                  color: "var(--text-muted)",
+                }}
+              >
+                {featured.readingTime} min read
+              </span>
+            </div>
             <h2
               style={{
                 font: "var(--display-3)",
@@ -159,262 +227,498 @@ export default function BlogPage() {
             >
               {featured.description}
             </p>
-            <span
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 7,
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "var(--text-link)",
-                marginTop: "var(--space-6)",
-              }}
-            >
-              Read the case
-              <img
-                src="/assets/icon-arrow-navy.png"
-                alt=""
-                style={{ width: 13, height: 12, display: "block" }}
-              />
-            </span>
-          </div>
-        </Link>
-      </section>
-
-      {/* All posts heading + filters */}
-      <section
-        style={{
-          maxWidth: "var(--page-max)",
-          margin: "0 auto",
-          padding: "0 var(--gutter)",
-        }}
-      >
-        <h2
-          style={{
-            font: "var(--display-2)",
-            letterSpacing: "var(--display-track)",
-            color: "var(--text-strong)",
-          }}
-        >
-          All posts
-        </h2>
-        <p
-          style={{
-            font: "var(--body-md)",
-            color: "var(--text-muted)",
-            marginTop: "var(--space-2)",
-            marginBottom: 0,
-          }}
-        >
-          Perspectives on applied AI, deployments, and building for the enterprise.
-        </p>
-
-        <div
-          style={{
-            borderBottom: "1px solid var(--border-hairline)",
-            margin: "var(--space-8) 0 var(--space-10)",
-          }}
-        />
-
-        {/* Filter buttons */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "var(--space-2)",
-          }}
-        >
-          {filters.map((f) => {
-            const isActive = f === activeFilter;
-            return (
-              <button
-                key={f}
-                type="button"
-                onClick={() => {
-                  setActiveFilter(f);
-                  setVisibleCount(6);
-                }}
-                style={{
-                  font: "var(--body-sm)",
-                  padding: "8px 18px",
-                  borderRadius: "var(--radius-pill)",
-                  cursor: "pointer",
-                  transition: "var(--transition-ui)",
-                  border: isActive ? "1px solid transparent" : "1px solid var(--border-subtle)",
-                  background: isActive ? "var(--blue-850)" : "transparent",
-                  color: isActive ? "var(--paper-050)" : "var(--text-body)",
-                }}
-              >
-                {f}
-              </button>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Post grid */}
-      <section
-        style={{
-          maxWidth: "var(--page-max)",
-          margin: "0 auto",
-          padding: "var(--space-10) var(--gutter) var(--space-16)",
-        }}
-      >
-        <div
-          className="post-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(272px, 1fr))",
-            gap: "40px 32px",
-          }}
-        >
-          {visible.map((post, i) => (
-            <Link
-              key={i}
-              href="#"
-              style={{
-                display: "block",
-                textDecoration: "none",
-                borderBottom: 0,
-              }}
-            >
-              {/* Image placeholder */}
-              <div
-                style={{
-                  aspectRatio: "4 / 3",
-                  background: "var(--surface-sunken)",
-                  borderRadius: "var(--radius-md)",
-                }}
-              />
+            <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: "var(--space-6)" }}>
               <span
                 style={{
-                  display: "block",
-                  font: "var(--body-sm)",
-                  color: "var(--text-muted)",
-                  marginTop: "var(--space-4)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 7,
+                  font: "var(--label)",
+                  letterSpacing: "var(--label-track)",
+                  color: "var(--text-link)",
                 }}
               >
-                {post.date}
+                Read the case
+                <img
+                  src="/assets/icon-arrow-navy.png"
+                  alt=""
+                  style={{ width: 13, height: 12, display: "block" }}
+                />
               </span>
-              <h3
-                style={{
-                  font: "var(--heading-2)",
-                  color: "var(--text-strong)",
-                  marginTop: "var(--space-2)",
-                }}
-              >
-                {post.title}
-              </h3>
               <span
                 style={{
-                  display: "inline-block",
                   font: "var(--body-sm)",
                   color: "var(--text-muted)",
-                  marginTop: "var(--space-2)",
                   background: "var(--surface-accent-soft)",
                   padding: "2px 10px",
                   borderRadius: "var(--radius-pill)",
                 }}
               >
-                {post.tag}
+                {featured.tag}
               </span>
-            </Link>
-          ))}
-        </div>
+            </div>
+          </div>
+        </Link>
+      </section>
 
-        {/* Load more */}
-        {visible.length < filtered.length && (
-          <div style={{ textAlign: "center", marginTop: "var(--space-12)" }}>
-            <button
-              type="button"
-              onClick={() => setVisibleCount((c) => c + 6)}
+      {/* Sticky scroll section */}
+      <div ref={stickyWrapRef} className="blog-sticky-wrap">
+        <div
+          ref={stickyInnerRef}
+          className="blog-sticky-inner"
+          style={{
+            position: "sticky",
+            top: 70,
+            height: "calc(100vh - 70px)",
+            overflow: "hidden",
+            background: "var(--surface-page)",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          {/* Header area — stays fixed, never overlapped */}
+          <div
+            style={{
+              flexShrink: 0,
+              maxWidth: "var(--page-max)",
+              margin: "0 auto",
+              padding: "var(--space-10) var(--gutter) 0",
+              width: "100%",
+              boxSizing: "border-box",
+              background: "var(--surface-page)",
+              zIndex: 3,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                justifyContent: "space-between",
+                flexWrap: "wrap",
+                gap: 16,
+              }}
+            >
+              <div>
+                <h2
+                  style={{
+                    font: "var(--display-2)",
+                    letterSpacing: "var(--display-track)",
+                    color: "var(--text-strong)",
+                  }}
+                >
+                  All posts
+                </h2>
+                <p
+                  style={{
+                    font: "var(--body-md)",
+                    color: "var(--text-muted)",
+                    marginTop: "var(--space-2)",
+                    marginBottom: 0,
+                  }}
+                >
+                  Perspectives on applied AI, deployments, and building for the
+                  enterprise.
+                </p>
+              </div>
+
+              {/* Filter buttons */}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: "var(--space-2)",
+                }}
+              >
+                {filters.map((f) => {
+                  const isActive = f === activeFilter;
+                  return (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => setActiveFilter(f)}
+                      style={{
+                        font: "var(--body-sm)",
+                        padding: "8px 18px",
+                        borderRadius: "var(--radius-pill)",
+                        cursor: "pointer",
+                        transition: "var(--transition-ui)",
+                        border: isActive
+                          ? "1px solid transparent"
+                          : "1px solid var(--border-subtle)",
+                        background: isActive ? "var(--blue-850)" : "transparent",
+                        color: isActive
+                          ? "var(--paper-050)"
+                          : "var(--text-body)",
+                      }}
+                    >
+                      {f}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div
+              style={{
+                borderBottom: "1px solid var(--border-hairline)",
+                margin: "var(--space-6) 0 0",
+              }}
+            />
+          </div>
+
+          {/* Clipped viewport for scrolling cards */}
+          <div ref={clipRef} style={{ flex: 1, overflow: "hidden", position: "relative" }}>
+          <div
+            className="blog-grid-translate"
+            style={{
+              transform: `translateY(-${clampedOffset}px)`,
+              willChange: "transform",
+            }}
+          >
+            <div
+              ref={gridRef}
+              style={{
+                maxWidth: "var(--page-max)",
+                margin: "0 auto",
+                padding: "var(--space-8) var(--gutter) var(--space-20)",
+              }}
+            >
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    "repeat(auto-fill, minmax(272px, 1fr))",
+                  gap: "40px 32px",
+                }}
+              >
+                {filtered.map((post, i) => (
+                  <Link
+                    key={`${activeFilter}-${i}`}
+                    href={`/blog/${post.slug}`}
+                    style={{
+                      display: "block",
+                      textDecoration: "none",
+                      borderBottom: 0,
+                    }}
+                  >
+                    <div
+                      style={{
+                        aspectRatio: "4 / 3",
+                        background: post.gradient,
+                        borderRadius: "var(--radius-md)",
+                        position: "relative",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background: "url(/assets/grain-512.png) repeat",
+                          backgroundSize: "512px 512px",
+                          opacity: 0.06,
+                          mixBlendMode: "soft-light",
+                        }}
+                      />
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 10,
+                        marginTop: "var(--space-4)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          font: "var(--body-sm)",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        {post.date}
+                      </span>
+                      <span style={{ font: "var(--body-sm)", color: "var(--text-faint)" }}>&middot;</span>
+                      <span
+                        style={{
+                          font: "var(--body-sm)",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        {post.readingTime} min read
+                      </span>
+                    </div>
+                    <h3
+                      style={{
+                        font: "var(--heading-2)",
+                        color: "var(--text-strong)",
+                        marginTop: "var(--space-2)",
+                      }}
+                    >
+                      {post.title}
+                    </h3>
+                    <p
+                      style={{
+                        font: "var(--body-sm)",
+                        color: "var(--text-body)",
+                        marginTop: "var(--space-2)",
+                        marginBottom: 0,
+                        display: "-webkit-box",
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {post.description}
+                    </p>
+                    <span
+                      style={{
+                        display: "inline-block",
+                        font: "var(--body-sm)",
+                        color: "var(--text-muted)",
+                        marginTop: "var(--space-3)",
+                        background: "var(--surface-accent-soft)",
+                        padding: "2px 10px",
+                        borderRadius: "var(--radius-pill)",
+                      }}
+                    >
+                      {post.tag}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Fade overlay at bottom */}
+          {gridOverflow > 0 && clampedOffset < gridOverflow - 10 && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 120,
+                background:
+                  "linear-gradient(to top, var(--surface-page) 0%, transparent 100%)",
+                pointerEvents: "none",
+                zIndex: 2,
+              }}
+            />
+          )}
+          </div>{/* end clipped viewport */}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer
+        className="brand-field--flat on-navy"
+        style={{ position: "relative" }}
+      >
+        <div
+          data-r="foot"
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "80px 24px 40px",
+            display: "grid",
+            gridTemplateColumns: "minmax(0,1.3fr) repeat(3,minmax(0,1fr))",
+            gap: 48,
+          }}
+        >
+          <div>
+            <img
+              src="/assets/logo-horizontal-white.png"
+              alt="Deployed"
+              style={{ width: 150, display: "block" }}
+            />
+            <div
+              style={{
+                font: "var(--eyebrow)",
+                letterSpacing: "var(--eyebrow-track)",
+                textTransform: "uppercase",
+                color: "rgba(249,246,243,.44)",
+                marginTop: 16,
+                maxWidth: "24ch",
+              }}
+            >
+              Reach optimal AI density within your org
+            </div>
+            <Link
+              href="/contact"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 9,
+                border: "1px solid rgba(255,255,255,.28)",
+                color: "var(--paper-050)",
+                font: "var(--label)",
+                letterSpacing: "var(--label-track)",
+                padding: "12px 20px",
+                borderRadius: 999,
+                marginTop: 28,
+                borderBottom: 0,
+              }}
+            >
+              Get in touch
+              <img
+                src="/assets/icon-arrow-white.png"
+                alt=""
+                style={{ width: 13, height: 12, display: "block" }}
+              />
+            </Link>
+          </div>
+
+          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
+            <div
               style={{
                 font: "var(--label)",
                 letterSpacing: "var(--label-track)",
-                padding: "13px 32px",
-                borderRadius: "var(--radius-pill)",
-                border: "1px solid var(--border-strong)",
-                background: "transparent",
-                color: "var(--text-strong)",
-                cursor: "pointer",
-                transition: "var(--transition-ui)",
+                color: "rgba(249,246,243,.44)",
+                marginBottom: 4,
               }}
             >
-              Load more
-            </button>
+              Core
+            </div>
+            <Link
+              href="/strategy"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Strategy
+            </Link>
+            <Link
+              href="/deployment"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Deployment
+            </Link>
+            <Link
+              href="/the-deployed-fit"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              The Deployed fit
+            </Link>
           </div>
-        )}
-      </section>
 
-      {/* Light footer */}
-      <footer
-        style={{
-          background: "var(--paper-100)",
-          borderTop: "1px solid var(--border-hairline)",
-        }}
-      >
+          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
+            <div
+              style={{
+                font: "var(--label)",
+                letterSpacing: "var(--label-track)",
+                color: "rgba(249,246,243,.44)",
+                marginBottom: 4,
+              }}
+            >
+              Company
+            </div>
+            <Link
+              href="/about"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              About
+            </Link>
+            <a
+              href="#"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Careers
+            </a>
+            <Link
+              href="/contact"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Contact
+            </Link>
+          </div>
+
+          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
+            <div
+              style={{
+                font: "var(--label)",
+                letterSpacing: "var(--label-track)",
+                color: "rgba(249,246,243,.44)",
+                marginBottom: 4,
+              }}
+            >
+              Resources
+            </div>
+            <Link
+              href="/blog"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Blog
+            </Link>
+            <a
+              href="#"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Industries
+            </a>
+            <a
+              href="#"
+              style={{
+                font: "var(--body-sm)",
+                color: "rgba(249,246,243,.78)",
+              }}
+            >
+              Security
+            </a>
+          </div>
+        </div>
+
         <div
           style={{
-            maxWidth: "var(--page-max)",
+            maxWidth: 1200,
             margin: "0 auto",
-            padding: "72px var(--gutter)",
+            padding: "22px 24px 40px",
+            borderTop: "1px solid var(--border-hairline)",
             display: "flex",
-            alignItems: "center",
-            gap: 28,
+            gap: 20,
             flexWrap: "wrap",
+            justifyContent: "space-between",
           }}
         >
-          <img
-            src="/assets/logo-horizontal-navy.png"
-            alt="Deployed"
-            style={{ width: 150, minWidth: 130, display: "block" }}
-          />
           <span
             style={{
-              font: "var(--eyebrow)",
-              letterSpacing: "var(--eyebrow-track)",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
+              font: "var(--mono-md)",
+              color: "rgba(249,246,243,.38)",
             }}
           >
-            Reach optimal AI density within your org
+            deployed.md
           </span>
-          <Link
-            href="/contact"
+          <span
             style={{
-              marginLeft: "auto",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 9,
-              background: "var(--action-primary)",
-              color: "var(--paper-050)",
-              font: "var(--label)",
-              letterSpacing: "var(--label-track)",
-              padding: "13px 22px",
-              borderRadius: 999,
-              borderBottom: 0,
+              font: "var(--mono-md)",
+              color: "rgba(249,246,243,.38)",
             }}
           >
-            Get in touch
-            <img
-              src="/assets/icon-arrow-white.png"
-              alt=""
-              style={{ width: 13, height: 12, display: "block" }}
-            />
-          </Link>
+            {"©"} 2026 Deployed
+          </span>
         </div>
       </footer>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .featured-card {
-            grid-template-columns: 1fr !important;
-          }
-          .featured-card > div:last-child {
-            padding: var(--space-6) var(--space-6) var(--space-8) !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }

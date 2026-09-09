@@ -789,7 +789,12 @@ export default function HealthcarePage() {
             border-left: 0 !important;
             border-top: 1px solid var(--border-hairline) !important;
             padding-left: 0 !important;
+            padding-right: 0 !important;
             padding-top: 26px !important;
+          }
+          [data-r="tri"] > *:first-child {
+            border-top: 0 !important;
+            padding-top: 0 !important;
           }
           [data-r="wf"] {
             grid-template-columns: minmax(0, 1fr) !important;

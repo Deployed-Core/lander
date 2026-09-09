@@ -135,6 +135,7 @@ export default function ContactPage() {
           Read more
         </Link>
         <span
+          className="contact-lang"
           style={{
             marginLeft: "auto",
             font: "var(--label)",
@@ -566,6 +567,9 @@ export default function ContactPage() {
           }
           .form-row {
             grid-template-columns: 1fr !important;
+          }
+          .contact-lang {
+            margin-left: 0 !important;
           }
         }
       `}</style>

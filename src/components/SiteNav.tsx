@@ -10,12 +10,10 @@ export default function SiteNav({
   tone = "light",
   active = "",
   showCta = true,
-  showSignIn = false,
 }: {
   tone?: Tone;
   active?: string;
   showCta?: boolean;
-  showSignIn?: boolean;
 }) {
   const [menu, setMenu] = useState<MenuState>(null);
 
@@ -95,14 +93,10 @@ export default function SiteNav({
           <Link href="/blog" style={{ font: "var(--body-sm)", fontSize: "13.5px", color: col("Blog"), fontWeight: wt("Blog"), borderBottom: 0 }}>Blog</Link>
         </nav>
 
-        {showSignIn && (
-          <Link href="/contact" className="nav-links" style={{ marginLeft: "auto", font: "var(--body-sm)", fontSize: "13.5px", color: strong, borderBottom: 0 }}>Sign in</Link>
-        )}
-
         <button type="button" className="nav-burger" onClick={() => setMenu(m => m === "mobile" ? null : "mobile")} aria-label="Menu" style={{ background: "none", border: `1px solid ${ctaBorder}`, borderRadius: 999, padding: "9px 14px", cursor: "pointer", alignItems: "center", gap: 8, font: "var(--label)", letterSpacing: "var(--label-track)", color: strong }}>{menu === "mobile" ? "Close" : "Menu"}</button>
 
         {showCta && (
-          <Link href="/contact" className="nav-cta" style={{ marginLeft: showSignIn ? 16 : "auto", display: "inline-flex", alignItems: "center", gap: 9, border: `1px solid ${ctaBorder}`, color: strong, font: "var(--label)", letterSpacing: "var(--label-track)", padding: "11px 18px", borderRadius: 999 }}>
+          <Link href="/contact" className="nav-cta" style={{ marginLeft: "auto", display: "inline-flex", alignItems: "center", gap: 9, border: `1px solid ${ctaBorder}`, color: strong, font: "var(--label)", letterSpacing: "var(--label-track)", padding: "11px 18px", borderRadius: 999 }}>
             Get in touch
             <img src={arrow} alt="" style={{ width: 13, height: 12, display: "block" }} />
           </Link>

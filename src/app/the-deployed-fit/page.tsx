@@ -432,35 +432,40 @@ export default function TheDeployedFitPage() {
         </p>
         <div
           data-reveal
+          className="rotating-text-wrap"
           style={{
             position: "relative",
             minHeight: 80,
           }}
         >
-          {rotatingLines.map((line, i) => (
-            <p
-              key={line}
-              style={{
-                position: i === 0 ? "relative" : "absolute",
-                top: 0,
-                left: 0,
-                right: 0,
-                font: "var(--display-3)",
-                letterSpacing: "var(--display-track)",
-                color: "var(--blue-600)",
-                margin: 0,
-                maxWidth: "34ch",
-                textWrap: "pretty" as never,
-                opacity: activeIndex === i ? 1 : 0,
-                transform:
-                  activeIndex === i ? "translateY(0)" : "translateY(6px)",
-                transition:
-                  "opacity 500ms cubic-bezier(.22,.61,.36,1), transform 500ms cubic-bezier(.22,.61,.36,1)",
-              }}
-            >
-              {line}
-            </p>
-          ))}
+          {rotatingLines.map((line, i) => {
+            const isLongest = i === 3;
+            return (
+              <p
+                key={line}
+                style={{
+                  position: isLongest ? "relative" : "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  font: "var(--display-3)",
+                  letterSpacing: "var(--display-track)",
+                  color: "var(--blue-600)",
+                  margin: 0,
+                  maxWidth: "34ch",
+                  textWrap: "pretty" as never,
+                  opacity: activeIndex === i ? 1 : 0,
+                  visibility: isLongest && activeIndex !== i ? "hidden" : undefined,
+                  transform:
+                    activeIndex === i ? "translateY(0)" : "translateY(6px)",
+                  transition:
+                    "opacity 500ms cubic-bezier(.22,.61,.36,1), transform 500ms cubic-bezier(.22,.61,.36,1)",
+                }}
+              >
+                {line}
+              </p>
+            );
+          })}
         </div>
       </section>
 
