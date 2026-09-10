@@ -62,7 +62,21 @@ export default function Home() {
           92%{transform:translateY(-62.5%) rotateX(-42deg)}
           100%{transform:translateY(-75%) rotateX(0deg)}
         }
-        @media (prefers-reduced-motion:reduce){[data-flow]{animation:none !important}}
+        @keyframes dep-card-a{
+          0%,42%{opacity:1}
+          48%,92%{opacity:0}
+          98%,100%{opacity:1}
+        }
+        @keyframes dep-card-b{
+          0%,42%{opacity:0}
+          48%,92%{opacity:1}
+          98%,100%{opacity:0}
+        }
+        .card-swap{display:grid !important;grid-template:1fr/1fr}
+        .card-swap > .card-a,.card-swap > .card-b{grid-area:1/1;display:flex;flex-direction:column;justify-content:flex-end}
+        .card-swap > .card-a{animation:dep-card-a 8s ease infinite}
+        .card-swap > .card-b{opacity:0;animation:dep-card-b 8s ease infinite}
+        @media (prefers-reduced-motion:reduce){[data-flow]{animation:none !important}.card-swap > .card-b{display:none !important}}
 
         @media (max-width:960px){
           [data-r="flow"]{grid-template-columns:minmax(0,1fr) !important;gap:18px !important}
@@ -374,8 +388,14 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Right column — stat mosaic */}
+          {/* Right column — transformation returns */}
           <div data-reveal="">
+            <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 20 }}>
+              <span style={{ font: "var(--eyebrow)", letterSpacing: "var(--eyebrow-track)", textTransform: "uppercase", color: "var(--text-faint)" }}>
+                What the transformation returns
+              </span>
+              <span style={{ font: "var(--mono-md)", color: "var(--text-faint)" }}>7 outcomes</span>
+            </div>
             <div
               data-r="mosaic"
               style={{
@@ -385,148 +405,57 @@ export default function Home() {
                 gap: 14,
               }}
             >
-              <div
-                style={{
-                  gridRow: "span 2",
-                  background: "var(--surface-card)",
-                  border: "1px solid var(--border-hairline)",
-                  borderRadius: "var(--radius-md)",
-                  boxShadow: "var(--shadow-1)",
-                  padding: 24,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <div
-                  style={{
-                    font: "var(--metric)",
-                    fontSize: "clamp(44px,5vw,68px)",
-                    fontVariantNumeric: "tabular-nums",
-                    color: "var(--blue-850)",
-                  }}
-                >
-                  4x
+              {/* Tall left — flips between 3.4x / 2.6x */}
+              <div className="card-swap" style={{ gridRow: "span 2", background: "var(--surface-card)", border: "1px solid var(--border-hairline)", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-1)", padding: 24 }}>
+                <div className="card-a">
+                  <div style={{ font: "var(--metric)", fontSize: "clamp(44px,5vw,68px)", fontVariantNumeric: "tabular-nums", color: "var(--blue-850)" }}>3.4x</div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)", marginTop: 10 }}>Enhanced efficiency</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Throughput per seat on the same headcount and the same systems.</div>
                 </div>
-                <div
-                  style={{
-                    font: "var(--label)",
-                    letterSpacing: "var(--label-track)",
-                    color: "var(--text-muted)",
-                    marginTop: 10,
-                  }}
-                >
-                  Revenue growth
+                <div className="card-b">
+                  <div style={{ font: "var(--metric)", fontSize: "clamp(44px,5vw,68px)", fontVariantNumeric: "tabular-nums", color: "var(--blue-850)" }}>2.6x</div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)", marginTop: 10 }}>Operating leverage</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Output per unit of cost against the sector benchmark.</div>
                 </div>
               </div>
-              <div
-                style={{
-                  background: "var(--surface-card)",
-                  border: "1px solid var(--border-hairline)",
-                  borderRadius: "var(--radius-md)",
-                  boxShadow: "var(--shadow-1)",
-                  padding: 20,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <div
-                  style={{
-                    font: "var(--metric)",
-                    fontVariantNumeric: "tabular-nums",
-                    color: "var(--blue-850)",
-                  }}
-                >
-                  60%
+
+              {/* Top right — flips between 41.2% / 1 wk */}
+              <div className="card-swap" style={{ background: "var(--surface-card)", border: "1px solid var(--border-hairline)", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-1)", padding: 20 }}>
+                <div className="card-a">
+                  <div style={{ font: "var(--metric)", fontVariantNumeric: "tabular-nums", color: "var(--blue-850)" }}>41.2%</div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)", marginTop: 8 }}>AI density, measured</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Baselined in week one, then raised.</div>
                 </div>
-                <div
-                  style={{
-                    font: "var(--label)",
-                    letterSpacing: "var(--label-track)",
-                    color: "var(--text-muted)",
-                    marginTop: 8,
-                  }}
-                >
-                  Conversion
+                <div className="card-b">
+                  <div style={{ font: "var(--metric)", fontVariantNumeric: "tabular-nums", color: "var(--blue-850)" }}>1 wk</div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)", marginTop: 8 }}>No burn on hit and trials</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Assessment before commitment — zero speculative pilots.</div>
                 </div>
               </div>
-              <div
-                style={{
-                  background: "var(--surface-card)",
-                  border: "1px solid var(--border-hairline)",
-                  borderRadius: "var(--radius-md)",
-                  boxShadow: "var(--shadow-1)",
-                  padding: 20,
-                  display: "grid",
-                  gridTemplateColumns: "auto minmax(0,1fr)",
-                  alignItems: "end",
-                  gap: 12,
-                }}
-              >
-                <div
-                  style={{
-                    font: "var(--metric)",
-                    fontSize: 30,
-                    color: "var(--blue-400)",
-                    lineHeight: 1,
-                  }}
-                >
-                  {"↑"}
+
+              {/* Bottom right — flips between 0 hrs / 100% */}
+              <div className="card-swap" style={{ background: "var(--surface-card)", border: "1px solid var(--border-hairline)", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-1)", padding: 20 }}>
+                <div className="card-a">
+                  <div style={{ font: "var(--metric)", fontVariantNumeric: "tabular-nums", color: "var(--blue-850)" }}>0 hrs</div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)", marginTop: 8 }}>Downtime during rollout</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Deployed alongside live operations.</div>
                 </div>
-                <div
-                  style={{
-                    font: "var(--label)",
-                    letterSpacing: "var(--label-track)",
-                    color: "var(--text-muted)",
-                  }}
-                >
-                  Efficiency
+                <div className="card-b">
+                  <div style={{ font: "var(--metric)", fontVariantNumeric: "tabular-nums", color: "var(--blue-850)" }}>100%</div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)", marginTop: 8 }}>Measurable impact</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Every decision logged against a baseline.</div>
                 </div>
               </div>
-              <div
-                style={{
-                  gridColumn: "span 2",
-                  background: "var(--surface-card)",
-                  border: "1px solid var(--border-hairline)",
-                  borderRadius: "var(--radius-md)",
-                  boxShadow: "var(--shadow-1)",
-                  padding: "20px 24px",
-                  display: "flex",
-                  alignItems: "baseline",
-                  gap: 16,
-                }}
-              >
-                <div
-                  style={{
-                    font: "var(--metric)",
-                    fontSize: 36,
-                    fontVariantNumeric: "tabular-nums",
-                    color: "var(--blue-850)",
-                  }}
-                >
-                  0
-                </div>
-                <div
-                  style={{
-                    font: "var(--label)",
-                    letterSpacing: "var(--label-track)",
-                    color: "var(--text-muted)",
-                  }}
-                >
-                  Downtime during rollout
+
+              {/* Full-width bottom — static */}
+              <div style={{ gridColumn: "span 2", background: "var(--surface-card)", border: "1px solid var(--border-hairline)", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-1)", padding: "20px 24px", display: "flex", alignItems: "center", gap: 20 }}>
+                <div style={{ font: "var(--metric)", fontSize: 48, fontVariantNumeric: "tabular-nums", color: "var(--blue-850)", lineHeight: 1 }}>0</div>
+                <div>
+                  <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "var(--text-strong)" }}>Rewrites when the frontier moves</div>
+                  <div style={{ font: "var(--body-sm)", color: "var(--text-muted)", marginTop: 4 }}>Model-agnostic by construction — forward compatible transformation.</div>
                 </div>
               </div>
             </div>
-            <p
-              style={{
-                font: "var(--body-sm)",
-                color: "var(--text-faint)",
-                margin: "14px 0 0",
-              }}
-            >
-              Illustrative outcomes — replace with measured client results.
-            </p>
           </div>
         </div>
       </section>
