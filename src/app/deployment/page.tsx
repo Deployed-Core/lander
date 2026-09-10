@@ -221,134 +221,262 @@ export default function DeploymentPage() {
       >
         <div
           data-reveal
+          data-r="phases"
           style={{
             overflowX: "auto",
             WebkitOverflowScrolling: "touch",
           }}
         >
           <div
+            className="phase-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, minmax(200px, 1fr))",
-              gap: 12,
+              gap: 20,
               minWidth: 760,
+              alignItems: "start",
             }}
           >
-            {[
-              {
-                phase: "01",
-                title: "Embed",
-                items: [
-                  "Map live workflows",
-                  "Identify friction points",
-                  "Define success metrics",
-                ],
-              },
-              {
-                phase: "02",
-                title: "Build & deploy",
-                items: [
-                  "Ship working software weekly",
-                  "Validate against real volume",
-                  "Adapt to what the data shows",
-                ],
-              },
-              {
-                phase: "03",
-                title: "Production",
-                items: [
-                  "Run in live operations",
-                  "Monitor and tune",
-                  "Measure ROI continuously",
-                ],
-              },
-              {
-                phase: "04",
-                title: "Handoff",
-                items: [
-                  "Transfer ownership to your team",
-                  "Document and train",
-                  "Ongoing support if needed",
-                ],
-              },
-            ].map((p) => (
+            {/* Phase 01 — Embed */}
+            <div style={{ paddingTop: 0 }}>
+              <p
+                style={{
+                  font: "var(--mono-md)",
+                  color: "var(--text-muted)",
+                  margin: "0 0 16px",
+                }}
+              >
+                Phase 01
+              </p>
               <div
-                key={p.phase}
                 style={{
                   border: "1px solid var(--border-hairline)",
                   borderRadius: "var(--radius-md)",
-                  padding: "24px 20px",
+                  padding: "18px 20px",
+                  background: "var(--surface-card)",
+                  textAlign: "center",
+                  marginBottom: 12,
+                }}
+              >
+                <p
+                  style={{
+                    font: "var(--heading-2)",
+                    color: "var(--text-strong)",
+                    margin: 0,
+                  }}
+                >
+                  Embed
+                </p>
+              </div>
+              <div
+                style={{
+                  border: "1px solid var(--border-hairline)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "20px 22px",
                   background: "var(--surface-card)",
                 }}
               >
                 <p
                   style={{
-                    font: "var(--eyebrow)",
-                    letterSpacing: "var(--eyebrow-track)",
-                    textTransform: "uppercase",
-                    color: "var(--text-muted)",
-                    margin: "0 0 8px",
-                  }}
-                >
-                  Phase {p.phase}
-                </p>
-                <p
-                  style={{
-                    font: "var(--heading-2)",
+                    font: "var(--body-sm)",
+                    fontWeight: 500,
                     color: "var(--text-strong)",
-                    margin: "0 0 16px",
+                    margin: "0 0 12px",
                   }}
                 >
-                  {p.title}
+                  Feedback
                 </p>
-                <ul
-                  style={{
-                    margin: 0,
-                    padding: "0 0 0 18px",
-                    display: "grid",
-                    gap: 6,
-                  }}
-                >
-                  {p.items.map((item) => (
-                    <li
+                <div style={{ display: "grid", gap: 8 }}>
+                  {[
+                    "Metrics",
+                    "Pattern recognition",
+                    "Workflow enhancement",
+                    "Optimisation",
+                  ].map((item) => (
+                    <p
                       key={item}
                       style={{
                         font: "var(--body-sm)",
                         color: "var(--text-body)",
+                        margin: 0,
                       }}
                     >
                       {item}
-                    </li>
+                    </p>
                   ))}
-                </ul>
+                </div>
               </div>
-            ))}
+            </div>
+
+            {/* Phase 02 — Build & deploy */}
+            <div style={{ paddingTop: 40 }}>
+              <p
+                style={{
+                  font: "var(--mono-md)",
+                  color: "var(--text-muted)",
+                  margin: "0 0 16px",
+                }}
+              >
+                Phase 02
+              </p>
+              <div
+                style={{
+                  border: "1px dashed var(--border-subtle)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "28px 22px",
+                  background: "var(--surface-card)",
+                  textAlign: "center",
+                }}
+              >
+                <p
+                  style={{
+                    font: "var(--heading-2)",
+                    color: "var(--text-strong)",
+                    margin: 0,
+                  }}
+                >
+                  Build & deploy
+                </p>
+              </div>
+            </div>
+
+            {/* Phase 03 — Production */}
+            <div style={{ paddingTop: 80 }}>
+              <p
+                style={{
+                  font: "var(--mono-md)",
+                  color: "var(--text-muted)",
+                  margin: "0 0 16px",
+                }}
+              >
+                Phase 03
+              </p>
+              <div
+                style={{
+                  borderRadius: "var(--radius-md)",
+                  padding: "36px 22px",
+                  background: "var(--blue-950)",
+                  textAlign: "center",
+                }}
+              >
+                <p
+                  style={{
+                    font: "var(--heading-2)",
+                    color: "var(--paper-050)",
+                    margin: 0,
+                  }}
+                >
+                  Production
+                </p>
+              </div>
+            </div>
+
+            {/* Phase 04 — Handoff */}
+            <div style={{ paddingTop: 40 }}>
+              <p
+                style={{
+                  font: "var(--mono-md)",
+                  color: "var(--text-muted)",
+                  margin: "0 0 16px",
+                }}
+              >
+                Phase 04
+              </p>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  marginBottom: 16,
+                }}
+              >
+                <p
+                  style={{
+                    font: "var(--heading-2)",
+                    color: "var(--text-strong)",
+                    margin: 0,
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Handoff
+                </p>
+                <div
+                  style={{
+                    flex: 1,
+                    height: 1,
+                    background: "var(--border-strong)",
+                  }}
+                />
+                <img
+                  src="/assets/icon-arrow-navy.png"
+                  alt=""
+                  style={{ width: 16, height: 14, display: "block", opacity: 0.55 }}
+                />
+              </div>
+              <p
+                style={{
+                  font: "var(--body-md)",
+                  color: "var(--text-body)",
+                  margin: 0,
+                  maxWidth: "30ch",
+                  textWrap: "pretty" as never,
+                }}
+              >
+                Complete ownership, documentation, and the capability to run it
+                without us.
+              </p>
+            </div>
           </div>
 
           {/* Iterate bar spanning phases 1-3 */}
           <div
+            className="phase-iterate-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(4, minmax(200px, 1fr))",
-              gap: 12,
+              gap: 20,
               minWidth: 760,
-              marginTop: 12,
+              marginTop: 32,
             }}
           >
             <div
               style={{
                 gridColumn: "1 / 4",
-                background: "var(--blue-050)",
-                border: "1px solid var(--blue-200)",
-                borderRadius: "var(--radius-md)",
-                padding: "14px 20px",
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "var(--blue-700)",
-                textAlign: "center",
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
               }}
             >
-              Iterate till ROI
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M6 1L1 6l5 5" stroke="var(--blue-600)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <div style={{ flex: 1, position: "relative" }}>
+                <div
+                  style={{
+                    height: 2,
+                    background: "var(--blue-600)",
+                    borderRadius: 1,
+                  }}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    top: -10,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    font: "var(--body-sm)",
+                    color: "var(--blue-600)",
+                    background: "var(--paper-050)",
+                    padding: "0 12px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  Iterate till ROI
+                </span>
+              </div>
+              <svg width="18" height="12" viewBox="0 0 18 12" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M12 1l5 5-5 5" stroke="var(--blue-600)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
           </div>
         </div>
@@ -649,6 +777,27 @@ export default function DeploymentPage() {
           [data-r="transition"] img {
             transform: rotate(90deg);
             margin: 0 auto;
+          }
+          .phase-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            min-width: 0 !important;
+            gap: 24px !important;
+          }
+          .phase-grid > * {
+            padding-top: 0 !important;
+          }
+          .phase-iterate-grid {
+            grid-template-columns: 1fr !important;
+            min-width: 0 !important;
+          }
+          .phase-iterate-grid > div {
+            grid-column: auto !important;
+          }
+        }
+        @media (max-width: 560px) {
+          .phase-grid {
+            grid-template-columns: minmax(0, 1fr) !important;
+            gap: 28px !important;
           }
         }
       `}</style>
