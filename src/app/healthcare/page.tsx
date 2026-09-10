@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function HealthcarePage() {
@@ -54,6 +55,7 @@ export default function HealthcarePage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar />
       <SiteNav active="Industries" tone="navy" />
 
       {/* Hero */}
@@ -76,6 +78,18 @@ export default function HealthcarePage() {
               position: "absolute",
               inset: 0,
               background: "var(--blue-950)",
+            }}
+          />
+          <img
+            src="/assets/healthcare-hero.png"
+            alt=""
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
             }}
           />
           <div
@@ -195,7 +209,7 @@ export default function HealthcarePage() {
         </div>
       </section>
 
-      {/* Image placeholder */}
+      {/* Image */}
       <section
         style={{ maxWidth: 1160, margin: "0 auto", padding: "8px 24px 0" }}
       >
@@ -209,7 +223,13 @@ export default function HealthcarePage() {
             background: "var(--surface-sunken)",
             border: "1px solid var(--border-hairline)",
           }}
-        />
+        >
+          <img
+            src="/assets/healthcare-slot2.png"
+            alt="Healthcare facility operations"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        </div>
       </section>
 
       {/* Stats */}

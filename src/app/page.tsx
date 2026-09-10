@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function Home() {
   useEffect(() => {
@@ -83,40 +84,7 @@ export default function Home() {
         }
       `}</style>
 
-      {/* ── Banner ── */}
-      <div
-        style={{
-          background: "var(--paper-050)",
-          color: "var(--text-body)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 14,
-          padding: "11px 24px",
-          font: "var(--body-sm)",
-          textAlign: "center",
-        }}
-      >
-        <span>Now taking Q4 deployment engagements</span>
-        <a
-          href="#contact"
-          style={{
-            color: "var(--text-strong)",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 7,
-            font: "var(--label)",
-            letterSpacing: "var(--label-track)",
-          }}
-        >
-          Get in touch
-          <img
-            src="/assets/icon-arrow-navy.png"
-            alt=""
-            style={{ width: 13, height: 12, display: "block" }}
-          />
-        </a>
-      </div>
+      <AnnouncementBar />
 
       {/* ── Nav ── */}
       <SiteNav tone="navy-solid" />
@@ -223,8 +191,8 @@ export default function Home() {
                   style={{ width: 13, height: 12, display: "block" }}
                 />
               </a>
-              <a
-                href="#fit"
+              <Link
+                href="/the-deployed-fit"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -237,75 +205,17 @@ export default function Home() {
                   borderRadius: 999,
                   transition:
                     "border-color var(--dur-fast) var(--ease-out)",
+                  borderBottom: 0,
                 }}
               >
                 See the approach
-              </a>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Client logos ── */}
-      <section
-        id="industries"
-        style={{
-          background: "var(--surface-page)",
-          borderBottom: "1px solid var(--border-hairline)",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "26px 24px",
-            display: "flex",
-            alignItems: "center",
-            gap: 32,
-            flexWrap: "wrap",
-          }}
-        >
-          <span
-            style={{
-              font: "var(--eyebrow)",
-              letterSpacing: "var(--eyebrow-track)",
-              textTransform: "uppercase",
-              color: "var(--text-faint)",
-            }}
-          >
-            Deployed with
-          </span>
-          <div
-            style={{
-              display: "flex",
-              gap: 14,
-              flexWrap: "wrap",
-              flex: 1,
-            }}
-          >
-            {Array.from({ length: 5 }).map((_, i) => (
-              <div
-                key={i}
-                style={{
-                  flex: 1,
-                  minWidth: 104,
-                  height: 38,
-                  border: "1px dashed var(--border-subtle)",
-                  borderRadius: "var(--radius-sm)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  font: "var(--body-sm)",
-                  fontSize: 11,
-                  color: "var(--text-faint)",
-                }}
-              >
-                Client mark
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Client logos (hidden until ready) ── */}
 
       {/* ── Premise ── */}
       <section id="fit" style={{ background: "var(--surface-page)" }}>

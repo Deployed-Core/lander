@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function UtilitiesPage() {
@@ -54,6 +55,7 @@ export default function UtilitiesPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar />
       <SiteNav active="Industries" tone="navy" />
 
       {/* Hero */}
@@ -76,6 +78,18 @@ export default function UtilitiesPage() {
               position: "absolute",
               inset: 0,
               background: "var(--blue-950)",
+            }}
+          />
+          <img
+            src="/assets/utilities-hero.png"
+            alt=""
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
             }}
           />
           <div
@@ -194,7 +208,7 @@ export default function UtilitiesPage() {
         </div>
       </section>
 
-      {/* Image placeholder */}
+      {/* Image */}
       <section
         style={{ maxWidth: 1160, margin: "0 auto", padding: "8px 24px 0" }}
       >
@@ -208,7 +222,13 @@ export default function UtilitiesPage() {
             background: "var(--surface-sunken)",
             border: "1px solid var(--border-hairline)",
           }}
-        />
+        >
+          <img
+            src="/assets/utilities-slot2.png"
+            alt="Utilities control room operations"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        </div>
       </section>
 
       {/* Stats */}
@@ -360,7 +380,13 @@ export default function UtilitiesPage() {
                 background: "rgba(255,255,255,.05)",
                 border: "1px solid rgba(255,255,255,.10)",
               }}
-            />
+            >
+              <img
+                src="/assets/utilities-slot3.png"
+                alt="Field engineer at utility substation"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
             <div data-reveal>
               <div
                 style={{

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import {
   getPostBySlug,
   getRelatedPosts,
@@ -92,6 +93,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
         }}
       />
 
+      <AnnouncementBar />
       <SiteNav active="Blog" tone="light" />
 
       {/* Breadcrumb */}

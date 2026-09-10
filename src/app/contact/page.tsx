@@ -84,9 +84,28 @@ export default function ContactPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = (e: FormEvent) => {
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setSending(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+      setSent(true);
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const reset = () => {
@@ -118,6 +137,7 @@ export default function ContactPage() {
           gap: "var(--space-4)",
           font: "var(--body-sm)",
           flexWrap: "wrap",
+          position: "relative",
         }}
       >
         <span style={{ textAlign: "center" }}>
@@ -137,7 +157,8 @@ export default function ContactPage() {
         <span
           className="contact-lang"
           style={{
-            marginLeft: "auto",
+            position: "absolute",
+            right: "var(--gutter)",
             font: "var(--label)",
             letterSpacing: "var(--label-track)",
             color: "rgba(249,246,243,.5)",
@@ -470,9 +491,16 @@ export default function ContactPage() {
                     </Field>
                   </div>
 
+                  {error && (
+                    <p style={{ font: "var(--body-sm)", color: "var(--red-600)", margin: 0 }}>
+                      {error}
+                    </p>
+                  )}
+
                   {/* Submit */}
                   <button
                     type="submit"
+                    disabled={sending}
                     style={{
                       marginTop: "var(--space-4)",
                       background: "var(--action-primary)",
@@ -482,12 +510,13 @@ export default function ContactPage() {
                       padding: "14px 28px",
                       borderRadius: "var(--radius-sm)",
                       border: "none",
-                      cursor: "pointer",
+                      cursor: sending ? "not-allowed" : "pointer",
                       transition: "var(--transition-ui)",
                       width: "100%",
+                      opacity: sending ? 0.7 : 1,
                     }}
                   >
-                    Send
+                    {sending ? "Sending…" : "Send"}
                   </button>
                 </form>
               </>

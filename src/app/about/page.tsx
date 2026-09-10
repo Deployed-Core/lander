@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function AboutPage() {
@@ -44,6 +45,7 @@ export default function AboutPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar />
       <SiteNav active="Company" tone="light" />
 
       {/* Hero */}
@@ -105,7 +107,13 @@ export default function AboutPage() {
             border: "1px solid var(--border-hairline)",
             background: "var(--surface-sunken)",
           }}
-        />
+        >
+          <img
+            src="/assets/about-slot1.png"
+            alt="Team collaborating in a modern office"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        </div>
         <p
           data-reveal
           style={{
@@ -239,6 +247,11 @@ export default function AboutPage() {
             background: "var(--surface-sunken)",
           }}
         >
+          <img
+            src="/assets/about-slot2.png"
+            alt="Team presenting strategy on whiteboard"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
           <div
             style={{
               position: "absolute",

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function DeploymentPage() {
@@ -45,6 +46,7 @@ export default function DeploymentPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar />
       <SiteNav active="Core" tone="light" />
 
       {/* Hero */}

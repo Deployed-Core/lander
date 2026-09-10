@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function BankingPage() {
@@ -54,6 +55,7 @@ export default function BankingPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar />
       <SiteNav active="Industries" tone="navy" />
 
       {/* Hero */}
@@ -76,6 +78,18 @@ export default function BankingPage() {
               position: "absolute",
               inset: 0,
               background: "var(--blue-950)",
+            }}
+          />
+          <img
+            src="/assets/banking-hero.png"
+            alt=""
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
             }}
           />
           <div
@@ -208,7 +222,13 @@ export default function BankingPage() {
             background: "var(--surface-sunken)",
             border: "1px solid var(--border-hairline)",
           }}
-        />
+        >
+          <img
+            src="/assets/banking-slot2.png"
+            alt="Banking operations floor"
+            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          />
+        </div>
       </section>
 
       {/* Stats */}
