@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import SiteNav from "@/components/SiteNav";
 import CompactFooter from "@/components/CompactFooter";
 
-export default function AboutPage() {
+export default function CareersPage() {
   useEffect(() => {
     const nodes = Array.from(
       document.querySelectorAll<HTMLElement>("[data-reveal]")
@@ -66,7 +66,7 @@ export default function AboutPage() {
             textWrap: "pretty" as never,
           }}
         >
-          We build operating leverage with AI.
+          Careers at Deployed
         </h1>
         <p
           data-reveal
@@ -78,54 +78,71 @@ export default function AboutPage() {
             margin: "22px 0 0",
           }}
         >
-          Deployed is a forward-deployed solution engineering firm
+          Join the team building operating leverage with AI
         </p>
       </section>
 
-      {/* Two-column: image + body text */}
+      {/* Coming Soon Card */}
       <section
-        data-r="cols2"
         style={{
           maxWidth: 1160,
           margin: "0 auto",
-          padding: "48px 24px 96px",
-          display: "grid",
-          gridTemplateColumns: "minmax(0,1.35fr) minmax(0,1fr)",
-          gap: 56,
-          alignItems: "start",
+          padding: "64px 24px 40px",
         }}
       >
         <div
           data-reveal
           style={{
             position: "relative",
-            aspectRatio: "16/10",
             borderRadius: "var(--radius-md)",
             overflow: "hidden",
             border: "1px solid var(--border-hairline)",
             background: "var(--surface-sunken)",
+            padding: "80px 32px",
+            textAlign: "center",
           }}
         >
-          <img
-            src="/assets/about-slot1.png"
-            alt="Team collaborating in a modern office"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
+          <div
+            style={{
+              display: "inline-block",
+              font: "var(--eyebrow)",
+              letterSpacing: "var(--eyebrow-track)",
+              textTransform: "uppercase",
+              color: "var(--blue-700)",
+              background: "rgba(37,99,235,.08)",
+              padding: "6px 16px",
+              borderRadius: 999,
+              marginBottom: 28,
+            }}
+          >
+            Coming soon
+          </div>
+          <p
+            style={{
+              font: "var(--display-3)",
+              letterSpacing: "var(--display-track)",
+              color: "var(--text-strong)",
+              margin: "0 auto",
+              maxWidth: "28ch",
+              textWrap: "pretty" as never,
+            }}
+          >
+            We&rsquo;re building something worth joining.
+          </p>
+          <p
+            style={{
+              font: "var(--body-lg)",
+              color: "var(--text-body)",
+              margin: "20px auto 0",
+              maxWidth: "48ch",
+              textWrap: "pretty" as never,
+            }}
+          >
+            Open roles will be listed here soon. In the meantime, reach out if
+            you want to be part of a team that ships AI into real enterprise
+            operations.
+          </p>
         </div>
-        <p
-          data-reveal
-          style={{
-            font: "var(--body-lg)",
-            color: "var(--text-body)",
-            margin: 0,
-            maxWidth: "44ch",
-            textWrap: "pretty" as never,
-          }}
-        >
-          We work with enterprise teams to identify high-leverage business
-          problems, then build custom AI and agentic systems directly into their
-          operations.
-        </p>
       </section>
 
       {/* Quote banner */}
@@ -151,12 +168,12 @@ export default function AboutPage() {
               textWrap: "pretty" as never,
             }}
           >
-            {"“"}We build AI systems that enhances how the business operates.{"”"}
+            {"“"}We hire people who ship.{"”"}
           </p>
         </div>
       </section>
 
-      {/* Two-column: display text + benefits list */}
+      {/* Values */}
       <section
         data-r="cols2"
         style={{
@@ -180,19 +197,19 @@ export default function AboutPage() {
               textWrap: "pretty" as never,
             }}
           >
-            The value of AI is not in how much you use.
+            What it&rsquo;s like to work here.
           </p>
           <p
             style={{
-              font: "var(--display-3)",
-              letterSpacing: "var(--display-track)",
-              color: "var(--blue-700)",
-              margin: "22px 0 0",
-              maxWidth: "24ch",
+              font: "var(--body-lg)",
+              color: "var(--text-body)",
+              margin: "20px 0 0",
+              maxWidth: "38ch",
               textWrap: "pretty" as never,
             }}
           >
-            It is in what it makes possible.
+            We&rsquo;re a small, high-leverage team. Every person ships directly
+            into enterprise operations.
           </p>
         </div>
         <div
@@ -206,10 +223,10 @@ export default function AboutPage() {
           }}
         >
           {[
-            "More throughput",
-            "Faster decisions",
-            "Less coordination",
-            "New capabilities without proportional headcount",
+            "Forward-deployed — embedded with the client",
+            "Ownership from day one",
+            "Ship AI that runs real operations",
+            "Small team, outsized impact",
           ].map((item) => (
             <div
               key={item}
@@ -226,55 +243,66 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Wide image with overlay text */}
+      {/* CTA */}
       <section
         style={{
           maxWidth: 1160,
           margin: "0 auto",
           padding: "0 24px 104px",
+          textAlign: "center",
         }}
       >
         <div
           data-reveal
           style={{
-            position: "relative",
-            aspectRatio: "21/9",
             borderRadius: "var(--radius-md)",
-            overflow: "hidden",
             border: "1px solid var(--border-hairline)",
-            background: "var(--surface-sunken)",
+            background: "var(--paper-000)",
+            padding: "56px 32px",
           }}
         >
-          <img
-            src="/assets/about-slot2.png"
-            alt="Team presenting strategy on whiteboard"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
-          <div
+          <p
             style={{
-              position: "absolute",
-              inset: "auto 0 0 0",
-              pointerEvents: "none",
-              background:
-                "linear-gradient(to top,rgba(0,5,30,.92),rgba(0,5,30,0))",
-              padding: "64px 32px 28px",
+              font: "var(--display-3)",
+              letterSpacing: "var(--display-track)",
+              color: "var(--text-strong)",
+              margin: 0,
             }}
           >
-            <p
-              style={{
-                font: "var(--display-3)",
-                fontSize: "clamp(18px,1.7vw,24px)",
-                letterSpacing: "var(--display-track)",
-                color: "var(--paper-000)",
-                margin: 0,
-                maxWidth: "38ch",
-                textWrap: "pretty" as never,
-              }}
-            >
-              We start with the business outcome and work backwards into the
-              technology.
-            </p>
-          </div>
+            Interested?
+          </p>
+          <p
+            style={{
+              font: "var(--body-lg)",
+              color: "var(--text-body)",
+              margin: "14px auto 28px",
+              maxWidth: "42ch",
+            }}
+          >
+            Drop us a line and tell us what you&rsquo;re working on.
+          </p>
+          <a
+            href="/contact"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 9,
+              border: "1px solid var(--border-strong)",
+              color: "var(--text-strong)",
+              font: "var(--label)",
+              letterSpacing: "var(--label-track)",
+              padding: "13px 22px",
+              borderRadius: 999,
+              textDecoration: "none",
+            }}
+          >
+            Get in touch
+            <img
+              src="/assets/icon-arrow-navy.png"
+              alt=""
+              style={{ width: 13, height: 12, display: "block" }}
+            />
+          </a>
         </div>
       </section>
 

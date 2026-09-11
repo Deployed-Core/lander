@@ -125,49 +125,6 @@ export default function ContactPage() {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-      {/* Top banner */}
-      <div
-        style={{
-          background: "var(--blue-950)",
-          color: "var(--paper-050)",
-          padding: "10px var(--gutter)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "var(--space-4)",
-          font: "var(--body-sm)",
-          flexWrap: "wrap",
-          position: "relative",
-        }}
-      >
-        <span style={{ textAlign: "center" }}>
-          Now taking Q4 deployment engagements
-        </span>
-        <Link
-          href="/blog"
-          style={{
-            color: "var(--blue-300)",
-            font: "var(--body-sm)",
-            fontWeight: 500,
-            borderBottom: 0,
-          }}
-        >
-          Read more
-        </Link>
-        <span
-          className="contact-lang"
-          style={{
-            position: "absolute",
-            right: "var(--gutter)",
-            font: "var(--label)",
-            letterSpacing: "var(--label-track)",
-            color: "rgba(249,246,243,.5)",
-          }}
-        >
-          EN
-        </span>
-      </div>
-
       {/* Two-column split */}
       <div
         className="contact-grid"
@@ -175,12 +132,12 @@ export default function ContactPage() {
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           flex: 1,
-          minHeight: "calc(100vh - 40px)",
+          minHeight: "100vh",
         }}
       >
         {/* Left column */}
         <div
-          className="brand-field on-navy"
+          className="brand-field on-navy contact-left"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -251,16 +208,6 @@ export default function ContactPage() {
                   }}
                 >
                   security@deployed.md
-                </a>
-                <a
-                  href="#"
-                  style={{
-                    color: "rgba(249,246,243,.60)",
-                    font: "var(--body-sm)",
-                    borderBottom: 0,
-                  }}
-                >
-                  Bug bounty programme
                 </a>
               </div>
             </div>
@@ -590,15 +537,17 @@ export default function ContactPage() {
       </div>
 
       <style>{`
+        .contact-left > div:first-child > div {
+          padding-left: clamp(32px, 5vw, 80px) !important;
+          padding-right: clamp(32px, 5vw, 80px) !important;
+          max-width: none !important;
+        }
         @media (max-width: 900px) {
           .contact-grid {
             grid-template-columns: 1fr !important;
           }
           .form-row {
             grid-template-columns: 1fr !important;
-          }
-          .contact-lang {
-            margin-left: 0 !important;
           }
         }
       `}</style>

@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function DeploymentPage() {
@@ -46,7 +45,6 @@ export default function DeploymentPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <AnnouncementBar />
       <SiteNav active="Core" tone="light" />
 
       {/* Hero */}
@@ -222,18 +220,14 @@ export default function DeploymentPage() {
         <div
           data-reveal
           data-r="phases"
-          style={{
-            overflowX: "auto",
-            WebkitOverflowScrolling: "touch",
-          }}
+          style={{}}
         >
           <div
             className="phase-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(200px, 1fr))",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
               gap: 20,
-              minWidth: 760,
               alignItems: "start",
             }}
           >
@@ -433,9 +427,8 @@ export default function DeploymentPage() {
             className="phase-iterate-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(4, minmax(200px, 1fr))",
+              gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
               gap: 20,
-              minWidth: 760,
               marginTop: 32,
             }}
           >
@@ -605,159 +598,150 @@ export default function DeploymentPage() {
         </div>
       </section>
 
-      {/* Statement + link cards */}
+      {/* CTA section */}
       <section
+        data-reveal
         style={{
-          maxWidth: 1160,
-          margin: "0 auto",
-          padding: "96px 24px",
+          background: "var(--paper-000)",
+          borderTop: "1px solid var(--border-hairline)",
         }}
       >
-        <p
-          data-reveal
-          style={{
-            font: "var(--display-2)",
-            letterSpacing: "var(--display-track)",
-            color: "var(--text-strong)",
-            margin: "0 0 56px",
-            maxWidth: "26ch",
-            textWrap: "pretty" as never,
-          }}
-        >
-          We do not consult. We do not hand over decks. We ship working systems
-          from inside your operation.
-        </p>
         <div
-          data-reveal
-          data-r="cols2"
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 20,
+            maxWidth: 1160,
+            margin: "0 auto",
+            padding: "96px 24px",
           }}
         >
-          <Link
-            href="/strategy"
+          <h2
             style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              border: "1px solid var(--border-hairline)",
-              borderRadius: "var(--radius-md)",
-              padding: "28px 24px",
-              background: "var(--surface-card)",
-              transition: "background var(--dur-fast) var(--ease-out)",
-              textDecoration: "none",
+              font: "var(--display-2)",
+              letterSpacing: "var(--display-track)",
+              color: "var(--text-strong)",
+              margin: 0,
+              maxWidth: "26ch",
+              textWrap: "pretty" as never,
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--blue-050)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "var(--surface-card)")
-            }
           >
-            <div>
-              <p
+            We do not consult. We do not hand over decks. We ship working systems
+            from inside your operation.
+          </h2>
+          <Link
+            href="/contact"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 9,
+              background: "var(--action-primary)",
+              color: "var(--paper-050)",
+              font: "var(--label)",
+              letterSpacing: "var(--label-track)",
+              padding: "14px 24px",
+              borderRadius: 999,
+              marginTop: 32,
+              borderBottom: 0,
+            }}
+          >
+            Get in touch
+            <img
+              src="/assets/icon-arrow-white.png"
+              alt=""
+              style={{ width: 13, height: 12, display: "block" }}
+            />
+          </Link>
+
+          <div
+            data-r="cols2"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "minmax(0,1fr) minmax(0,1.6fr)",
+              gap: 20,
+              marginTop: 56,
+            }}
+          >
+            <Link
+              href="/strategy"
+              style={{
+                border: "1px solid var(--border-hairline)",
+                borderRadius: "var(--radius-md)",
+                background: "var(--surface-page)",
+                boxShadow: "var(--shadow-1)",
+                padding: 28,
+                minHeight: 180,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+                textAlign: "right" as const,
+                transition: "background var(--dur-fast) var(--ease-out)",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "var(--surface-sunken)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "var(--surface-page)")
+              }
+            >
+              <div
                 style={{
-                  font: "var(--eyebrow)",
-                  letterSpacing: "var(--eyebrow-track)",
-                  textTransform: "uppercase",
-                  color: "var(--text-muted)",
-                  margin: "0 0 10px",
+                  font: "var(--heading-2)",
+                  color: "var(--text-strong)",
                 }}
               >
                 Strategy
-              </p>
-              <p
+              </div>
+              <div
                 style={{
-                  font: "var(--heading-1)",
-                  color: "var(--text-strong)",
-                  margin: 0,
+                  font: "var(--body-sm)",
+                  color: "var(--text-muted)",
+                  marginTop: 6,
                 }}
               >
                 How we identify where AI creates the most leverage
-              </p>
-            </div>
-            <div
+              </div>
+            </Link>
+            <Link
+              href="/the-deployed-fit"
               style={{
+                border: "1px solid var(--border-hairline)",
+                borderRadius: "var(--radius-md)",
+                background: "var(--surface-page)",
+                boxShadow: "var(--shadow-1)",
+                padding: 28,
+                minHeight: 180,
                 display: "flex",
-                alignItems: "center",
-                gap: 8,
-                marginTop: 28,
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "var(--text-link)",
+                flexDirection: "column",
+                justifyContent: "flex-end",
+                alignItems: "flex-end",
+                textAlign: "right" as const,
+                transition: "background var(--dur-fast) var(--ease-out)",
               }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.background = "var(--surface-sunken)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.background = "var(--surface-page)")
+              }
             >
-              Read more
-              <img
-                src="/assets/icon-arrow-navy.png"
-                alt=""
-                style={{ width: 13, height: 12, display: "block" }}
-              />
-            </div>
-          </Link>
-          <Link
-            href="/the-deployed-fit"
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              border: "1px solid var(--border-hairline)",
-              borderRadius: "var(--radius-md)",
-              padding: "28px 24px",
-              background: "var(--surface-card)",
-              transition: "background var(--dur-fast) var(--ease-out)",
-              textDecoration: "none",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--blue-050)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "var(--surface-card)")
-            }
-          >
-            <div>
-              <p
+              <div
                 style={{
-                  font: "var(--eyebrow)",
-                  letterSpacing: "var(--eyebrow-track)",
-                  textTransform: "uppercase",
-                  color: "var(--text-muted)",
-                  margin: "0 0 10px",
+                  font: "var(--heading-2)",
+                  color: "var(--text-strong)",
                 }}
               >
                 The Deployed fit
-              </p>
-              <p
+              </div>
+              <div
                 style={{
-                  font: "var(--heading-1)",
-                  color: "var(--text-strong)",
-                  margin: 0,
+                  font: "var(--body-sm)",
+                  color: "var(--text-muted)",
+                  marginTop: 6,
                 }}
               >
                 Where we create the most leverage for your organization
-              </p>
-            </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                marginTop: 28,
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "var(--text-link)",
-              }}
-            >
-              Read more
-              <img
-                src="/assets/icon-arrow-navy.png"
-                alt=""
-                style={{ width: 13, height: 12, display: "block" }}
-              />
-            </div>
-          </Link>
+              </div>
+            </Link>
+          </div>
         </div>
       </section>
 

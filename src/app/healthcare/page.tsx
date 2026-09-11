@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import CompactFooter from "@/components/CompactFooter";
 
 export default function HealthcarePage() {
@@ -44,18 +43,8 @@ export default function HealthcarePage() {
     };
   }, []);
 
-  const marqueeNames = [
-    "Rowan Health System",
-    "Ardennes Clinics",
-    "Meridian Care Network",
-    "Sable Diagnostics",
-    "Halden Payer Group",
-    "Northfield Hospitals",
-  ];
-
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <AnnouncementBar />
       <SiteNav active="Industries" tone="navy" />
 
       {/* Hero */}
@@ -148,89 +137,6 @@ export default function HealthcarePage() {
         </div>
       </section>
 
-      {/* Marquee */}
-      <section style={{ background: "var(--paper-050)", padding: "52px 24px" }}>
-        <div style={{ maxWidth: 1160, margin: "0 auto" }}>
-          <div
-            style={{
-              font: "var(--eyebrow)",
-              letterSpacing: "var(--eyebrow-track)",
-              textTransform: "uppercase",
-              color: "var(--text-muted)",
-              textAlign: "center",
-            }}
-          >
-            Deployed across providers and payers
-          </div>
-          <div
-            style={{
-              overflow: "hidden",
-              marginTop: 26,
-              maskImage:
-                "linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)",
-              WebkitMaskImage:
-                "linear-gradient(to right,transparent,#000 8%,#000 92%,transparent)",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                gap: 56,
-                width: "max-content",
-                animation: "hc-marquee 34s linear infinite",
-                opacity: 0.5,
-              }}
-            >
-              {[0, 1].map((copy) => (
-                <div
-                  key={copy}
-                  style={{
-                    display: "flex",
-                    gap: 56,
-                    alignItems: "center",
-                  }}
-                >
-                  {marqueeNames.map((name) => (
-                    <span
-                      key={`${copy}-${name}`}
-                      style={{
-                        font: "var(--heading-3)",
-                        color: "var(--text-strong)",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {name}
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Image */}
-      <section
-        style={{ maxWidth: 1160, margin: "0 auto", padding: "8px 24px 0" }}
-      >
-        <div
-          data-reveal
-          style={{
-            borderRadius: "var(--radius-md)",
-            overflow: "hidden",
-            height: "clamp(220px,34vw,420px)",
-            position: "relative",
-            background: "var(--surface-sunken)",
-            border: "1px solid var(--border-hairline)",
-          }}
-        >
-          <img
-            src="/assets/healthcare-slot2.png"
-            alt="Healthcare facility operations"
-            style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-          />
-        </div>
-      </section>
 
       {/* Stats */}
       <section
@@ -365,7 +271,7 @@ export default function HealthcarePage() {
             textWrap: "pretty" as never,
           }}
         >
-          The workflows we deploy first
+          The workflows we enhanced earlier
         </h2>
         <div
           data-r="wf"
@@ -788,14 +694,6 @@ export default function HealthcarePage() {
       <CompactFooter />
 
       <style>{`
-        @keyframes hc-marquee {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
-          }
-        }
         @media (max-width: 900px) {
           [data-r="cols2"] {
             grid-template-columns: minmax(0, 1fr) !important;

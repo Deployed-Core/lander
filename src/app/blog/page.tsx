@@ -670,24 +670,6 @@ export default function BlogPage() {
             >
               Blog
             </Link>
-            <a
-              href="#"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Industries
-            </a>
-            <a
-              href="#"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Security
-            </a>
           </div>
         </div>
 

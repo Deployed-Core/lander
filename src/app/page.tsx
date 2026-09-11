@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function Home() {
   useEffect(() => {
@@ -98,8 +97,6 @@ export default function Home() {
         }
       `}</style>
 
-      <AnnouncementBar />
-
       {/* ── Nav ── */}
       <SiteNav tone="navy-solid" />
 
@@ -183,7 +180,7 @@ export default function Home() {
               }}
             >
               <a
-                href="#contact"
+                href="/contact"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -823,7 +820,7 @@ export default function Home() {
             }}
           >
             <a
-              href="#contact"
+              href="/contact"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -887,7 +884,7 @@ export default function Home() {
               Reach optimal AI density within your org
             </div>
             <a
-              href="#contact"
+              href="/contact"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -1033,24 +1030,6 @@ export default function Home() {
             >
               Blog
             </Link>
-            <a
-              href="#industries"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Industries
-            </a>
-            <a
-              href="#contact"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Security
-            </a>
           </div>
         </div>
 
