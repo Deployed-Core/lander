@@ -106,7 +106,7 @@ export default function Home() {
         className="brand-field on-navy"
         style={{
           position: "relative",
-          minHeight: "78vh",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
@@ -121,7 +121,7 @@ export default function Home() {
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
-            padding: "clamp(120px,16vw,150px) 24px 68px",
+            padding: "clamp(120px,16vw,200px) 24px clamp(80px,10vh,120px)",
             boxSizing: "border-box",
             display: "grid",
             gridTemplateColumns: "minmax(0,1.25fr) minmax(0,1fr)",
