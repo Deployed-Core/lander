@@ -32,25 +32,34 @@ export default function CompactFooter() {
         <span style={{ font: "var(--eyebrow)", letterSpacing: "var(--eyebrow-track)", textTransform: "uppercase", color: "rgba(249,246,243,.6)" }}>
           Reach optimal AI density within your org
         </span>
-        <Link
-          href="/contact"
-          className="compact-footer-cta"
-          style={{
-            marginLeft: "auto",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 9,
-            background: "var(--paper-050)",
-            color: "var(--blue-950)",
-            font: "var(--label)",
-            letterSpacing: "var(--label-track)",
-            padding: "13px 22px",
-            borderRadius: 999,
-          }}
-        >
-          Get in touch
-          <img src="/assets/icon-arrow-navy.png" alt="" style={{ width: 13, height: 12, display: "block" }} />
-        </Link>
+        <div className="compact-footer-cta" style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 20 }}>
+          <Link
+            href="/privacy"
+            style={{
+              font: "var(--body-sm)",
+              color: "rgba(249,246,243,.5)",
+            }}
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/contact"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 9,
+              background: "var(--paper-050)",
+              color: "var(--blue-950)",
+              font: "var(--label)",
+              letterSpacing: "var(--label-track)",
+              padding: "13px 22px",
+              borderRadius: 999,
+            }}
+          >
+            Get in touch
+            <img src="/assets/icon-arrow-navy.png" alt="" style={{ width: 13, height: 12, display: "block" }} />
+          </Link>
+        </div>
       </div>
     </footer>
   );

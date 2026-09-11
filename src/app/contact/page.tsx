@@ -221,8 +221,17 @@ export default function ContactPage() {
               color: "rgba(249,246,243,.38)",
             }}
           >
-            Your data is processed in accordance with our privacy policy. We
-            will never share your information with third parties.
+            Your data is processed in accordance with our{" "}
+            <Link
+              href="/privacy"
+              style={{
+                color: "rgba(249,246,243,.55)",
+                textDecoration: "underline",
+              }}
+            >
+              privacy policy
+            </Link>
+            . We will never share your information with third parties.
           </div>
         </div>
 
