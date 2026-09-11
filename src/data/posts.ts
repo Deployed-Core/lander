@@ -28,12 +28,6 @@ const dibyo = {
   avatar: "DM",
 };
 
-const arjun = {
-  name: "Arjun Mehta",
-  role: "Head of Deployments",
-  avatar: "AM",
-};
-
 const priya = {
   name: "Priya Sharma",
   role: "AI Strategy Lead",
@@ -167,213 +161,17 @@ export const posts: BlogPost[] = [
     ],
   },
   {
-    slug: "what-an-assessment-week-looks-like",
-    date: "28 Aug 2026",
-    isoDate: "2026-08-28",
-    title: "What an assessment week actually looks like",
-    tag: "Deployments",
-    description:
-      "A day-by-day walkthrough of how we map processes, identify leverage points, and build the deployment roadmap.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #001033 0%, #012057 50%, #0b3d9e 100%)",
-    content: [],
-  },
-  {
-    slug: "agentic-ops-for-claims-processing",
-    date: "19 Aug 2026",
-    isoDate: "2026-08-19",
-    title: "Agentic ops for claims processing",
-    tag: "Deployments",
-    description:
-      "End-to-end automation that handles intake, triage, and adjudication — reducing cycle time from days to minutes.",
-    readingTime: 7,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #0b3d9e 0%, #1a55c4 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "measuring-ai-density-without-scoring-people",
-    date: "7 Aug 2026",
-    isoDate: "2026-08-07",
-    title: "Measuring AI density without scoring people",
-    tag: "Product",
-    description:
-      "Our framework for quantifying organisational AI maturity at the process level, not the individual level.",
-    readingTime: 5,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #012a79 0%, #1a55c4 40%, #b6cdf7 100%)",
-    content: [],
-  },
-  {
-    slug: "hand-off-not-dependency",
-    date: "25 Jul 2026",
-    isoDate: "2026-07-25",
-    title: "Hand-off, not dependency",
-    tag: "Product",
-    description:
-      "Why every engagement ends with your team owning the system — and how we structure knowledge transfer from week one.",
-    readingTime: 5,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #000f2b 0%, #012a79 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "where-logistics-teams-find-leverage-first",
-    date: "11 Jul 2026",
-    isoDate: "2026-07-11",
-    title: "Where logistics teams find leverage first",
-    tag: "Industry",
-    description:
-      "The three operational bottlenecks where AI creates outsized returns in supply-chain and distribution businesses.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #001033 0%, #0b3d9e 40%, #7aa5ef 100%)",
-    content: [],
-  },
-  {
     slug: "building-trust-loops-into-agentic-workflows",
     date: "28 Jun 2026",
     isoDate: "2026-06-28",
     title: "Building trust loops into agentic workflows",
-    tag: "Product",
+    tag: "Technology",
     description:
       "How we design human-in-the-loop checkpoints that maintain velocity without sacrificing oversight or compliance.",
     readingTime: 6,
     author: priya,
     gradient:
       "linear-gradient(135deg, #012057 0%, #3f7ae0 50%, #dfe9fb 100%)",
-    content: [],
-  },
-  {
-    slug: "the-retail-ops-playbook",
-    date: "14 Jun 2026",
-    isoDate: "2026-06-14",
-    title: "The retail ops playbook",
-    tag: "Industry",
-    description:
-      "From demand forecasting to shelf allocation — where AI compounds fastest across multi-site retail operations.",
-    readingTime: 7,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #00040f 0%, #012057 50%, #1a55c4 100%)",
-    content: [],
-  },
-  {
-    slug: "why-your-ai-pilot-stalled",
-    date: "2 Jun 2026",
-    isoDate: "2026-06-02",
-    title: "Why your AI pilot stalled",
-    tag: "Deployments",
-    description:
-      "The five failure modes we see in enterprise AI pilots and how forward-deployed teams break through each one.",
-    readingTime: 8,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #012a79 0%, #0b3d9e 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "deploying-ai-in-regulated-environments",
-    date: "19 May 2026",
-    isoDate: "2026-05-19",
-    title: "Deploying AI in regulated environments",
-    tag: "Industry",
-    description:
-      "Navigating compliance, audit trails, and model governance when deploying AI in banking and financial services.",
-    readingTime: 7,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #000f2b 0%, #012a79 40%, #1a55c4 100%)",
-    content: [],
-  },
-  {
-    slug: "from-poc-to-production-in-6-weeks",
-    date: "5 May 2026",
-    isoDate: "2026-05-05",
-    title: "From proof-of-concept to production in 6 weeks",
-    tag: "Deployments",
-    description:
-      "A case study on collapsing the typical 6-month AI timeline by embedding engineers directly with the operations team.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #0b3d9e 0%, #3f7ae0 50%, #7aa5ef 100%)",
-    content: [],
-  },
-  {
-    slug: "the-compound-effect-of-small-automations",
-    date: "21 Apr 2026",
-    isoDate: "2026-04-21",
-    title: "The compound effect of small automations",
-    tag: "Product",
-    description:
-      "Why 20 small workflow automations often outperform one ambitious AI project — and how to sequence them.",
-    readingTime: 5,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #012057 0%, #1a55c4 50%, #b6cdf7 100%)",
-    content: [],
-  },
-  {
-    slug: "energy-sector-predictive-maintenance",
-    date: "8 Apr 2026",
-    isoDate: "2026-04-08",
-    title: "Energy sector: predictive maintenance at scale",
-    tag: "Industry",
-    description:
-      "How utilities are using AI to shift from scheduled to condition-based maintenance, cutting downtime by 40%.",
-    readingTime: 7,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #00040f 0%, #001033 40%, #012a79 100%)",
-    content: [],
-  },
-  {
-    slug: "designing-ai-systems-that-survive-reorgs",
-    date: "24 Mar 2026",
-    isoDate: "2026-03-24",
-    title: "Designing AI systems that survive reorgs",
-    tag: "Product",
-    description:
-      "Architecture principles that decouple AI systems from team structure so they stay useful when org charts change.",
-    readingTime: 6,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #012a79 0%, #3f7ae0 60%, #dfe9fb 100%)",
-    content: [],
-  },
-  {
-    slug: "the-assessment-framework-we-use-on-day-one",
-    date: "10 Mar 2026",
-    isoDate: "2026-03-10",
-    title: "The assessment framework we use on day one",
-    tag: "Deployments",
-    description:
-      "Our structured approach to scoring 40+ processes for AI readiness before writing a single line of code.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #001033 0%, #012057 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "insurance-underwriting-meets-agentic-ai",
-    date: "22 Feb 2026",
-    isoDate: "2026-02-22",
-    title: "Insurance underwriting meets agentic AI",
-    tag: "Industry",
-    description:
-      "Automating risk assessment workflows while keeping underwriters in control of edge cases and exceptions.",
-    readingTime: 7,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #012057 0%, #0b3d9e 40%, #7aa5ef 100%)",
     content: [],
   },
 ];

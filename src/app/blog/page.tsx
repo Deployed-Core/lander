@@ -3,11 +3,10 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import { posts } from "@/data/posts";
 
-type Filter = "All posts" | "Deployments" | "Industry" | "Product";
-const filters: Filter[] = ["All posts", "Deployments", "Industry", "Product"];
+type Filter = "All posts" | "Industry" | "Technology";
+const filters: Filter[] = ["All posts", "Industry", "Technology"];
 
 export default function BlogPage() {
   const [activeFilter, setActiveFilter] = useState<Filter>("All posts");
@@ -114,7 +113,6 @@ export default function BlogPage() {
         }
       `}</style>
 
-      <AnnouncementBar />
       <SiteNav active="Blog" tone="light" />
 
       {/* Hero / eyebrow */}
