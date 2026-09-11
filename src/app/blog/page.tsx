@@ -662,13 +662,13 @@ export default function BlogPage() {
               Resources
             </div>
             <Link
-              href="/blog"
+              href="/bip"
               style={{
                 font: "var(--body-sm)",
                 color: "rgba(249,246,243,.78)",
               }}
             >
-              Blog
+              Knowledge base
             </Link>
           </div>
         </div>

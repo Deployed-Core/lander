@@ -1000,7 +1000,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
 
           <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
             <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "rgba(249,246,243,.44)", marginBottom: 4 }}>Resources</div>
-            <Link href="/blog" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Blog</Link>
+            <Link href="/bip" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Knowledge base</Link>
             <a href="#" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Industries</a>
             <a href="#" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Security</a>
           </div>

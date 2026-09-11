@@ -19,7 +19,7 @@ export default function AnnouncementBar({ tone = "light" }: { tone?: "light" | "
     >
       <span>Now taking Q4 deployment engagements</span>
       <Link
-        href="/blog"
+        href="/contact"
         style={{
           color: navy ? "var(--blue-300)" : "var(--text-strong)",
           display: "inline-flex",
@@ -30,7 +30,7 @@ export default function AnnouncementBar({ tone = "light" }: { tone?: "light" | "
           borderBottom: 0,
         }}
       >
-        Read more
+        Get in touch
         {!navy && (
           <img
             src="/assets/icon-arrow-navy.png"
