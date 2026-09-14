@@ -73,7 +73,7 @@ export default function SiteNav({
 
       <div
         style={{
-          maxWidth: solid ? 1200 : 1160,
+          maxWidth: 1160,
           margin: "0 auto",
           padding: "0 24px",
           height: 70,
@@ -90,7 +90,7 @@ export default function SiteNav({
           <button type="button" onMouseEnter={() => setMenu("core")} onClick={() => setMenu(m => m === "core" ? null : "core")} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", font: "var(--body-sm)", fontSize: "13.5px", color: col("Core"), fontWeight: wt("Core") }}>Core</button>
           <button type="button" onMouseEnter={() => setMenu("industries")} onClick={() => setMenu(m => m === "industries" ? null : "industries")} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", font: "var(--body-sm)", fontSize: "13.5px", color: col("Industries"), fontWeight: wt("Industries") }}>Industries</button>
           <button type="button" onMouseEnter={() => setMenu("company")} onClick={() => setMenu(m => m === "company" ? null : "company")} style={{ background: "none", border: 0, padding: 0, cursor: "pointer", font: "var(--body-sm)", fontSize: "13.5px", color: col("Company"), fontWeight: wt("Company") }}>Company</button>
-          {/* <Link href="/blog" style={{ font: "var(--body-sm)", fontSize: "13.5px", color: col("Blog"), fontWeight: wt("Blog"), borderBottom: 0 }}>Blog</Link> */}
+          <Link href="/blog" onMouseEnter={() => setMenu(null)} style={{ font: "var(--body-sm)", fontSize: "13.5px", color: col("Blog"), fontWeight: wt("Blog"), borderBottom: 0 }}>Blog</Link>
         </nav>
 
         <button type="button" className="nav-burger" onClick={() => setMenu(m => m === "mobile" ? null : "mobile")} aria-label="Menu" style={{ background: "none", border: `1px solid ${ctaBorder}`, borderRadius: 999, padding: "9px 14px", cursor: "pointer", alignItems: "center", gap: 8, font: "var(--label)", letterSpacing: "var(--label-track)", color: strong }}>{menu === "mobile" ? "Close" : "Menu"}</button>
@@ -170,7 +170,8 @@ export default function SiteNav({
             <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: linkMuted, padding: "18px 0 4px" }}>Company</div>
             <Link href="/about" onClick={() => setMenu(null)} style={{ font: "var(--body-lg)", color: strong, padding: "11px 0", borderBottom: `1px solid ${hairline}` }}>About us</Link>
             <Link href="/careers" onClick={() => setMenu(null)} style={{ font: "var(--body-lg)", color: strong, padding: "11px 0", borderBottom: `1px solid ${hairline}` }}>Careers</Link>
-            {/* <Link href="/blog" onClick={() => setMenu(null)} style={{ font: "var(--body-lg)", color: strong, padding: "11px 0", borderBottom: `1px solid ${hairline}` }}>Blog</Link> */}
+            <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: linkMuted, padding: "18px 0 4px" }}>Resources</div>
+            <Link href="/blog" onClick={() => setMenu(null)} style={{ font: "var(--body-lg)", color: strong, padding: "11px 0", borderBottom: `1px solid ${hairline}` }}>Blog</Link>
             <Link href="/contact" onClick={() => setMenu(null)} style={{ marginTop: 22, display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 9, background: mobileCtaBg, color: mobileCtaFg, font: "var(--label)", letterSpacing: "var(--label-track)", padding: "15px 22px", borderRadius: 999, minHeight: 48, borderBottom: 0 }}>
               Get in touch
               <img src={mobileCtaArrow} alt="" style={{ width: 13, height: 12, display: "block" }} />

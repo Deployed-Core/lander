@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "Knowledge base — In progress",
   description:
     "A sacred knowledge page for our ops, tech and customer stories. Coming soon.",
+  robots: { index: false, follow: false },
 };
 
 export default function BipPage() {

@@ -22,6 +22,11 @@ export const metadata: Metadata = {
       "We build custom AI systems around how your organisation already operates — then hand them over.",
     images: ["/assets/dep-preview.png"],
   },
+  alternates: {
+    types: {
+      "application/rss+xml": "/feed",
+    },
+  },
 };
 
 export default function RootLayout({

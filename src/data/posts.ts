@@ -1,9 +1,75 @@
 export type ContentBlock =
-  | { type: "paragraph"; text: string }
+  | { type: "paragraph"; text: string; lead?: boolean }
   | { type: "heading"; text: string; id: string }
   | { type: "subheading"; text: string; id: string }
   | { type: "quote"; text: string; attribution?: string }
-  | { type: "list"; items: string[] };
+  | { type: "list"; items: string[] }
+  | {
+      type: "figure-transition";
+      label: string;
+      sublabel: string;
+      caption: string;
+      inputState: { label: string; items: string[] };
+      functionBox: { label: string; name: string; detail: string };
+      outputState: { label: string; items: string[] };
+      equation: { input: string; output: string };
+    }
+  | {
+      type: "figure-strategy";
+      label: string;
+      sublabel: string;
+      caption: string;
+      steps: { title: string; description: string }[];
+    }
+  | { type: "example-note"; text: string }
+  | {
+      type: "figure-workflow";
+      label: string;
+      caption: string;
+      before: {
+        tag: string;
+        title: string;
+        steps: { title: string; description: string; owner?: string; highlight?: boolean }[];
+        summary: string;
+      };
+      after: {
+        tag: string;
+        title: string;
+        steps: { title: string; description: string; owner?: string; highlight?: boolean }[];
+        summary: string;
+      };
+    }
+  | {
+      type: "figure-journey";
+      label: string;
+      caption?: string;
+      steps: { number: string; title: string; description: string }[];
+      checkpoint?: string;
+    }
+  | {
+      type: "figure-metrics";
+      label: string;
+      sublabel?: string;
+      caption: string;
+      headers: string[];
+      rows: string[][];
+      valueRule?: string;
+    }
+  | {
+      type: "figure-ownership";
+      label: string;
+      caption: string;
+      items: { title: string; description: string }[];
+    }
+  | {
+      type: "closing-block";
+      eyebrow: string;
+      quote: string;
+      outcomes: string;
+      prose: string;
+    }
+  | { type: "invitation"; title: string; description: string }
+  | { type: "pull-quote"; text: string };
 
 export interface BlogPost {
   slug: string;
@@ -17,364 +83,226 @@ export interface BlogPost {
     name: string;
     role: string;
     avatar: string;
+    avatarImage?: string;
   };
   gradient: string;
+  coverImage?: string;
   content: ContentBlock[];
 }
 
-const dibyo = {
-  name: "Dibyo Majumdar",
-  role: "Founder, Deployed",
-  avatar: "DM",
-};
-
-const arjun = {
-  name: "Arjun Mehta",
-  role: "Head of Deployments",
-  avatar: "AM",
-};
-
-const priya = {
-  name: "Priya Sharma",
-  role: "AI Strategy Lead",
-  avatar: "PS",
+const deployedTeam = {
+  name: "The Deployed Team",
+  role: "Strategy & Embedded Deployment",
+  avatar: "D",
+  avatarImage: "/icon.jpeg",
 };
 
 export const posts: BlogPost[] = [
   {
-    slug: "healthcare-manpower-optimisation",
-    date: "4 Sept 2026",
-    isoDate: "2026-09-04",
-    title: "Healthcare manpower optimisation",
+    slug: "modus-operandi",
+    date: "14 Sept 2026",
+    isoDate: "2026-09-14",
+    title: "Modus operandi for a better operating state",
     tag: "Industry",
     description:
-      "How a regional hospital network used AI-driven scheduling to cut agency spend by 34% while improving nurse satisfaction scores.",
-    readingTime: 8,
-    author: dibyo,
+      "Deployed is the function that transitions your organisation to a better operating state. Our approach to strategy, embedded AI deployment and measurable operating leverage.",
+    readingTime: 7,
+    author: deployedTeam,
     gradient:
-      "linear-gradient(135deg, #012a79 0%, #3f7ae0 50%, #7aa5ef 100%)",
+      "linear-gradient(135deg, #012057 0%, #163be8 50%, #3f7ae0 100%)",
+    coverImage: "/assets/blog-modus-operandi-preview.png",
     content: [
       {
+        type: "heading",
+        text: "Deployed is the function.",
+        id: "transition",
+      },
+      {
         type: "paragraph",
-        text: "Healthcare staffing is one of the most complex scheduling problems in any industry. A single 500-bed hospital manages thousands of shift assignments per week, each constrained by credentials, patient acuity, union rules, fatigue regulations, and individual preferences. Most systems treat this as a static optimisation problem. We approached it differently.",
+        text: "We think of an organisation as an operating state: its processes, data, business context and KPIs. Deployed is the function that transitions that state.",
+        lead: true,
+      },
+      {
+        type: "paragraph",
+        text: "The output is operating leverage. Our work is solution engineering for that transition, delivered through strategy and embedded deployment.",
+      },
+      {
+        type: "figure-transition",
+        label: "The transition function",
+        sublabel: "State → State",
+        caption: "A change in the way the organisation operates, measured through business performance.",
+        inputState: {
+          label: "Your operating state",
+          items: ["Processes", "Data", "Business context", "KPIs"],
+        },
+        functionBox: {
+          label: "The transition function",
+          name: "Deployed( )",
+          detail: "Strategy\n+ embedded deployment",
+        },
+        outputState: {
+          label: "Operating leverage",
+          items: ["Efficiency", "Enhanced workflows", "Autonomy", "Throughput"],
+        },
+        equation: {
+          input: "Deployed(processes, data, business context, KPIs)",
+          output: "→ efficiency, enhanced workflows, autonomy, throughput",
+        },
       },
       {
         type: "heading",
-        text: "The problem: agency spend was a symptom, not the disease",
-        id: "the-problem",
+        text: "Business first. Technology follows.",
+        id: "strategy",
       },
       {
         type: "paragraph",
-        text: "When MedVista Health — a regional network of four hospitals and twelve outpatient centres — approached us, their immediate pain was agency staffing costs. They were spending $14.2M annually on temporary nurses, up 68% in three years. But agency spend was a downstream symptom of a deeper problem: their scheduling system couldn't adapt to the reality of how healthcare operates.",
+        text: "Our strategy starts with your KPIs and traces through your processes, data and constraints towards technology. We identify what is worth improving before deciding what to build. We bring over a decade of experience as founders and technologists; your business metrics define success.",
       },
       {
         type: "paragraph",
-        text: "Shift schedules were built six weeks in advance using a rules-based system from 2014. By the time a schedule went live, an average of 23% of shifts had already been modified. Each modification cascaded — one swap created two or three downstream conflicts. The scheduling team spent more time firefighting than planning.",
+        text: "A slow process is a starting point for investigation. We look at where work waits, what information is missing and which decisions need human judgment. Only then can we determine whether AI can improve the result within your cost, time and operational constraints.",
       },
       {
-        type: "quote",
-        text: "We weren't managing schedules. We were managing exceptions to schedules.",
-        attribution: "Director of Nursing Operations, MedVista Health",
-      },
-      {
-        type: "heading",
-        text: "What we built: adaptive scheduling with preference learning",
-        id: "what-we-built",
-      },
-      {
-        type: "paragraph",
-        text: "Our system operates on three layers, each feeding into the next. The base layer is a constraint solver that handles the hard requirements — credentials, mandated rest periods, contractual obligations. This replaces the legacy rules engine but isn't where the real value lives.",
-      },
-      {
-        type: "paragraph",
-        text: "The second layer is a demand forecaster that predicts staffing needs at the unit level, 72 hours ahead, using admission patterns, seasonal trends, and real-time census data. This moves scheduling from a fixed-horizon exercise to a rolling, adaptive process.",
-      },
-      {
-        type: "paragraph",
-        text: "The third layer — and the one that had the most impact on nurse satisfaction — is a preference learning system. It observes shift swap patterns, time-off requests, and voluntary overtime behaviour to build individual preference profiles. When the system generates schedules, it optimises for constraint satisfaction first, then maximises aggregate preference alignment.",
-      },
-      {
-        type: "heading",
-        text: "Deployment: embedded with the scheduling team",
-        id: "deployment",
-      },
-      {
-        type: "paragraph",
-        text: "We embedded two engineers with MedVista's scheduling team for the first eight weeks. This wasn't a handoff — it was a co-build. The scheduling coordinators understood edge cases that no requirements document could capture: which units had informal buddy systems, which shifts were hardest to fill on holiday weekends, which nurses were one bad schedule away from quitting.",
-      },
-      {
-        type: "list",
-        items: [
-          "Week 1-2: Process mapping and constraint cataloguing across all four hospitals",
-          "Week 3-4: Demand forecasting model training on 18 months of historical census data",
-          "Week 5-6: Preference learning calibration with voluntary participation from 340 nurses",
-          "Week 7-8: Shadow mode — system generates schedules in parallel, coordinators compare and flag gaps",
+        type: "figure-strategy",
+        label: "The strategy sequence",
+        sublabel: "Business → Technology",
+        caption: "Each technology decision must trace back to a business outcome.",
+        steps: [
+          { title: "Business KPI", description: "What result needs to improve?" },
+          { title: "Process", description: "How does the work happen today?" },
+          { title: "Bottleneck", description: "Where does performance suffer?" },
+          { title: "Data & constraints", description: "What information and boundaries matter?" },
+          { title: "Intervention", description: "What is worth engineering?" },
+          { title: "Measured outcome", description: "Did the change improve the KPI?" },
         ],
       },
       {
+        type: "heading",
+        text: "Embed with the team. Improve the connected system.",
+        id: "embedded",
+      },
+      {
         type: "paragraph",
-        text: "Shadow mode was critical. It built trust with the scheduling team and surfaced twelve edge cases our constraint model hadn't captured. By the time we went live, the coordinators were already choosing the AI-generated schedule over their own in 78% of comparisons.",
+        text: "Isolated task automations are insufficient. We work alongside your teams, across departments, to understand how work moves and engineer improvements in the right sequence. AI should strengthen your workflows without forcing your organisation to conform to a generic application. We deliver a first version in weeks, then refine it with your team through production and adoption.",
+      },
+      {
+        type: "paragraph",
+        text: "Consider a request that crosses several teams. Preparing the request faster has limited value if it still waits for missing information or a manual handoff. The opportunity is to improve the connected workflow, with clear responsibilities at every step.",
+      },
+      {
+        type: "example-note",
+        text: "Illustrative workflow. The example below explains our approach. It is not a customer case study or a claim of measured results.",
+      },
+      {
+        type: "figure-workflow",
+        label: "One request, two operating states",
+        caption: "The design objective: reduce coordination effort while keeping judgment and accountability explicit. Actual gains must be measured against the starting workflow.",
+        before: {
+          tag: "Before",
+          title: "Manual coordination",
+          steps: [
+            { title: "Request arrives", description: "A team member reads and routes it." },
+            { title: "Gather context", description: "Someone searches for supporting information." },
+            { title: "Check with another team", description: "Missing details trigger a follow-up." },
+            { title: "Review and decide", description: "The decision-maker assembles the full picture." },
+            { title: "Update systems", description: "Someone records the decision and next steps." },
+          ],
+          summary: "Work depends on repeated manual coordination.",
+        },
+        after: {
+          tag: "After",
+          title: "Connected execution",
+          steps: [
+            { title: "Request arrives", description: "The team receives it in the existing workflow." },
+            { title: "Prepare the context", description: "Assemble information from permitted sources.", owner: "AI assists", highlight: true },
+            { title: "Surface gaps and exceptions", description: "Flag what needs attention before review.", owner: "AI assists", highlight: true },
+            { title: "Review the prepared case", description: "The accountable person decides and approves.", owner: "Human judgment" },
+            { title: "Execute approved actions", description: "Update connected systems; record progress and usage.", highlight: true },
+          ],
+          summary: "The team spends more attention on decisions and exceptions.",
+        },
+      },
+      {
+        type: "paragraph",
+        text: "Deployment progresses through a feedback loop. We establish how work happens, build the first useful version, learn from the people using it and measure the change before handoff.",
+      },
+      {
+        type: "figure-journey",
+        label: "From understanding to ownership",
+        steps: [
+          { number: "01", title: "Understand", description: "Map the workflow, baseline and constraints." },
+          { number: "02", title: "Build", description: "Deliver a first version in weeks." },
+          { number: "03", title: "Refine", description: "Use team feedback to reach production." },
+          { number: "04", title: "Measure", description: "Verify improvement and running costs." },
+          { number: "05", title: "Hand over", description: "Equip the team to operate and adapt." },
+        ],
+        checkpoint: "The handoff condition: measurable improvement, adoption within the team and the ability to sustain the new operating state.",
       },
       {
         type: "heading",
-        text: "Results: beyond the cost savings",
-        id: "results",
+        text: "Make the economics accountable.",
+        id: "economics",
       },
       {
         type: "paragraph",
-        text: "Six months after full deployment, the numbers told a clear story. Agency spend dropped 34%, from $14.2M to $9.4M annualised. But the second-order effects were more significant.",
+        text: "Before building, we agree on outcomes, measurement and cost constraints. AI usage, costs and performance remain visible. We engineer within operational and data constraints so AI creates value without becoming a liability. The improvement must be worth substantially more than the cost of making and maintaining the transition.",
       },
       {
-        type: "list",
+        type: "paragraph",
+        text: "Measurement starts with the current state. For the illustrative request workflow, we would agree on measures such as the following. The baseline and target come from your business; they are not assumed in advance.",
+      },
+      {
+        type: "figure-metrics",
+        label: "What we would measure",
+        sublabel: "Illustrative framework",
+        caption: "A decision rule, not a forecast. Faster processing alone does not establish financial value; the business benefit must be evidenced.",
+        headers: ["Measure", "What it tells us"],
+        rows: [
+          ["Cycle time", "How long a request takes from arrival to completion."],
+          ["Throughput", "How many requests the team completes over a comparable period."],
+          ["Quality", "How often requests need correction, rework or escalation."],
+          ["Running cost", "The cost of AI usage and ongoing system operation."],
+          ["Business value", "Whether the measured benefit justifies transition and maintenance costs."],
+        ],
+        valueRule: "Value created > cost of transition + cost of sustaining it",
+      },
+      {
+        type: "heading",
+        text: "Hand over control. Build for change.",
+        id: "ownership",
+      },
+      {
+        type: "paragraph",
+        text: "Deployment is complete when the improvement is measurable and your team can sustain it. You retain control of your data, workflows and systems, with self-service dashboards to operate and adapt them. We design for evolving AI models and technology so adopting improvements does not require rebuilding the whole workflow.",
+      },
+      {
+        type: "paragraph",
+        text: "In practice, that means making the system understandable and manageable for the people who own the process. New model capabilities should be evaluated against the same outcomes, cost limits and operating requirements before being adopted.",
+      },
+      {
+        type: "figure-ownership",
+        label: "What stays with your organisation",
+        caption: "The handoff transfers day-to-day operating control to your team.",
         items: [
-          "Agency spend reduced by 34% ($4.8M annualised savings)",
-          "Nurse satisfaction scores increased 18 points (measured via quarterly pulse survey)",
-          "Schedule modification rate dropped from 23% to 7%",
-          "Voluntary overtime uptake increased 41% — nurses chose extra shifts when the system respected their preferences",
-          "Coordinator time spent on schedule adjustments reduced by 62%",
+          { title: "Enhanced workflows", description: "A working process adopted by the team, with clear responsibilities." },
+          { title: "Self-service controls", description: "Dashboards and controls to manage the system and make supported changes." },
+          { title: "Visibility & ownership", description: "Control of your data and workflows, with AI usage and costs visible to the business." },
+          { title: "Room to evolve", description: "A system designed to accommodate newer models, with maintenance support available when needed." },
         ],
       },
       {
-        type: "paragraph",
-        text: "The voluntary overtime number is the one that surprised the executive team. When you give nurses schedules that respect their lives, they're willing to give more. The system didn't just reduce costs — it changed the relationship between the organisation and its workforce.",
+        type: "closing-block",
+        eyebrow: "06 / Our standard",
+        quote: "A deployment succeeds when your team can sustain a measurable improvement at a cost that makes business sense.",
+        outcomes: "You pay for outcomes, not the implementation of agentic infrastructure.",
+        prose: "Our responsibility is to deliver a better operating state your organisation can own and sustain.",
       },
       {
-        type: "heading",
-        text: "What we'd do differently",
-        id: "what-wed-do-differently",
-      },
-      {
-        type: "paragraph",
-        text: "If we were starting this engagement today, we'd bring the union representatives into the process earlier. We engaged them in week three; it should have been week one. Their input on fatigue rules and preference transparency would have saved us a full iteration cycle on the constraint model.",
-      },
-      {
-        type: "paragraph",
-        text: "We'd also start the preference learning in shadow mode from day one, even before the constraint solver was complete. Preference data takes time to accumulate, and the earlier you start collecting it, the better your initial schedules will be.",
-      },
-      {
-        type: "heading",
-        text: "The hand-off",
-        id: "the-hand-off",
-      },
-      {
-        type: "paragraph",
-        text: "MedVista's internal team now owns the system entirely. We trained two of their engineers on the model architecture and retraining pipeline. The preference learning system is self-improving — it gets better with every scheduling cycle. Our engagement ended at week fourteen. The system has been running independently for four months with no degradation in performance.",
-      },
-      {
-        type: "paragraph",
-        text: "This is what we mean by deployment, not dependency. The value compounds after we leave.",
+        type: "invitation",
+        title: "Bring us one workflow worth improving.",
+        description: "Let’s define the transition—and how we’ll prove its value.",
       },
     ],
-  },
-  {
-    slug: "what-an-assessment-week-looks-like",
-    date: "28 Aug 2026",
-    isoDate: "2026-08-28",
-    title: "What an assessment week actually looks like",
-    tag: "Deployments",
-    description:
-      "A day-by-day walkthrough of how we map processes, identify leverage points, and build the deployment roadmap.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #001033 0%, #012057 50%, #0b3d9e 100%)",
-    content: [],
-  },
-  {
-    slug: "agentic-ops-for-claims-processing",
-    date: "19 Aug 2026",
-    isoDate: "2026-08-19",
-    title: "Agentic ops for claims processing",
-    tag: "Deployments",
-    description:
-      "End-to-end automation that handles intake, triage, and adjudication — reducing cycle time from days to minutes.",
-    readingTime: 7,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #0b3d9e 0%, #1a55c4 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "measuring-ai-density-without-scoring-people",
-    date: "7 Aug 2026",
-    isoDate: "2026-08-07",
-    title: "Measuring AI density without scoring people",
-    tag: "Product",
-    description:
-      "Our framework for quantifying organisational AI maturity at the process level, not the individual level.",
-    readingTime: 5,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #012a79 0%, #1a55c4 40%, #b6cdf7 100%)",
-    content: [],
-  },
-  {
-    slug: "hand-off-not-dependency",
-    date: "25 Jul 2026",
-    isoDate: "2026-07-25",
-    title: "Hand-off, not dependency",
-    tag: "Product",
-    description:
-      "Why every engagement ends with your team owning the system — and how we structure knowledge transfer from week one.",
-    readingTime: 5,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #000f2b 0%, #012a79 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "where-logistics-teams-find-leverage-first",
-    date: "11 Jul 2026",
-    isoDate: "2026-07-11",
-    title: "Where logistics teams find leverage first",
-    tag: "Industry",
-    description:
-      "The three operational bottlenecks where AI creates outsized returns in supply-chain and distribution businesses.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #001033 0%, #0b3d9e 40%, #7aa5ef 100%)",
-    content: [],
-  },
-  {
-    slug: "building-trust-loops-into-agentic-workflows",
-    date: "28 Jun 2026",
-    isoDate: "2026-06-28",
-    title: "Building trust loops into agentic workflows",
-    tag: "Product",
-    description:
-      "How we design human-in-the-loop checkpoints that maintain velocity without sacrificing oversight or compliance.",
-    readingTime: 6,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #012057 0%, #3f7ae0 50%, #dfe9fb 100%)",
-    content: [],
-  },
-  {
-    slug: "the-retail-ops-playbook",
-    date: "14 Jun 2026",
-    isoDate: "2026-06-14",
-    title: "The retail ops playbook",
-    tag: "Industry",
-    description:
-      "From demand forecasting to shelf allocation — where AI compounds fastest across multi-site retail operations.",
-    readingTime: 7,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #00040f 0%, #012057 50%, #1a55c4 100%)",
-    content: [],
-  },
-  {
-    slug: "why-your-ai-pilot-stalled",
-    date: "2 Jun 2026",
-    isoDate: "2026-06-02",
-    title: "Why your AI pilot stalled",
-    tag: "Deployments",
-    description:
-      "The five failure modes we see in enterprise AI pilots and how forward-deployed teams break through each one.",
-    readingTime: 8,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #012a79 0%, #0b3d9e 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "deploying-ai-in-regulated-environments",
-    date: "19 May 2026",
-    isoDate: "2026-05-19",
-    title: "Deploying AI in regulated environments",
-    tag: "Industry",
-    description:
-      "Navigating compliance, audit trails, and model governance when deploying AI in banking and financial services.",
-    readingTime: 7,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #000f2b 0%, #012a79 40%, #1a55c4 100%)",
-    content: [],
-  },
-  {
-    slug: "from-poc-to-production-in-6-weeks",
-    date: "5 May 2026",
-    isoDate: "2026-05-05",
-    title: "From proof-of-concept to production in 6 weeks",
-    tag: "Deployments",
-    description:
-      "A case study on collapsing the typical 6-month AI timeline by embedding engineers directly with the operations team.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #0b3d9e 0%, #3f7ae0 50%, #7aa5ef 100%)",
-    content: [],
-  },
-  {
-    slug: "the-compound-effect-of-small-automations",
-    date: "21 Apr 2026",
-    isoDate: "2026-04-21",
-    title: "The compound effect of small automations",
-    tag: "Product",
-    description:
-      "Why 20 small workflow automations often outperform one ambitious AI project — and how to sequence them.",
-    readingTime: 5,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #012057 0%, #1a55c4 50%, #b6cdf7 100%)",
-    content: [],
-  },
-  {
-    slug: "energy-sector-predictive-maintenance",
-    date: "8 Apr 2026",
-    isoDate: "2026-04-08",
-    title: "Energy sector: predictive maintenance at scale",
-    tag: "Industry",
-    description:
-      "How utilities are using AI to shift from scheduled to condition-based maintenance, cutting downtime by 40%.",
-    readingTime: 7,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #00040f 0%, #001033 40%, #012a79 100%)",
-    content: [],
-  },
-  {
-    slug: "designing-ai-systems-that-survive-reorgs",
-    date: "24 Mar 2026",
-    isoDate: "2026-03-24",
-    title: "Designing AI systems that survive reorgs",
-    tag: "Product",
-    description:
-      "Architecture principles that decouple AI systems from team structure so they stay useful when org charts change.",
-    readingTime: 6,
-    author: priya,
-    gradient:
-      "linear-gradient(135deg, #012a79 0%, #3f7ae0 60%, #dfe9fb 100%)",
-    content: [],
-  },
-  {
-    slug: "the-assessment-framework-we-use-on-day-one",
-    date: "10 Mar 2026",
-    isoDate: "2026-03-10",
-    title: "The assessment framework we use on day one",
-    tag: "Deployments",
-    description:
-      "Our structured approach to scoring 40+ processes for AI readiness before writing a single line of code.",
-    readingTime: 6,
-    author: arjun,
-    gradient:
-      "linear-gradient(135deg, #001033 0%, #012057 50%, #3f7ae0 100%)",
-    content: [],
-  },
-  {
-    slug: "insurance-underwriting-meets-agentic-ai",
-    date: "22 Feb 2026",
-    isoDate: "2026-02-22",
-    title: "Insurance underwriting meets agentic AI",
-    tag: "Industry",
-    description:
-      "Automating risk assessment workflows while keeping underwriters in control of edge cases and exceptions.",
-    readingTime: 7,
-    author: dibyo,
-    gradient:
-      "linear-gradient(135deg, #012057 0%, #0b3d9e 40%, #7aa5ef 100%)",
-    content: [],
   },
 ];
 
