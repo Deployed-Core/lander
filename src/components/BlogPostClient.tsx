@@ -74,7 +74,9 @@ export default function BlogPostClient({ slug }: { slug: string }) {
         }
         @media (max-width: 560px) {
           [data-r="foot"] { grid-template-columns: minmax(0,1fr) !important; }
-          .blog-hero-meta { flex-direction: column !important; gap: 12px !important; }
+          .blog-hero-meta { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+          .blog-hero-meta .meta-divider { display: none !important; }
+          .blog-hero-meta .meta-share { margin-left: 0 !important; }
           .blog-adj-grid { grid-template-columns: 1fr !important; }
         }
         .fig-state-flow {
@@ -431,6 +433,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
           </div>
 
           <div
+            className="meta-divider"
             style={{
               width: 1,
               height: 28,
@@ -457,6 +460,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
           </div>
 
           <div
+            className="meta-divider"
             style={{
               width: 1,
               height: 28,
@@ -484,6 +488,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
 
           {/* Share buttons — pushed right */}
           <div
+            className="meta-share"
             style={{
               marginLeft: "auto",
               display: "flex",
