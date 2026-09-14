@@ -6,6 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        disallow: "/bip",
       },
     ],
     sitemap: "https://deployed.md/sitemap.xml",

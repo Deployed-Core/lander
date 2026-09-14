@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 import { posts } from "@/data/posts";
 
 type Filter = "All posts" | "Industry" | "Technology";
@@ -118,7 +119,7 @@ export default function BlogPage() {
       {/* Hero / eyebrow */}
       <section
         style={{
-          maxWidth: "var(--page-max)",
+          maxWidth: 1160,
           margin: "0 auto",
           padding: "var(--space-16) var(--gutter) var(--space-10)",
         }}
@@ -138,7 +139,7 @@ export default function BlogPage() {
       {/* Featured post */}
       <section
         style={{
-          maxWidth: "var(--page-max)",
+          maxWidth: 1160,
           margin: "0 auto",
           padding: "0 var(--gutter) var(--section-y)",
         }}
@@ -168,16 +169,30 @@ export default function BlogPage() {
               overflow: "hidden",
             }}
           >
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "url(/assets/grain-512.png) repeat",
-                backgroundSize: "512px 512px",
-                opacity: 0.06,
-                mixBlendMode: "soft-light",
-              }}
-            />
+            {featured.coverImage ? (
+              <img
+                src={featured.coverImage}
+                alt={featured.title}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "url(/assets/grain-512.png) repeat",
+                  backgroundSize: "512px 512px",
+                  opacity: 0.06,
+                  mixBlendMode: "soft-light",
+                }}
+              />
+            )}
           </div>
           <div
             style={{
@@ -280,7 +295,7 @@ export default function BlogPage() {
           <div
             style={{
               flexShrink: 0,
-              maxWidth: "var(--page-max)",
+              maxWidth: 1160,
               margin: "0 auto",
               padding: "var(--space-10) var(--gutter) 0",
               width: "100%",
@@ -378,7 +393,7 @@ export default function BlogPage() {
             <div
               ref={gridRef}
               style={{
-                maxWidth: "var(--page-max)",
+                maxWidth: 1160,
                 margin: "0 auto",
                 padding: "var(--space-8) var(--gutter) var(--space-20)",
               }}
@@ -403,23 +418,37 @@ export default function BlogPage() {
                   >
                     <div
                       style={{
-                        aspectRatio: "4 / 3",
+                        aspectRatio: "16 / 10",
                         background: post.gradient,
                         borderRadius: "var(--radius-md)",
                         position: "relative",
                         overflow: "hidden",
                       }}
                     >
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: 0,
-                          background: "url(/assets/grain-512.png) repeat",
-                          backgroundSize: "512px 512px",
-                          opacity: 0.06,
-                          mixBlendMode: "soft-light",
-                        }}
-                      />
+                      {post.coverImage ? (
+                        <img
+                          src={post.coverImage}
+                          alt={post.title}
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            position: "absolute",
+                            inset: 0,
+                            background: "url(/assets/grain-512.png) repeat",
+                            backgroundSize: "512px 512px",
+                            opacity: 0.06,
+                            mixBlendMode: "soft-light",
+                          }}
+                        />
+                      )}
                     </div>
                     <div
                       style={{
@@ -509,198 +538,7 @@ export default function BlogPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer
-        className="brand-field--flat on-navy"
-        style={{ position: "relative" }}
-      >
-        <div
-          data-r="foot"
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "80px 24px 40px",
-            display: "grid",
-            gridTemplateColumns: "minmax(0,1.3fr) repeat(3,minmax(0,1fr))",
-            gap: 48,
-          }}
-        >
-          <div>
-            <img
-              src="/assets/logo-horizontal-white.png"
-              alt="Deployed"
-              style={{ width: 150, display: "block" }}
-            />
-            <div
-              style={{
-                font: "var(--eyebrow)",
-                letterSpacing: "var(--eyebrow-track)",
-                textTransform: "uppercase",
-                color: "rgba(249,246,243,.44)",
-                marginTop: 16,
-                maxWidth: "24ch",
-              }}
-            >
-              Reach optimal AI density within your org
-            </div>
-            <Link
-              href="/contact"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 9,
-                border: "1px solid rgba(255,255,255,.28)",
-                color: "var(--paper-050)",
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                padding: "12px 20px",
-                borderRadius: 999,
-                marginTop: 28,
-                borderBottom: 0,
-              }}
-            >
-              Get in touch
-              <img
-                src="/assets/icon-arrow-white.png"
-                alt=""
-                style={{ width: 13, height: 12, display: "block" }}
-              />
-            </Link>
-          </div>
-
-          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
-            <div
-              style={{
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "rgba(249,246,243,.44)",
-                marginBottom: 4,
-              }}
-            >
-              Core
-            </div>
-            <Link
-              href="/strategy"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Strategy
-            </Link>
-            <Link
-              href="/deployment"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Deployment
-            </Link>
-            <Link
-              href="/the-deployed-fit"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              The Deployed fit
-            </Link>
-          </div>
-
-          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
-            <div
-              style={{
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "rgba(249,246,243,.44)",
-                marginBottom: 4,
-              }}
-            >
-              Company
-            </div>
-            <Link
-              href="/about"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              About
-            </Link>
-            <a
-              href="#"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Careers
-            </a>
-            <Link
-              href="/contact"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Contact
-            </Link>
-          </div>
-
-          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
-            <div
-              style={{
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                color: "rgba(249,246,243,.44)",
-                marginBottom: 4,
-              }}
-            >
-              Resources
-            </div>
-            <Link
-              href="/bip"
-              style={{
-                font: "var(--body-sm)",
-                color: "rgba(249,246,243,.78)",
-              }}
-            >
-              Knowledge base
-            </Link>
-          </div>
-        </div>
-
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "22px 24px 40px",
-            borderTop: "1px solid var(--border-hairline)",
-            display: "flex",
-            gap: 20,
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
-          <span
-            style={{
-              font: "var(--mono-md)",
-              color: "rgba(249,246,243,.38)",
-            }}
-          >
-            deployed.md
-          </span>
-          <span
-            style={{
-              font: "var(--mono-md)",
-              color: "rgba(249,246,243,.38)",
-            }}
-          >
-            {"©"} 2026 Deployed
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

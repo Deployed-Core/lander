@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 /design-handoff
+/blog-handoff
 
 # testing
 /coverage

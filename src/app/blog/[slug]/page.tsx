@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       tags: [post.tag],
       images: [
         {
-          url: `/api/og?title=${encodeURIComponent(post.title)}`,
+          url: post.coverImage || `/api/og?title=${encodeURIComponent(post.title)}`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
-      images: [`/api/og?title=${encodeURIComponent(post.title)}`],
+      images: [post.coverImage || `/api/og?title=${encodeURIComponent(post.title)}`],
     },
   };
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 import {
   getPostBySlug,
   getRelatedPosts,
@@ -75,6 +76,133 @@ export default function BlogPostClient({ slug }: { slug: string }) {
           [data-r="foot"] { grid-template-columns: minmax(0,1fr) !important; }
           .blog-hero-meta { flex-direction: column !important; gap: 12px !important; }
           .blog-adj-grid { grid-template-columns: 1fr !important; }
+        }
+        .fig-state-flow {
+          display: grid;
+          grid-template-columns: 1fr 36px 1.08fr 36px 1fr;
+          align-items: center;
+          gap: 8px;
+        }
+        .fig-strategy-flow {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 22px;
+          list-style: none;
+          counter-reset: strategy;
+          margin: 0;
+          padding: 22px 25px;
+        }
+        .fig-strategy-flow li {
+          counter-increment: strategy;
+          border-top: 1px solid var(--border-subtle);
+          padding-top: 12px;
+        }
+        .fig-strategy-flow li::before {
+          content: '0' counter(strategy);
+          font: var(--label);
+          letter-spacing: var(--label-track);
+          color: var(--blue-600);
+          display: block;
+          margin-bottom: 8px;
+        }
+        .fig-workflow-panels {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0;
+        }
+        .fig-workflow-steps li:not(:last-child)::after {
+          content: '↓';
+          position: absolute;
+          bottom: -26px;
+          left: calc(50% - 6px);
+          color: var(--text-faint);
+          font-size: 17px;
+          height: 25px;
+        }
+        .fig-journey-steps {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          gap: 18px;
+          list-style: none;
+          padding: 26px;
+          margin: 0;
+        }
+        .fig-ownership-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 23px 32px;
+          padding: 26px;
+        }
+        .fig-metrics-table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .fig-metrics-table th,
+        .fig-metrics-table td {
+          padding: 15px 23px;
+          border-bottom: 1px solid var(--border-hairline);
+          vertical-align: top;
+          text-align: left;
+        }
+        .fig-metrics-table th {
+          font: var(--label);
+          letter-spacing: var(--label-track);
+          text-transform: uppercase;
+          color: var(--text-muted);
+          background: var(--surface-card);
+        }
+        .fig-metrics-table th:first-child { width: 26%; }
+        .fig-metrics-table td:first-child {
+          font-weight: 600;
+          color: var(--text-strong);
+        }
+        .fig-metrics-table td {
+          font: var(--body-md);
+          color: var(--text-muted);
+        }
+        .fig-metrics-table tr:last-child td { border-bottom: 0; }
+        .fig-metrics-table tr:last-child { background: var(--surface-accent-soft); }
+        @media (max-width: 800px) {
+          .fig-state-flow {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+          }
+          .fig-state-flow .flow-arrow-svg {
+            transform: rotate(90deg);
+            width: 29px !important;
+            height: 27px !important;
+            justify-self: center;
+          }
+          .fig-strategy-flow {
+            grid-template-columns: 1fr 1fr !important;
+            padding: 18px !important;
+            gap: 20px !important;
+          }
+          .fig-workflow-panels {
+            grid-template-columns: 1fr !important;
+          }
+          .fig-workflow-panel-after {
+            border-left: 0 !important;
+            border-top: 1px solid var(--border-hairline) !important;
+          }
+          .fig-journey-steps {
+            grid-template-columns: 1fr !important;
+            padding: 20px !important;
+            gap: 18px !important;
+          }
+          .fig-journey-steps li {
+            display: grid !important;
+            grid-template-columns: 40px 1fr !important;
+            gap: 0 10px !important;
+          }
+          .fig-ownership-grid {
+            grid-template-columns: 1fr !important;
+            padding: 20px !important;
+          }
+          .fig-metrics-table td,
+          .fig-metrics-table th {
+            padding: 12px !important;
+          }
         }
       `}</style>
 
@@ -150,33 +278,48 @@ export default function BlogPostClient({ slug }: { slug: string }) {
             overflow: "hidden",
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "url(/assets/grain-512.png) repeat",
-              backgroundSize: "512px 512px",
-              opacity: 0.06,
-              mixBlendMode: "soft-light",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: 32,
-              left: 36,
-              font: "var(--display-1)",
-              fontSize: "clamp(32px, 5vw, 72px)",
-              color: "rgba(255,255,255,0.08)",
-              letterSpacing: "-0.03em",
-              lineHeight: 1,
-              maxWidth: "80%",
-              pointerEvents: "none",
-            }}
-          >
-            {post.title}
-          </div>
+          {post.coverImage ? (
+            <img
+              src={post.coverImage}
+              alt={post.title}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          ) : (
+            <>
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "url(/assets/grain-512.png) repeat",
+                  backgroundSize: "512px 512px",
+                  opacity: 0.06,
+                  mixBlendMode: "soft-light",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 32,
+                  left: 36,
+                  font: "var(--display-1)",
+                  fontSize: "clamp(32px, 5vw, 72px)",
+                  color: "rgba(255,255,255,0.08)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                  maxWidth: "80%",
+                  pointerEvents: "none",
+                }}
+              >
+                {post.title}
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -238,23 +381,37 @@ export default function BlogPostClient({ slug }: { slug: string }) {
         >
           {/* Author */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <div
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: "50%",
-                background: "var(--blue-850)",
-                color: "var(--paper-050)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                flexShrink: 0,
-              }}
-            >
-              {post.author.avatar}
-            </div>
+            {post.author.avatarImage ? (
+              <img
+                src={post.author.avatarImage}
+                alt={post.author.name}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  flexShrink: 0,
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  background: "var(--blue-850)",
+                  color: "var(--paper-050)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  font: "var(--label)",
+                  letterSpacing: "var(--label-track)",
+                  flexShrink: 0,
+                }}
+              >
+                {post.author.avatar}
+              </div>
+            )}
             <div>
               <div
                 style={{
@@ -471,6 +628,9 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                     key={i}
                     style={{
                       margin: "0 0 var(--space-5)",
+                      ...(block.lead
+                        ? { fontSize: 21, lineHeight: 1.65 }
+                        : {}),
                     }}
                   >
                     {block.text}
@@ -537,6 +697,800 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                       </li>
                     ))}
                   </ul>
+                );
+              case "pull-quote":
+                return (
+                  <p
+                    key={i}
+                    style={{
+                      borderLeft: "3px solid var(--blue-500)",
+                      padding: "3px 0 3px 23px",
+                      fontSize: 22,
+                      lineHeight: 1.55,
+                      margin: "var(--space-8) 0",
+                      color: "var(--text-strong)",
+                    }}
+                  >
+                    {block.text}
+                  </p>
+                );
+              case "example-note":
+                return (
+                  <p
+                    key={i}
+                    style={{
+                      font: "var(--body-sm)",
+                      lineHeight: 1.6,
+                      color: "var(--text-muted)",
+                      borderLeft: "2px solid var(--blue-200)",
+                      paddingLeft: 14,
+                      margin: "var(--space-6) 0",
+                    }}
+                  >
+                    <strong>{block.text.split(".")[0]}.</strong>
+                    {block.text.substring(block.text.indexOf(".") + 1)}
+                  </p>
+                );
+              case "figure-transition":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--blue-850)",
+                      border: "1px solid var(--blue-800)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                      color: "var(--paper-050)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "rgba(212,220,255,.7)",
+                        borderBottom: "1px solid rgba(255,255,255,.18)",
+                      }}
+                    >
+                      <span style={{ color: "var(--paper-050)" }}>{block.label}</span>
+                      <span>{block.sublabel}</span>
+                    </div>
+                    <div style={{ padding: "32px 26px 26px" }}>
+                      <div className="fig-state-flow">
+                        <div
+                          style={{
+                            border: "1px solid rgba(255,255,255,.28)",
+                            padding: "20px 16px",
+                            minHeight: 185,
+                          }}
+                        >
+                          <div
+                            style={{
+                              font: "var(--label)",
+                              letterSpacing: "1px",
+                              textTransform: "uppercase",
+                              marginBottom: 13,
+                              color: "rgba(212,220,255,.7)",
+                            }}
+                          >
+                            {block.inputState.label}
+                          </div>
+                          <ul
+                            style={{
+                              listStyle: "none",
+                              margin: 0,
+                              padding: 0,
+                              font: "var(--body-md)",
+                              lineHeight: 1.9,
+                            }}
+                          >
+                            {block.inputState.items.map((item, j) => (
+                              <li key={j}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                        <svg
+                          className="flow-arrow-svg"
+                          viewBox="0 0 36 24"
+                          aria-hidden="true"
+                          style={{ width: "100%", height: 25, color: "currentColor" }}
+                        >
+                          <path
+                            d="M2 12h30m-8-8 8 8-8 8"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            fill="none"
+                          />
+                        </svg>
+                        <div
+                          style={{
+                            background: "var(--paper-000)",
+                            color: "var(--blue-600)",
+                            border: "1px solid var(--paper-000)",
+                            padding: "20px 16px",
+                            minHeight: 185,
+                            textAlign: "center",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <div
+                            style={{
+                              font: "var(--label)",
+                              letterSpacing: "1px",
+                              textTransform: "uppercase",
+                              marginBottom: 13,
+                              color: "var(--text-muted)",
+                            }}
+                          >
+                            {block.functionBox.label}
+                          </div>
+                          <div
+                            style={{
+                              fontFamily: "var(--font-display)",
+                              fontStyle: "italic",
+                              fontSize: "clamp(24px, 2.5vw, 34px)",
+                              lineHeight: 1.2,
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {block.functionBox.name}
+                          </div>
+                          <div
+                            style={{
+                              font: "var(--body-sm)",
+                              lineHeight: 1.6,
+                              marginTop: 12,
+                              whiteSpace: "pre-line",
+                            }}
+                          >
+                            {block.functionBox.detail}
+                          </div>
+                        </div>
+                        <svg
+                          className="flow-arrow-svg"
+                          viewBox="0 0 36 24"
+                          aria-hidden="true"
+                          style={{ width: "100%", height: 25, color: "currentColor" }}
+                        >
+                          <path
+                            d="M2 12h30m-8-8 8 8-8 8"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            fill="none"
+                          />
+                        </svg>
+                        <div
+                          style={{
+                            border: "1px solid rgba(255,255,255,.28)",
+                            padding: "20px 16px",
+                            minHeight: 185,
+                          }}
+                        >
+                          <div
+                            style={{
+                              font: "var(--label)",
+                              letterSpacing: "1px",
+                              textTransform: "uppercase",
+                              marginBottom: 13,
+                              color: "rgba(212,220,255,.7)",
+                            }}
+                          >
+                            {block.outputState.label}
+                          </div>
+                          <ul
+                            style={{
+                              listStyle: "none",
+                              margin: 0,
+                              padding: 0,
+                              font: "var(--body-md)",
+                              lineHeight: 1.9,
+                            }}
+                          >
+                            {block.outputState.items.map((item, j) => (
+                              <li key={j}>{item}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: 20,
+                          lineHeight: 1.65,
+                          textAlign: "center",
+                          paddingTop: 26,
+                          marginTop: 27,
+                          borderTop: "1px solid rgba(255,255,255,.18)",
+                        }}
+                      >
+                        <span>{block.equation.input}</span>
+                        <br />
+                        <span style={{ color: "rgba(212,220,255,.7)" }}>
+                          {block.equation.output}
+                        </span>
+                      </div>
+                    </div>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "rgba(212,220,255,.7)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid rgba(255,255,255,.18)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-strategy":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--surface-accent-soft)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                      <span>{block.sublabel}</span>
+                    </div>
+                    <ol className="fig-strategy-flow">
+                      {block.steps.map((step, j) => (
+                        <li key={j}>
+                          <strong
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                              display: "block",
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {step.title}
+                          </strong>
+                          <small
+                            style={{
+                              display: "block",
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              marginTop: 6,
+                            }}
+                          >
+                            {step.description}
+                          </small>
+                        </li>
+                      ))}
+                    </ol>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                        background: "var(--surface-card)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-workflow":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-6) 0 var(--space-6)",
+                      background: "var(--surface-card)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                        background: "var(--surface-accent-soft)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                    </div>
+                    <div className="fig-workflow-panels">
+                      {[block.before, block.after].map((panel, pi) => (
+                        <div
+                          key={pi}
+                          className={pi === 1 ? "fig-workflow-panel-after" : ""}
+                          style={{
+                            padding: 24,
+                            ...(pi === 1
+                              ? {
+                                  borderLeft: "1px solid var(--border-hairline)",
+                                  background: "var(--surface-accent-soft)",
+                                }
+                              : {}),
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 10,
+                              marginBottom: 20,
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                            }}
+                          >
+                            <span
+                              style={{
+                                font: "var(--label)",
+                                letterSpacing: "1px",
+                                textTransform: "uppercase",
+                                padding: "3px 7px",
+                                lineHeight: 1.5,
+                                background:
+                                  pi === 0
+                                    ? "var(--border-subtle)"
+                                    : "var(--blue-600)",
+                                color:
+                                  pi === 0
+                                    ? "var(--text-muted)"
+                                    : "var(--paper-050)",
+                                fontSize: 11,
+                              }}
+                            >
+                              {panel.tag}
+                            </span>
+                            {panel.title}
+                          </div>
+                          <ol
+                            className="fig-workflow-steps"
+                            style={{
+                              listStyle: "none",
+                              margin: 0,
+                              padding: 0,
+                            }}
+                          >
+                            {panel.steps.map((step, si) => (
+                              <li
+                                key={si}
+                                style={{
+                                  position: "relative",
+                                  border: `1px solid ${step.highlight ? "var(--blue-300)" : "var(--border-hairline)"}`,
+                                  padding: "13px 14px",
+                                  background: "var(--surface-card)",
+                                  marginBottom: si < panel.steps.length - 1 ? 24 : 0,
+                                }}
+                              >
+                                {step.owner && (
+                                  <span
+                                    style={{
+                                      font: "var(--label)",
+                                      fontSize: 10,
+                                      letterSpacing: ".9px",
+                                      color: "var(--blue-600)",
+                                      textTransform: "uppercase",
+                                      display: "block",
+                                      marginBottom: 4,
+                                    }}
+                                  >
+                                    {step.owner}
+                                  </span>
+                                )}
+                                <strong
+                                  style={{
+                                    font: "var(--body-md)",
+                                    fontWeight: 600,
+                                    color: "var(--text-strong)",
+                                    display: "block",
+                                    lineHeight: 1.4,
+                                  }}
+                                >
+                                  {step.title}
+                                </strong>
+                                <small
+                                  style={{
+                                    display: "block",
+                                    font: "var(--body-sm)",
+                                    color: "var(--text-muted)",
+                                    marginTop: 5,
+                                  }}
+                                >
+                                  {step.description}
+                                </small>
+                              </li>
+                            ))}
+                          </ol>
+                          <div
+                            style={{
+                              font: "var(--body-sm)",
+                              lineHeight: 1.5,
+                              marginTop: 20,
+                              color: "var(--text-muted)",
+                            }}
+                          >
+                            {panel.summary}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-journey":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--surface-accent-soft)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                    </div>
+                    <ol className="fig-journey-steps">
+                      {block.steps.map((step, j) => (
+                        <li
+                          key={j}
+                          style={{
+                            borderTop: `2px solid ${j === block.steps.length - 1 ? "var(--blue-500)" : "var(--border-subtle)"}`,
+                            paddingTop: 15,
+                          }}
+                        >
+                          <span
+                            style={{
+                              font: "var(--label)",
+                              letterSpacing: "var(--label-track)",
+                              textTransform: "uppercase",
+                              color: "var(--blue-600)",
+                              marginBottom: 9,
+                              display: "block",
+                            }}
+                          >
+                            {step.number}
+                          </span>
+                          <strong
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                              display: "block",
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {step.title}
+                          </strong>
+                          <small
+                            style={{
+                              display: "block",
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              marginTop: 8,
+                            }}
+                          >
+                            {step.description}
+                          </small>
+                        </li>
+                      ))}
+                    </ol>
+                    {block.checkpoint && (
+                      <div
+                        style={{
+                          margin: "0 26px 26px",
+                          padding: "15px 18px",
+                          borderLeft: "3px solid var(--blue-500)",
+                          background: "var(--blue-050)",
+                          font: "var(--body-sm)",
+                          lineHeight: 1.6,
+                          color: "var(--text-body)",
+                        }}
+                      >
+                        <strong style={{ color: "var(--blue-600)" }}>
+                          {block.checkpoint.split(":")[0]}:
+                        </strong>
+                        {block.checkpoint.substring(block.checkpoint.indexOf(":") + 1)}
+                      </div>
+                    )}
+                  </figure>
+                );
+              case "figure-metrics":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--surface-accent-soft)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                      {block.sublabel && <span>{block.sublabel}</span>}
+                    </div>
+                    <table className="fig-metrics-table">
+                      <thead>
+                        <tr>
+                          {block.headers.map((h, j) => (
+                            <th key={j}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {block.rows.map((row, j) => (
+                          <tr key={j}>
+                            {row.map((cell, k) => (
+                              <td key={k}>{cell}</td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    {block.valueRule && (
+                      <div
+                        style={{
+                          fontFamily: "var(--font-display)",
+                          fontSize: 26,
+                          lineHeight: 1.45,
+                          padding: "24px 26px",
+                          borderTop: "1px solid var(--border-hairline)",
+                          color: "var(--blue-600)",
+                          background: "var(--surface-card)",
+                        }}
+                      >
+                        {block.valueRule}
+                      </div>
+                    )}
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                        background: "var(--surface-card)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-ownership":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--surface-accent-soft)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                    </div>
+                    <div className="fig-ownership-grid">
+                      {block.items.map((item, j) => (
+                        <div
+                          key={j}
+                          style={{
+                            borderTop: "1px solid var(--border-subtle)",
+                            paddingTop: 14,
+                          }}
+                        >
+                          <h3
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                              margin: 0,
+                            }}
+                          >
+                            {item.title}
+                          </h3>
+                          <p
+                            style={{
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              lineHeight: 1.6,
+                              margin: "6px 0 0",
+                            }}
+                          >
+                            {item.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                        background: "var(--surface-card)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "closing-block":
+                return (
+                  <section
+                    key={i}
+                    style={{
+                      marginTop: "var(--space-12)",
+                      paddingTop: "var(--space-10)",
+                      borderTop: "2px solid var(--text-strong)",
+                    }}
+                  >
+                    <p
+                      style={{
+                        font: "var(--eyebrow)",
+                        letterSpacing: "var(--eyebrow-track)",
+                        textTransform: "uppercase",
+                        color: "var(--blue-600)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 15,
+                        marginBottom: "var(--space-5)",
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: 28,
+                          height: 2,
+                          background: "var(--blue-500)",
+                          display: "inline-block",
+                        }}
+                      />
+                      {block.eyebrow}
+                    </p>
+                    <blockquote
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(24px, 3vw, 32px)",
+                        letterSpacing: "-0.6px",
+                        lineHeight: 1.35,
+                        margin: "0 0 var(--space-6)",
+                        maxWidth: 740,
+                        color: "var(--text-strong)",
+                      }}
+                    >
+                      {block.quote}
+                    </blockquote>
+                    <p
+                      style={{
+                        fontSize: 19,
+                        fontWeight: 650,
+                        color: "var(--text-strong)",
+                        marginBottom: "var(--space-5)",
+                      }}
+                    >
+                      {block.outcomes}
+                    </p>
+                    <p
+                      style={{
+                        font: "var(--body-lg)",
+                        color: "var(--text-body)",
+                        marginBottom: 0,
+                      }}
+                    >
+                      {block.prose}
+                    </p>
+                  </section>
+                );
+              case "invitation":
+                return (
+                  <section
+                    key={i}
+                    style={{
+                      marginTop: "var(--space-10)",
+                      maxWidth: 700,
+                    }}
+                  >
+                    <h2
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        fontSize: "clamp(28px, 3vw, 34px)",
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                        letterSpacing: "-0.5px",
+                        color: "var(--text-strong)",
+                        marginBottom: "var(--space-4)",
+                      }}
+                    >
+                      {block.title}
+                    </h2>
+                    <p
+                      style={{
+                        font: "var(--body-lg)",
+                        color: "var(--text-muted)",
+                        margin: 0,
+                      }}
+                    >
+                      {block.description}
+                    </p>
+                  </section>
                 );
               default:
                 return null;
@@ -616,22 +1570,36 @@ export default function BlogPostClient({ slug }: { slug: string }) {
             flexWrap: "wrap",
           }}
         >
-          <div
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: "50%",
-              background: "var(--blue-850)",
-              color: "var(--paper-050)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              font: "var(--heading-2)",
-              flexShrink: 0,
-            }}
-          >
-            {post.author.avatar}
-          </div>
+          {post.author.avatarImage ? (
+            <img
+              src={post.author.avatarImage}
+              alt={post.author.name}
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: "50%",
+                objectFit: "cover",
+                flexShrink: 0,
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: "50%",
+                background: "var(--blue-850)",
+                color: "var(--paper-050)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                font: "var(--heading-2)",
+                flexShrink: 0,
+              }}
+            >
+              {post.author.avatar}
+            </div>
+          )}
           <div style={{ flex: 1, minWidth: 200 }}>
             <div
               style={{
@@ -925,103 +1893,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
         </section>
       )}
 
-      {/* Footer */}
-      <footer
-        className="brand-field--flat on-navy"
-        style={{ position: "relative" }}
-      >
-        <div
-          data-r="foot"
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "80px 24px 40px",
-            display: "grid",
-            gridTemplateColumns: "minmax(0,1.3fr) repeat(3,minmax(0,1fr))",
-            gap: 48,
-          }}
-        >
-          <div>
-            <img
-              src="/assets/logo-horizontal-white.png"
-              alt="Deployed"
-              style={{ width: 150, display: "block" }}
-            />
-            <div
-              style={{
-                font: "var(--eyebrow)",
-                letterSpacing: "var(--eyebrow-track)",
-                textTransform: "uppercase",
-                color: "rgba(249,246,243,.44)",
-                marginTop: 16,
-                maxWidth: "24ch",
-              }}
-            >
-              Reach optimal AI density within your org
-            </div>
-            <Link
-              href="/contact"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 9,
-                border: "1px solid rgba(255,255,255,.28)",
-                color: "var(--paper-050)",
-                font: "var(--label)",
-                letterSpacing: "var(--label-track)",
-                padding: "12px 20px",
-                borderRadius: 999,
-                marginTop: 28,
-                borderBottom: 0,
-              }}
-            >
-              Get in touch
-              <img
-                src="/assets/icon-arrow-white.png"
-                alt=""
-                style={{ width: 13, height: 12, display: "block" }}
-              />
-            </Link>
-          </div>
-
-          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
-            <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "rgba(249,246,243,.44)", marginBottom: 4 }}>Core</div>
-            <Link href="/strategy" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Strategy</Link>
-            <Link href="/deployment" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Deployment</Link>
-            <Link href="/the-deployed-fit" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>The Deployed fit</Link>
-          </div>
-
-          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
-            <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "rgba(249,246,243,.44)", marginBottom: 4 }}>Company</div>
-            <Link href="/about" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>About</Link>
-            <a href="#" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Careers</a>
-            <Link href="/contact" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Contact</Link>
-          </div>
-
-          <div style={{ display: "grid", gap: 11, alignContent: "start" }}>
-            <div style={{ font: "var(--label)", letterSpacing: "var(--label-track)", color: "rgba(249,246,243,.44)", marginBottom: 4 }}>Resources</div>
-            <Link href="/bip" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Knowledge base</Link>
-            <a href="#" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Industries</a>
-            <a href="#" style={{ font: "var(--body-sm)", color: "rgba(249,246,243,.78)" }}>Security</a>
-          </div>
-        </div>
-
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "22px 24px 40px",
-            borderTop: "1px solid var(--border-hairline)",
-            display: "flex",
-            gap: 20,
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
-          <span style={{ font: "var(--mono-md)", color: "rgba(249,246,243,.38)" }}>deployed.md</span>
-          <span style={{ font: "var(--mono-md)", color: "rgba(249,246,243,.38)" }}>{"©"} 2026 Deployed</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
