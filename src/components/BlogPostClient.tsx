@@ -206,6 +206,52 @@ export default function BlogPostClient({ slug }: { slug: string }) {
             padding: 12px !important;
           }
         }
+        .fig-comparison-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+        .fig-consumption-stages {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 22px;
+          padding: 22px 25px;
+        }
+        .fig-paths-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+        }
+        .fig-paths-lenses {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 23px 32px;
+          padding: 26px;
+          border-top: 1px solid var(--border-hairline);
+          background: var(--surface-accent-soft);
+        }
+        @media (max-width: 800px) {
+          .fig-comparison-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .fig-comparison-grid > div + div {
+            border-left: 0 !important;
+            border-top: 1px solid var(--border-hairline) !important;
+          }
+          .fig-consumption-stages {
+            grid-template-columns: 1fr !important;
+            padding: 18px !important;
+          }
+          .fig-paths-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .fig-paths-grid > div + div {
+            border-left: 0 !important;
+            border-top: 1px solid var(--border-hairline) !important;
+          }
+          .fig-paths-lenses {
+            grid-template-columns: 1fr !important;
+            padding: 20px !important;
+          }
+        }
       `}</style>
 
       {/* Scroll progress bar */}
@@ -1463,6 +1509,604 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                       {block.prose}
                     </p>
                   </section>
+                );
+              case "equation":
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontSize: "clamp(18px, 2vw, 22px)",
+                      lineHeight: 1.5,
+                      textAlign: "center",
+                      padding: "var(--space-5) var(--space-6)",
+                      margin: "var(--space-4) 0",
+                      background: "var(--surface-accent-soft)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-md)",
+                      color: "var(--blue-600)",
+                      letterSpacing: "-0.01em",
+                    }}
+                  >
+                    {block.text}
+                  </div>
+                );
+              case "references":
+                return (
+                  <section
+                    key={i}
+                    style={{
+                      marginTop: "var(--space-10)",
+                      paddingTop: "var(--space-8)",
+                      borderTop: "1px solid var(--border-hairline)",
+                    }}
+                  >
+                    <h3
+                      style={{
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        marginBottom: "var(--space-4)",
+                      }}
+                    >
+                      References
+                    </h3>
+                    <ol
+                      style={{
+                        margin: 0,
+                        paddingLeft: "var(--space-5)",
+                        display: "grid",
+                        gap: "var(--space-2)",
+                      }}
+                    >
+                      {block.items.map((ref, j) => (
+                        <li
+                          key={j}
+                          style={{
+                            font: "var(--body-sm)",
+                            color: "var(--text-muted)",
+                            lineHeight: 1.6,
+                          }}
+                        >
+                          <a
+                            href={ref.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              color: "var(--blue-600)",
+                              borderBottom: "1px solid var(--border-subtle)",
+                            }}
+                          >
+                            {ref.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                );
+              case "figure-comparison":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-6) 0",
+                      background: "var(--surface-card)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                        background: "var(--surface-accent-soft)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                      <span>{block.sublabel}</span>
+                    </div>
+                    <div className="fig-comparison-grid">
+                      {block.cases.map((c, ci) => (
+                        <div
+                          key={ci}
+                          style={{
+                            padding: "26px 24px",
+                            borderLeft:
+                              ci > 0
+                                ? "1px solid var(--border-hairline)"
+                                : undefined,
+                          }}
+                        >
+                          <h3
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                              margin: "0 0 var(--space-4)",
+                            }}
+                          >
+                            {c.title}
+                          </h3>
+                          <div
+                            style={{
+                              display: "flex",
+                              gap: 24,
+                              marginBottom: "var(--space-4)",
+                            }}
+                          >
+                            {c.values.map((v, vi) => (
+                              <div key={vi}>
+                                <div
+                                  style={{
+                                    fontFamily: "var(--font-display)",
+                                    fontSize: "clamp(28px, 3vw, 36px)",
+                                    lineHeight: 1.1,
+                                    color: "var(--text-strong)",
+                                    letterSpacing: "-0.02em",
+                                  }}
+                                >
+                                  {v.amount}
+                                </div>
+                                <div
+                                  style={{
+                                    font: "var(--body-sm)",
+                                    color: "var(--text-muted)",
+                                    marginTop: 4,
+                                  }}
+                                >
+                                  {v.label}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          <p
+                            style={{
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              lineHeight: 1.6,
+                              margin: 0,
+                            }}
+                          >
+                            {c.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                        background: "var(--surface-card)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-consumption":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--surface-accent-soft)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                      <span>{block.sublabel}</span>
+                    </div>
+                    <div className="fig-consumption-stages">
+                      {block.stages.map((s, si) => (
+                        <div
+                          key={si}
+                          style={{
+                            borderTop: "2px solid var(--border-subtle)",
+                            paddingTop: 15,
+                          }}
+                        >
+                          <span
+                            style={{
+                              font: "var(--label)",
+                              letterSpacing: "var(--label-track)",
+                              textTransform: "uppercase",
+                              color: "var(--blue-600)",
+                              display: "block",
+                              marginBottom: 8,
+                              fontSize: 10,
+                            }}
+                          >
+                            {s.index}
+                          </span>
+                          <strong
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                              display: "block",
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {s.title}
+                          </strong>
+                          <div
+                            style={{
+                              fontFamily: "var(--font-display)",
+                              fontSize: "clamp(22px, 2.5vw, 28px)",
+                              lineHeight: 1.2,
+                              color: "var(--text-strong)",
+                              letterSpacing: "-0.02em",
+                              marginTop: 10,
+                            }}
+                          >
+                            {s.value}
+                          </div>
+                          <div
+                            style={{
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              marginTop: 2,
+                            }}
+                          >
+                            {s.unit}
+                          </div>
+                          <p
+                            style={{
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              lineHeight: 1.5,
+                              margin: "8px 0 0",
+                            }}
+                          >
+                            {s.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    {block.scenarios.map((sc, sci) => (
+                      <div
+                        key={sci}
+                        style={{
+                          padding: "12px 26px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                          borderTop: "1px solid var(--border-hairline)",
+                          font: "var(--body-sm)",
+                        }}
+                      >
+                        <span style={{ color: "var(--text-muted)" }}>{sc.label}</span>
+                        <strong style={{ color: "var(--text-strong)" }}>{sc.total}</strong>
+                      </div>
+                    ))}
+                    <table className="fig-metrics-table">
+                      <thead>
+                        <tr>
+                          {block.tableHeaders.map((h, j) => (
+                            <th key={j}>{h}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {block.tableRows.map((row, j) => (
+                          <tr
+                            key={j}
+                            style={
+                              j === block.tableRows.length - 1
+                                ? { background: "var(--surface-accent-soft)" }
+                                : undefined
+                            }
+                          >
+                            {row.map((cell, k) => (
+                              <td
+                                key={k}
+                                style={
+                                  j === block.tableRows.length - 1
+                                    ? { fontWeight: 600, color: "var(--text-strong)" }
+                                    : undefined
+                                }
+                              >
+                                {cell}
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                        background: "var(--surface-card)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-paths":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--surface-card)",
+                      border: "1px solid var(--border-hairline)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "var(--text-muted)",
+                        borderBottom: "1px solid var(--border-hairline)",
+                        background: "var(--surface-accent-soft)",
+                      }}
+                    >
+                      <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
+                      <span>{block.sublabel}</span>
+                    </div>
+                    <div className="fig-paths-grid">
+                      {block.paths.map((path, pi) => (
+                        <div
+                          key={pi}
+                          style={{
+                            padding: 24,
+                            borderLeft:
+                              pi > 0
+                                ? "1px solid var(--border-hairline)"
+                                : undefined,
+                          }}
+                        >
+                          {path.steps.map((step, si) => (
+                            <div
+                              key={si}
+                              style={{
+                                border: `1px solid ${step.isResult ? "var(--blue-300)" : "var(--border-hairline)"}`,
+                                background: step.isResult
+                                  ? "var(--surface-accent-soft)"
+                                  : "var(--surface-card)",
+                                padding: "14px 16px",
+                                marginBottom:
+                                  si < path.steps.length - 1 ? 12 : 0,
+                                position: "relative",
+                              }}
+                            >
+                              {step.index && (
+                                <span
+                                  style={{
+                                    font: "var(--label)",
+                                    fontSize: 10,
+                                    letterSpacing: ".9px",
+                                    color: "var(--blue-600)",
+                                    textTransform: "uppercase",
+                                    display: "block",
+                                    marginBottom: 4,
+                                  }}
+                                >
+                                  {step.index}
+                                </span>
+                              )}
+                              <strong
+                                style={{
+                                  font: "var(--body-md)",
+                                  fontWeight: 600,
+                                  color: "var(--text-strong)",
+                                  display: "block",
+                                  lineHeight: 1.4,
+                                }}
+                              >
+                                {step.title}
+                              </strong>
+                              <small
+                                style={{
+                                  display: "block",
+                                  font: "var(--body-sm)",
+                                  color: "var(--text-muted)",
+                                  marginTop: 5,
+                                }}
+                              >
+                                {step.description}
+                              </small>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="fig-paths-lenses">
+                      {block.lenses.map((lens, li) => (
+                        <div
+                          key={li}
+                          style={{
+                            borderTop: "1px solid var(--border-subtle)",
+                            paddingTop: 14,
+                          }}
+                        >
+                          <strong
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--text-strong)",
+                              display: "block",
+                            }}
+                          >
+                            {lens.title}
+                          </strong>
+                          <p
+                            style={{
+                              font: "var(--body-sm)",
+                              color: "var(--text-muted)",
+                              lineHeight: 1.6,
+                              margin: "6px 0 0",
+                            }}
+                          >
+                            {lens.description}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "var(--text-muted)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid var(--border-hairline)",
+                        background: "var(--surface-card)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
+                );
+              case "figure-deployment":
+                return (
+                  <figure
+                    key={i}
+                    style={{
+                      margin: "var(--space-8) 0 var(--space-6)",
+                      background: "var(--blue-850)",
+                      border: "1px solid var(--blue-800)",
+                      borderRadius: "var(--radius-lg)",
+                      overflow: "hidden",
+                      color: "var(--paper-050)",
+                    }}
+                  >
+                    <div
+                      style={{
+                        padding: "19px 25px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        gap: 12,
+                        font: "var(--label)",
+                        letterSpacing: "var(--label-track)",
+                        textTransform: "uppercase",
+                        color: "rgba(212,220,255,.7)",
+                        borderBottom: "1px solid rgba(255,255,255,.18)",
+                      }}
+                    >
+                      <span style={{ color: "var(--paper-050)" }}>{block.label}</span>
+                      <span>{block.sublabel}</span>
+                    </div>
+                    <ol
+                      style={{
+                        listStyle: "none",
+                        margin: 0,
+                        padding: "26px 26px 20px",
+                        display: "grid",
+                        gap: 16,
+                      }}
+                    >
+                      {block.steps.map((step, si) => (
+                        <li
+                          key={si}
+                          style={{
+                            display: "grid",
+                            gridTemplateColumns: "44px 1fr",
+                            gap: "0 14px",
+                            padding: "16px 18px",
+                            border: `1px solid ${step.isBoundary ? "var(--blue-400)" : "rgba(255,255,255,.18)"}`,
+                            background: step.isBoundary
+                              ? "rgba(255,255,255,.06)"
+                              : "transparent",
+                          }}
+                        >
+                          <span
+                            style={{
+                              font: "var(--label)",
+                              letterSpacing: "var(--label-track)",
+                              color: "var(--blue-400)",
+                              gridRow: "1 / 3",
+                              paddingTop: 2,
+                            }}
+                          >
+                            {step.number}
+                          </span>
+                          <strong
+                            style={{
+                              font: "var(--heading-3)",
+                              color: "var(--paper-050)",
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {step.title}
+                          </strong>
+                          <small
+                            style={{
+                              font: "var(--body-sm)",
+                              color: "rgba(212,220,255,.7)",
+                              lineHeight: 1.6,
+                              marginTop: 4,
+                            }}
+                          >
+                            {step.description}
+                          </small>
+                        </li>
+                      ))}
+                    </ol>
+                    <div
+                      style={{
+                        margin: "0 26px 26px",
+                        padding: "15px 18px",
+                        borderLeft: "3px solid var(--blue-400)",
+                        background: "rgba(255,255,255,.04)",
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "rgba(212,220,255,.7)",
+                      }}
+                    >
+                      {block.feedback}
+                    </div>
+                    <figcaption
+                      style={{
+                        font: "var(--body-sm)",
+                        lineHeight: 1.6,
+                        color: "rgba(212,220,255,.7)",
+                        padding: "16px 25px",
+                        borderTop: "1px solid rgba(255,255,255,.18)",
+                      }}
+                    >
+                      {block.caption}
+                    </figcaption>
+                  </figure>
                 );
               case "invitation":
                 return (

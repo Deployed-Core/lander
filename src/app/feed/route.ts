@@ -21,13 +21,15 @@ export async function GET() {
       <pubDate>${new Date(post.isoDate).toUTCString()}</pubDate>
       <description>${escapeXml(post.description)}</description>
       <category>${escapeXml(post.tag)}</category>
-      <author>${escapeXml(post.author.name)}</author>
+${post.keywords.map((k) => `      <category>${escapeXml(k)}</category>`).join("\n")}
+      <dc:creator>${escapeXml(post.author.name)}</dc:creator>
+      <author>${escapeXml(post.author.name)}</author>${post.coverImage ? `\n      <enclosure url="${BASE}${post.coverImage}" type="image/png" length="0"/>` : ""}
     </item>`
     )
     .join("\n");
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Deployed — Blog</title>
     <link>${BASE}/blog</link>
