@@ -119,7 +119,7 @@ export const posts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "We think of an organisation as an operating state: its processes, data, business context and KPIs. Deployed is the function that transitions that state.",
+        text: "We think of an organisation as an operating state: its processes, data, business context and KPIs. Our team engineer solutions that transitions that state.",
         lead: true,
       },
       {
