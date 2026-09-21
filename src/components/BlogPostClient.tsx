@@ -739,7 +739,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                       <li
                         key={j}
                         style={{
-                          font: "var(--body-md)",
+                          font: "var(--body-lg)",
                           color: "var(--text-body)",
                           lineHeight: 1.65,
                         }}
@@ -1235,7 +1235,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                     >
                       <span style={{ color: "var(--blue-600)" }}>{block.label}</span>
                     </div>
-                    <ol className="fig-journey-steps">
+                    <ol className="fig-journey-steps" style={{ gridTemplateColumns: `repeat(${block.steps.length}, 1fr)` }}>
                       {block.steps.map((step, j) => (
                         <li
                           key={j}

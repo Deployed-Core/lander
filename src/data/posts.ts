@@ -384,241 +384,200 @@ export const posts: BlogPost[] = [
     ],
   },
   {
-    slug: "enterprise-workflow-tokenomics",
-    date: "15 Sept 2026",
-    isoDate: "2026-09-15",
+    slug: "ai-tokenomics",
+    date: "21 Sept 2026",
+    isoDate: "2026-09-21",
     title:
-      "Enterprise Workflow Tokenomics: The Unit Economics of AI Transformation",
+      "AI Tokenomics: The Enterprise Question Behind Every AI Workflow",
     tag: "Technology",
     description:
-      "Tokens are the economic unit of AI consumption. Business outcomes are the return. Enterprise workflow tokenomics keeps the two in balance.",
-    readingTime: 7,
+      "AI tokenomics is the way an enterprise understands, allocates, prices, and optimises token consumption across its workflows. It treats tokens not just as a technical metric, but as a unit for the commercialisation of artificial intelligence.",
+    readingTime: 3,
     author: princeRaj,
     gradient:
       "linear-gradient(135deg, #010613 0%, #072a78 50%, #0b3d9e 100%)",
-    coverImage: "/assets/blog-enterprise-workflow-tokenomics-preview.png",
+    coverImage: "/assets/blog-ai-tokenomics-preview.png",
     keywords: [
       "AI tokenomics",
-      "enterprise workflow tokenomics",
+      "enterprise AI",
+      "token consumption",
+      "AI workflow",
+      "FinOps",
       "token economics",
       "AI cost optimization",
-      "LLM token consumption",
-      "agentic AI costs",
+      "enterprise workflow",
       "AI unit economics",
-      "token cost management",
-      "enterprise AI deployment",
-      "AI workflow cost",
       "Prince Raj",
       "Deployed",
     ],
     content: [
       {
         type: "paragraph",
-        text: "Recently, in conversations with business owners and enterprise leaders, I have noticed a shift in how they evaluate AI. The question is no longer only, \"Where can we use AI?\" It is increasingly:",
+        text: "Enterprise conversations around AI are changing.",
         lead: true,
       },
       {
-        type: "pull-quote",
-        text: "What does this workflow cost every time intelligence is used, and does that cost remain justified by the business value it creates?",
+        type: "paragraph",
+        text: "Earlier, the focus was largely on whether AI could be added to a workflow. Today, the questions are more specific:",
+      },
+      {
+        type: "list",
+        items: [
+          "How many tokens will this operation consume?",
+          "What value will those tokens create?",
+          "Where will costs increase?",
+          "And can the workflow be designed to use tokens more efficiently?",
+        ],
       },
       {
         type: "paragraph",
-        text: "This is where enterprise workflow tokenomics becomes important.",
-      },
-      {
-        type: "paragraph",
-        text: "I see AI tokenomics as the way tokens are consumed, priced, allocated and optimised across workflow functions. Tokens provide an economic unit for measuring AI consumption. Prompting, retrieved context, tool interactions, memory, reasoning and response generation can all add token consumption, which becomes operating cost. Commercial value depends on the successful outcomes that consumption produces.",
-      },
-      {
-        type: "paragraph",
-        text: "But tokenomics is not simply token accounting.",
-      },
-      {
-        type: "paragraph",
-        text: "Token accounting tells us how many tokens were consumed after the fact. Tokenomics asks a larger question:",
+        text: "These questions point to an emerging enterprise priority: AI tokenomics.",
       },
       {
         type: "pull-quote",
-        text: "How should token consumption be planned across a workflow so that the intelligence being purchased generates more business value than it costs?",
+        text: "AI tokenomics is the way an enterprise understands, allocates, prices, and optimises token consumption across its workflows. It treats tokens not just as a technical metric, but as a unit for the commercialisation of artificial intelligence.",
       },
       {
         type: "heading",
-        text: "Tokens as an economic unit",
-        id: "tokens-as-an-economic-unit",
+        text: "An emerging FinOps problem",
+        id: "an-emerging-finops-problem",
       },
       {
         type: "paragraph",
-        text: "Token consumption depends on several variables: prompt complexity, how context is handled, tool architecture and usage, the architecture of the enterprise workflow itself, and the number and behaviour of agents operating inside it.",
+        text: "This makes AI an increasingly important FinOps problem.",
       },
       {
         type: "paragraph",
-        text: "A small deviation in any of these can create a large change in total consumption. An agent can carry unnecessary context, choose an expensive model for a simple step, repeatedly invoke a tool, retry an action, create additional hand-offs, or enter a reasoning loop.",
+        text: "Every action in an AI workflow consumes tokens: prompting, context retrieval, tool invocation, memory management, reasoning, and response generation. As AI becomes one of the fastest-growing categories of enterprise expenditure, token consumption needs to be managed with the same attention given to other business costs.",
       },
       {
         type: "paragraph",
-        text: "The workflow may still produce the right answer while becoming economically irrational.",
+        text: "The cost is not driven by one thing alone. Token consumption depends on:",
+      },
+      {
+        type: "list",
+        items: [
+          "The complexity of the prompt",
+          "How context is handled",
+          "Tool architecture and its use",
+          "The architecture of the enterprise workflow",
+          "The agents used in internal operations",
+        ],
       },
       {
         type: "paragraph",
-        text: "This is already becoming a production concern. AWS recommends treating cost as a first-class design constraint for agentic systems, including token budgets, iteration limits and consumption ceilings. Microsoft Research found that repeated agent runs on the same coding task could vary by as much as 30× in token consumption, while higher token consumption did not necessarily translate into better accuracy. Cisco describes tokens as the “working capital” of intelligence and frames tokenomics around understanding which consumption actually contributes to successful task completion. [1][2][3]",
-      },
-      {
-        type: "paragraph",
-        text: "This leads to a simple principle:",
-      },
-      {
-        type: "quote",
-        text: "An AI workflow can be technically successful and still become a financial liability.",
-      },
-      {
-        type: "paragraph",
-        text: "The question is therefore not \"How do we minimise tokens?\"",
-      },
-      {
-        type: "paragraph",
-        text: "It is:",
-      },
-      {
-        type: "pull-quote",
-        text: "How much intelligence can this business process economically afford, and what return does that intelligence generate?",
+        text: "A small change in any of these areas can create a significant difference in token consumption and cost.",
       },
       {
         type: "heading",
-        text: "Token cost versus business return",
-        id: "token-cost-versus-business-return",
+        text: "From accounting to economics",
+        id: "from-accounting-to-economics",
       },
       {
         type: "paragraph",
-        text: "When enterprises ask how many tokens an operation consumes, they are really trying to understand where the hidden cost sits, whether AI creates enough value to justify that cost, and how the workflow can be optimised before usage scales.",
+        text: "But token accounting alone is not enough.",
+      },
+      {
+        type: "pull-quote",
+        text: "Token accounting tells us how many tokens have already been consumed. Tokenomics asks a more important question: how should tokens be planned and used so that they generate more value than cost?",
       },
       {
         type: "paragraph",
-        text: "The economic relationship is:",
+        text: "This is the difference between tracking AI usage and designing an AI workflow that makes economic sense.",
+      },
+      {
+        type: "heading",
+        text: "Where the tokens go",
+        id: "where-the-tokens-go",
+      },
+      {
+        type: "paragraph",
+        text: "To understand this, consider a workflow for analysing internal sales documents.",
+      },
+      {
+        type: "paragraph",
+        text: "The workflow has three stages:",
+      },
+      {
+        type: "figure-journey",
+        label: "Token consumption across workflow stages",
+        steps: [
+          {
+            number: "01",
+            title: "Sales Document Ingestion",
+            description: "The documents become the input context for the AI workflow.",
+          },
+          {
+            number: "02",
+            title: "Sales Reasoning and Analysis",
+            description: "The system identifies sales trends, compares regional performance, and highlights customer risks.",
+          },
+          {
+            number: "03",
+            title: "Sales Summary Generation",
+            description: "The output is built on the document ingestion and reasoning that happened before it.",
+          },
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Assume that the sales documents include eight files. Each file contains 35 pages, and each page corresponds to approximately 180 tokens.",
+      },
+      {
+        type: "paragraph",
+        text: "The first stage is document ingestion. The documents become the input context for the AI workflow.",
       },
       {
         type: "equation",
-        text: "Token Cost → Successful Output → Business Value",
-      },
-      {
-        type: "figure-comparison",
-        label: "Same AI cost. Different economics.",
-        sublabel: "Illustrative comparison",
-        caption:
-          "Token consumption acquires commercial meaning when connected to a successful outcome and its measurable business value. These examples do not include implementation or ongoing non-AI costs.",
-        cases: [
-          {
-            title: "A higher-value outcome",
-            values: [
-              { amount: "$20", label: "AI execution cost" },
-              { amount: "$200", label: "Business value" },
-            ],
-            description:
-              "Value exceeds AI execution cost by $180, before other costs. The workflow may have excellent economics.",
-          },
-          {
-            title: "A lower-value outcome",
-            values: [
-              { amount: "$20", label: "AI execution cost" },
-              { amount: "$5", label: "Business value" },
-            ],
-            description:
-              "AI execution cost exceeds value by $15. A correct output can still be economically unjustified.",
-          },
-        ],
+        text: "t₁ = 8 × 35 × 180 = 50,400 tokens",
       },
       {
         type: "paragraph",
-        text: "Tokens are an economic unit of AI consumption, but a token count alone cannot establish the commercial value of intelligence. That requires understanding what the consumption produces.",
+        text: "This means that, before any analysis begins, the workflow has already consumed 50,400 input tokens.",
       },
       {
         type: "paragraph",
-        text: "Enterprise workflow tokenomics should therefore consider cost per successful output at each stage of the workflow: how much intelligence was consumed, whether the stage delivered its intended result, and how that result contributes to the business outcome.",
+        text: "The second stage is sales reasoning and analysis. This is where the system identifies sales trends, compares regional performance, and highlights customer risks.",
       },
       {
         type: "paragraph",
-        text: "Each stage must also be evaluated for its downstream effects. Spending more on accurate extraction may reduce reasoning costs, retries and human intervention later. The financial boundary belongs to the whole workflow; stage-level economics help us understand and control it.",
+        text: "This is also the most token-intensive stage. Depending on the complexity and depth of the analysis:",
       },
       {
         type: "equation",
-        text: "Cost per Successful Outputᵢ = AI Costᵢ / Successful Outputsᵢ",
+        text: "t₂ ∈ [80,000, 220,000] tokens",
       },
       {
         type: "paragraph",
-        text: "AI cost should include model consumption and, where relevant, context, tools, APIs and infrastructure.",
+        text: "The final stage generates the sales summary. The output may be short, but it is built on the document ingestion and reasoning that happened before it.",
+      },
+      {
+        type: "equation",
+        text: "t₃ ∈ [800, 1,200] tokens",
       },
       {
         type: "paragraph",
-        text: "The purpose of tokenomics is therefore not to starve a system of intelligence. It is to allocate the right amount of intelligence to the right stage of a workflow, within a financially justified boundary.",
+        text: "The total token consumption for the complete workflow is:",
+      },
+      {
+        type: "equation",
+        text: "T_total = 50,400 + [80,000, 220,000] + [800, 1,200]",
+      },
+      {
+        type: "equation",
+        text: "T_total ∈ [131,200, 271,600] tokens",
       },
       {
         type: "paragraph",
-        text: "Microsoft makes a similar distinction in its production guidance: the objective is not simply to minimize tokens, but to lower the cost of a successful outcome while maintaining quality, safety and latency. [4]",
-      },
-      {
-        type: "heading",
-        text: "Planning tokenomics at the workflow level",
-        id: "planning-tokenomics-at-the-workflow-level",
+        text: "The final sales summary may require only a small number of tokens. However, most token consumption happens in preparing the sales data and conducting the analysis in the background.",
       },
       {
         type: "paragraph",
-        text: "Consider an enterprise workflow that turns internal sales documents into an actionable summary. The input consists of eight files, each containing 35 pages, with approximately 180 tokens per page: 8 × 35 × 180 = 50,400 tokens.",
+        text: "This is the point enterprises need to understand.",
       },
       {
         type: "paragraph",
-        text: "The reasoning stage identifies trends, compares regional performance and surfaces customer risks. Its consumption depends on the complexity of the analysis. In this illustrative model, reasoning uses 80,000–220,000 tokens, while the final summary uses 800–1,200 tokens.",
-      },
-      {
-        type: "figure-consumption",
-        label: "Where the tokens go",
-        sublabel: "Illustrative token consumption",
-        caption:
-          "Both bars use the same scale. The visible summary accounts for less than 1% of consumption in each scenario; most tokens are consumed before the answer appears. Token shares are not cost shares: model and token-type pricing can differ.",
-        stages: [
-          {
-            index: "01 / INPUT",
-            title: "Document ingestion",
-            value: "50,400",
-            unit: "tokens · t₁",
-            description: "8 files × 35 pages × 180 tokens.",
-          },
-          {
-            index: "02 / ANALYSIS",
-            title: "Sales reasoning",
-            value: "80,000–220,000",
-            unit: "tokens · t₂",
-            description: "Interpret trends, performance and risks.",
-          },
-          {
-            index: "03 / OUTPUT",
-            title: "Sales summary",
-            value: "800–1,200",
-            unit: "tokens · t₃",
-            description: "The short answer the reader sees.",
-          },
-        ],
-        scenarios: [
-          { label: "Lower-consumption scenario", total: "131,200 tokens" },
-          { label: "Upper-consumption scenario", total: "271,600 tokens" },
-        ],
-        tableHeaders: ["Stage", "Lower scenario", "Upper scenario"],
-        tableRows: [
-          ["Ingestion", "50,400", "50,400"],
-          ["Reasoning", "80,000", "220,000"],
-          ["Summary", "800", "1,200"],
-          ["Total tokens", "131,200", "271,600"],
-        ],
-      },
-      {
-        type: "example-note",
-        text: "Counting assumption: T = t₁ + t₂ + t₃. Each stage counts distinct token-processing events attributable to that stage. Context processed again in a later model call counts as new consumption in that stage; the same event is never counted twice. These are illustrative totals, not measured usage or a provider billing forecast.",
-      },
-      {
-        type: "paragraph",
-        text: "The visible sales summary may be short, but most of the economic consumption happens while preparing, contextualising and analysing the sales data in the background.",
-      },
-      {
-        type: "paragraph",
-        text: "That is why an enterprise should understand not merely the size of the final output, but where tokens are being consumed throughout the workflow and whether that consumption is actually improving sales decisions, identifying opportunities and reducing revenue risk.",
+        text: "The important question is not only whether the final output is useful. It is whether the token consumption across every workflow stage is helping the organisation make better sales decisions, identify opportunities, and reduce revenue risk.",
       },
       {
         type: "heading",
@@ -627,199 +586,42 @@ export const posts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "A framework for enterprise workflow tokenomics should integrate technical, economic and operational perspectives into a common token analytical structure.",
-      },
-      {
-        type: "paragraph",
-        text: "The technical, economic and operational perspectives belong in the same analysis. Architecture determines what intelligence is consumed; output quality influences downstream work; both affect the cost of successful completion.",
-      },
-      {
-        type: "figure-paths",
-        label: "One allocation decision. Two possible paths.",
-        sublabel: "Qualitative illustration",
-        caption:
-          "Higher spending does not guarantee higher accuracy. These paths illustrate how stage-level choices can affect total cost; the relationship must be evaluated against actual workflow results.",
-        paths: [
-          {
-            steps: [
-              {
-                index: "PATH A / EXTRACTION",
-                title: "Lower spend, poor accuracy",
-                description: "Important context is missed or misread.",
-              },
-              {
-                title: "More downstream work",
-                description:
-                  "Additional reasoning, retries and human review are needed to repair the result.",
-              },
-              {
-                title: "Total cost can rise",
-                description:
-                  "The saving at extraction can be outweighed by rework, delays and risk.",
-                isResult: true,
-              },
-            ],
-          },
-          {
-            steps: [
-              {
-                index: "PATH B / EXTRACTION",
-                title: "Higher spend, better accuracy",
-                description: "Relevant context is captured correctly.",
-              },
-              {
-                title: "Less downstream rework",
-                description:
-                  "Later stages need fewer corrections and interventions to complete the task.",
-              },
-              {
-                title: "Total cost can fall",
-                description:
-                  "Additional early spending can improve the economics of the whole workflow.",
-                isResult: true,
-              },
-            ],
-          },
-        ],
-        lenses: [
-          {
-            title: "Technical",
-            description:
-              "How are prompts, context, models, memory, tools and agents constructed?",
-          },
-          {
-            title: "Operational",
-            description:
-              "How does quality affect retries, human intervention, delays and downstream risk?",
-          },
-          {
-            title: "Economic",
-            description:
-              "What does successful completion cost, what value does it create, and is it within budget?",
-          },
-        ],
-      },
-      {
-        type: "paragraph",
-        text: "Token allocation at one stage can influence quality, risk and generated value in every stage after it. The objective is to improve the economics of the connected workflow. Additional reasoning is wasteful when it produces no meaningful improvement in the business outcome.",
-      },
-      {
-        type: "paragraph",
-        text: "AWS similarly recommends matching model capability, context length and reasoning depth to task complexity, while enforcing consumption ceilings and attributing spend at the workflow level rather than discovering overruns after deployment. [1]",
-      },
-      {
-        type: "paragraph",
-        text: "So workflow tokenomics ultimately requires understanding both generated value per token and the downstream risk propagated by how those tokens are allocated.",
-      },
-      {
-        type: "heading",
-        text: "Tokenomics as part of forward deployment",
-        id: "tokenomics-as-part-of-forward-deployment",
-      },
-      {
-        type: "paragraph",
-        text: "This is why tokenomics should be designed before an AI system is deployed, rather than treated as a cost-optimisation exercise afterwards.",
-      },
-      {
-        type: "paragraph",
-        text: "When we work as a forward-deployed team, we first understand the enterprise workflow, its process knowledge, business context and the KPIs it is expected to move. That understanding establishes the financial boundaries against which the solution is designed.",
-      },
-      {
-        type: "figure-deployment",
-        label: "From business context to viable deployment",
-        sublabel: "Deployed’s approach",
-        caption:
-          "Business economics shape implementation before deployment. Measurement checks whether the workflow continues to deliver value within its agreed boundaries.",
-        steps: [
-          {
-            number: "01",
-            title: "Understand the workflow and KPIs",
-            description:
-              "Map the stages, data, process knowledge, constraints and current performance.",
-          },
-          {
-            number: "02",
-            title: "Define successful outputs",
-            description:
-              "Agree on acceptable quality at each stage and how outputs contribute to business value.",
-          },
-          {
-            number: "03",
-            title: "Set financial boundaries",
-            description:
-              "Estimate stage consumption and downstream effects. Define the cost per successful outcome the workflow can support, alongside usage and retry limits.",
-            isBoundary: true,
-          },
-          {
-            number: "04",
-            title: "Design the architecture",
-            description:
-              "Choose models, context, tools, agents, memory and reasoning patterns within those boundaries.",
-          },
-          {
-            number: "05",
-            title: "Deploy and measure",
-            description:
-              "Track successful outcomes, quality, total running cost and business value as usage scales.",
-          },
-        ],
-        feedback:
-          "Feed measured results back into architecture and token allocation. Re-evaluate the financial boundary when business conditions change.",
-      },
-      {
-        type: "paragraph",
-        text: "The objective is not simply to implement an AI system.",
-      },
-      {
-        type: "paragraph",
-        text: "It is to engineer a workflow whose economics remain viable as usage scales.",
-      },
-      {
-        type: "paragraph",
-        text: "That is the core idea of enterprise workflow tokenomics:",
-      },
-      {
-        type: "quote",
-        text: "Tokens are the economic unit of AI consumption. Business outcomes are the return. Tokenomics is the discipline that keeps the two in balance.",
-      },
-      {
-        type: "paragraph",
-        text: "AI transformation should not create a new uncontrolled line item inside the organisation.",
-      },
-      {
-        type: "paragraph",
-        text: "Every workflow should have an economic boundary. Every major unit of intelligence should have a reason for being consumed. And the cost of AI should remain proportional to the business value it creates.",
+        text: "Token planning at each workflow stage affects more than cost. It can influence output quality, risk, and the value created in later stages of the workflow.",
       },
       {
         type: "pull-quote",
-        text: "The goal is not to make AI cheaper at any cost. The goal is to make AI economically sustainable enough that it never becomes a liability.",
+        text: "A framework for enterprise workflow tokenomics brings technical, economic, and operational perspectives into one common token-analytical structure.",
       },
       {
-        type: "references",
+        type: "paragraph",
+        text: "This means that each workflow stage should be evaluated through three questions:",
+      },
+      {
+        type: "figure-ownership",
+        label: "Stage evaluation framework",
+        caption: "Each workflow stage should be assessed across these three dimensions.",
         items: [
           {
-            text: "AWS — Cost optimization design principles",
-            url: "https://docs.aws.amazon.com/wellarchitected/latest/agentic-ai-lens/cost-optimization-design-principles.html",
+            title: "Consumption",
+            description: "How many tokens does this stage consume?",
           },
           {
-            text: "Microsoft Research — How Do AI Agents Spend Your Money?",
-            url: "https://www.microsoft.com/en-us/research/publication/how-do-ai-agents-spend-your-money-analyzing-and-predicting-token-consumption-in-agentic-coding-tasks/",
+            title: "Value generation",
+            description: "What value does this stage generate per token?",
           },
           {
-            text: "Cisco — What is agent tokenomics?",
-            url: "https://www.cisco.com/site/us/en/learn/topics/artificial-intelligence/agent-tokenomics.html",
-          },
-          {
-            text: "Microsoft Azure — The economics of agent optimization",
-            url: "https://azure.microsoft.com/en-us/blog/the-economics-of-agent-optimization-four-ways-to-lower-the-cost/",
+            title: "Downstream impact",
+            description: "What quality or risk impact does this stage create for the stages that follow?",
           },
         ],
       },
       {
-        type: "invitation",
-        title: "Bring us one workflow worth improving.",
-        description:
-          "Let’s define its economic boundaries—and how we’ll prove its value.",
+        type: "paragraph",
+        text: "In my upcoming blog on tokenomics, I will share how we worked with an enterprise as a forward-deployed team. I will explain how we understood the workflow where they wanted to add an AI system, broke that workflow into multiple stages, and designed tokenomics at each stage.",
+      },
+      {
+        type: "paragraph",
+        text: "The focus was not only on technical design. It was on balancing technical, economic, and operational perspectives—and understanding the impact that tokenomics planning had on the overall workflow.",
       },
     ],
   },
