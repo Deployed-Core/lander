@@ -155,7 +155,7 @@ const deployedTeam = {
   role: "Strategy & Embedded Deployment",
   avatar: "D",
   avatarImage: "/icon.jpeg",
-  url: "https://deployed.md",
+  url: "https://www.deployed.md",
 };
 
 const princeRaj = {
@@ -163,7 +163,7 @@ const princeRaj = {
   role: "Partner & Tech Architect",
   avatar: "PR",
   avatarImage: "/assets/prince-raj.jpeg",
-  url: "https://deployed.md",
+  url: "https://www.deployed.md",
   linkedIn: "https://www.linkedin.com/in/princexraj/",
 };
 

@@ -55,7 +55,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
     return () => observer.disconnect();
   }, [headings]);
 
-  const shareUrl = `https://deployed.md/blog/${post.slug}`;
+  const shareUrl = `https://www.deployed.md/blog/${post.slug}`;
   const shareText = post.title;
 
   const copyLink = () => {
@@ -190,12 +190,20 @@ export default function BlogPostClient({ slug }: { slug: string }) {
           .fig-journey-steps {
             grid-template-columns: 1fr !important;
             padding: 20px !important;
-            gap: 18px !important;
+            gap: 0 !important;
           }
           .fig-journey-steps li {
-            display: grid !important;
-            grid-template-columns: 40px 1fr !important;
-            gap: 0 10px !important;
+            display: block !important;
+            border-top: none !important;
+            padding-top: 0 !important;
+            padding-bottom: 24px !important;
+            margin-bottom: 24px !important;
+            border-bottom: 2px solid var(--border-subtle) !important;
+          }
+          .fig-journey-steps li:last-child {
+            border-bottom-color: var(--blue-500) !important;
+            margin-bottom: 0 !important;
+            padding-bottom: 0 !important;
           }
           .fig-ownership-grid {
             grid-template-columns: 1fr !important;

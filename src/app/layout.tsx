@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://deployed.md"),
+  metadataBase: new URL("https://www.deployed.md"),
   title: {
     default: "Deployed — Applied AI for the enterprise",
     template: "%s — Deployed",

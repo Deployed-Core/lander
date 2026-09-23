@@ -1,6 +1,6 @@
 import { posts } from "@/data/posts";
 
-const BASE = "https://deployed.md";
+const BASE = "https://www.deployed.md";
 
 function escapeXml(s: string) {
   return s

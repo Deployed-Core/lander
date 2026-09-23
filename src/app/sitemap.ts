@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { posts } from "@/data/posts";
 
-const BASE = "https://deployed.md";
+const BASE = "https://www.deployed.md";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [

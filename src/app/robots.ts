@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: "/bip",
       },
     ],
-    sitemap: "https://deployed.md/sitemap.xml",
+    sitemap: "https://www.deployed.md/sitemap.xml",
   };
 }

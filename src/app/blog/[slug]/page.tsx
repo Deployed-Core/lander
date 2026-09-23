@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
 
-  const url = `https://deployed.md/blog/${post.slug}`;
+  const url = `https://www.deployed.md/blog/${post.slug}`;
   const imageUrl =
     post.coverImage ||
     `/api/og?title=${encodeURIComponent(post.title)}`;
@@ -66,10 +66,10 @@ export default function BlogPostPage({ params }: Props) {
   const post = getPostBySlug(params.slug);
   if (!post || post.content.length === 0) notFound();
 
-  const postUrl = `https://deployed.md/blog/${post.slug}`;
+  const postUrl = `https://www.deployed.md/blog/${post.slug}`;
   const imageUrl = post.coverImage
-    ? `https://deployed.md${post.coverImage}`
-    : `https://deployed.md/api/og?title=${encodeURIComponent(post.title)}`;
+    ? `https://www.deployed.md${post.coverImage}`
+    : `https://www.deployed.md/api/og?title=${encodeURIComponent(post.title)}`;
 
   const authorSameAs = [
     post.author.url,
@@ -91,16 +91,16 @@ export default function BlogPostPage({ params }: Props) {
       ...(post.author.url && { url: post.author.url }),
       ...(authorSameAs.length > 0 && { sameAs: authorSameAs }),
       ...(post.author.avatarImage && {
-        image: `https://deployed.md${post.author.avatarImage}`,
+        image: `https://www.deployed.md${post.author.avatarImage}`,
       }),
     },
     publisher: {
       "@type": "Organization",
       name: "Deployed",
-      url: "https://deployed.md",
+      url: "https://www.deployed.md",
       logo: {
         "@type": "ImageObject",
-        url: "https://deployed.md/assets/logo-horizontal-navy.png",
+        url: "https://www.deployed.md/assets/logo-horizontal-navy.png",
       },
     },
     mainEntityOfPage: {
@@ -133,13 +133,13 @@ export default function BlogPostPage({ params }: Props) {
         "@type": "ListItem",
         position: 1,
         name: "Blog",
-        item: "https://deployed.md/blog",
+        item: "https://www.deployed.md/blog",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: post.tag,
-        item: `https://deployed.md/blog?tag=${post.tag}`,
+        item: `https://www.deployed.md/blog?tag=${post.tag}`,
       },
       {
         "@type": "ListItem",
@@ -158,12 +158,12 @@ export default function BlogPostPage({ params }: Props) {
     worksFor: {
       "@type": "Organization",
       name: "Deployed",
-      url: "https://deployed.md",
+      url: "https://www.deployed.md",
     },
     ...(post.author.url && { url: post.author.url }),
     ...(authorSameAs.length > 0 && { sameAs: authorSameAs }),
     ...(post.author.avatarImage && {
-      image: `https://deployed.md${post.author.avatarImage}`,
+      image: `https://www.deployed.md${post.author.avatarImage}`,
     }),
   };
 
