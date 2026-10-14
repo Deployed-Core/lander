@@ -276,7 +276,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
         }}
       />
 
-      <SiteNav active="Blog" tone="navy-solid" />
+      <SiteNav active="Blog" tone="light" />
 
       {/* Breadcrumb */}
       <div
