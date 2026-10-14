@@ -45,7 +45,7 @@ export default function BankingPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <SiteNav active="Industries" tone="navy-solid" />
+      <SiteNav active="Industries" tone="navy" />
 
       {/* Hero */}
       <section
