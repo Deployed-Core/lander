@@ -119,6 +119,7 @@ export default function Home() {
           style={{
             position: "relative",
             zIndex: 1,
+            transform: "translateY(clamp(66px, 3vh, 36px))",
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
