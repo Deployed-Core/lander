@@ -1,11 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
+import type { GeoJsonObject } from "geojson";
+import { ComposableMap, Geographies, Geography, Line, Marker } from "react-simple-maps";
+import worldMap from "world-atlas/countries-110m.json";
 import SiteNav from "@/components/SiteNav";
 import CompactFooter from "@/components/CompactFooter";
 import LeadershipSection from "@/components/LeadershipSection";
 
 export default function AboutPage() {
+  const locations = [
+    { name: "UNITED STATES", coordinates: [-98, 39] as [number, number], offset: [0, -16] as [number, number] },
+    { name: "UAE", coordinates: [54.4, 24.5] as [number, number], offset: [-12, -14] as [number, number] },
+    { name: "INDIA", coordinates: [78.9, 20.6] as [number, number], offset: [16, -12] as [number, number] },
+    { name: "AUSTRALIA", coordinates: [133.8, -25] as [number, number], offset: [0, 22] as [number, number] },
+  ];
   useEffect(() => {
     const nodes = Array.from(
       document.querySelectorAll<HTMLElement>("[data-reveal]")
@@ -167,53 +176,53 @@ export default function AboutPage() {
         >
           Serving enterprises across the United States, Australia, India, and the UAE.
         </p>
-        <svg
-          className="about-world-map"
-          viewBox="0 0 1000 470"
-          role="img"
-          aria-labelledby="about-map-title about-map-description"
-          style={{ display: "block", width: "100%", height: "auto", marginTop: 40, overflow: "visible" }}
-        >
-          <title id="about-map-title">Where Deployed works</title>
-          <desc id="about-map-description">
-            A world map marking the United States, the UAE, India, and Australia.
-          </desc>
-          <g fill="rgba(249,246,243,.14)" stroke="rgba(249,246,243,.24)" strokeWidth="1.5" strokeLinejoin="round">
-            <path d="M83 112l32-29 55-13 33 14 22-4 31 20 10 23-18 15-7 25-25 11-12 30-20 20-8 28-21 7-17-19-5-33-18-21-19-6-13-30-19-12-5-26z" />
-            <path d="M241 245l25 12 18 28 5 31-13 29-7 32-19 34-17-10-8-35-17-28 6-35 12-25-2-22 17-11z" />
-            <path d="M432 102l31-20 39 6 21-11 28 13 22-2 18 18 35 2 33 18 37-6 35 19 28 25-6 18-34 2-20 19-29 4-21 21-21 5-14 26-20 7-16-16-20-3-18-23-25-3-16-22-24-1-16-18-19-5-20-24-27-8-9-24z" />
-            <path d="M484 229l21-10 23 8 16 20-4 19-18 8-18-10-21-3-10-17z" />
-            <path d="M516 264l32-16 37 6 23 23-4 27-23 10-7 31-19 23-21-8-10-26-23-16-9-25z" />
-            <path d="M722 333l35-15 45 4 34 18 14 21-12 24-28 10-21-10-27 10-28-12-20-22z" />
-            <path d="M853 390l13-7 12 8-5 16-14 4z" />
-            <path d="M315 80l17-8 16 7-3 12-18 5z" />
-          </g>
-          <g fill="none" stroke="rgba(122,165,239,.62)" strokeWidth="1.5" strokeDasharray="5 7">
-            <path d="M230 165Q387 82 547 224" />
-            <path d="M547 224Q573 199 591 235" />
-            <path d="M547 224Q638 264 751 355" />
-          </g>
-          <g className="about-map-marker" aria-label="United States">
-            <circle className="about-map-pulse" cx="230" cy="165" r="12" />
-            <circle cx="230" cy="165" r="5" />
-            <text x="230" y="143" textAnchor="middle">UNITED STATES</text>
-          </g>
-          <g className="about-map-marker" aria-label="United Arab Emirates">
-            <circle className="about-map-pulse" cx="547" cy="224" r="12" style={{ animationDelay: ".45s" }} />
-            <circle cx="547" cy="224" r="5" />
-            <text x="520" y="201" textAnchor="end">UAE</text>
-          </g>
-          <g className="about-map-marker" aria-label="India">
-            <circle className="about-map-pulse" cx="591" cy="235" r="12" style={{ animationDelay: ".9s" }} />
-            <circle cx="591" cy="235" r="5" />
-            <text x="608" y="214">INDIA</text>
-          </g>
-          <g className="about-map-marker" aria-label="Australia">
-            <circle className="about-map-pulse" cx="751" cy="355" r="12" style={{ animationDelay: "1.35s" }} />
-            <circle cx="751" cy="355" r="5" />
-            <text x="751" y="383" textAnchor="middle">AUSTRALIA</text>
-          </g>
-        </svg>
+        <div role="img" aria-labelledby="about-map-title about-map-description" style={{ width: "100%", marginTop: 40 }}>
+          <span id="about-map-title" className="about-map-sr-only">Where Deployed works</span>
+          <span id="about-map-description" className="about-map-sr-only">A world map marking the United States, the UAE, India, and Australia, connected by animated lines.</span>
+          <ComposableMap
+            className="about-world-map"
+            width={1000}
+            height={470}
+            projection="geoEqualEarth"
+            projectionConfig={{ scale: 165, center: [12, 4] }}
+            style={{ display: "block", width: "100%", height: "auto", overflow: "visible" }}
+          >
+            {/* react-simple-maps converts TopoJSON at runtime; its prop type only declares GeoJSON. */}
+            <Geographies geography={worldMap as unknown as GeoJsonObject}>
+              {({ geographies }) => geographies.map((geo) => (
+                <Geography
+                  key={geo.rsmKey}
+                  geography={geo}
+                  fill="rgba(249,246,243,.14)"
+                  stroke="rgba(249,246,243,.24)"
+                  strokeWidth={0.7}
+                  style={{ outline: "none" }}
+                />
+              ))}
+            </Geographies>
+            {locations.slice(0, -1).map((location, index) => (
+              <Line
+                key={`${location.name}-${locations[index + 1].name}`}
+                from={location.coordinates}
+                to={locations[index + 1].coordinates}
+                className="about-map-connection"
+                stroke="rgba(122,165,239,.8)"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                style={{ animationDelay: `${index * 0.35}s` }}
+              />
+            ))}
+            {locations.map((location, index) => (
+              <Marker key={location.name} coordinates={location.coordinates}>
+                <g className="about-map-marker" aria-label={location.name}>
+                  <circle className="about-map-pulse" r={11} style={{ animationDelay: `${index * 0.4}s` }} />
+                  <circle r={4.5} />
+                  <text x={location.offset[0]} y={location.offset[1]} textAnchor="middle">{location.name}</text>
+                </g>
+              </Marker>
+            ))}
+          </ComposableMap>
+        </div>
         </div>
       </section>
 
@@ -373,10 +382,16 @@ export default function AboutPage() {
           0% { opacity: .65; transform: scale(.65); }
           100% { opacity: 0; transform: scale(2.4); }
         }
+        @keyframes about-map-connection-blink {
+          0%, 100% { opacity: .25; }
+          50% { opacity: 1; }
+        }
+        .about-map-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+        .about-map-connection { stroke-dasharray: 5 7; animation: about-map-connection-blink 2s ease-in-out infinite; }
         .about-map-marker { fill: var(--blue-300); }
         .about-map-marker text { fill: var(--paper-000); font: 600 11px var(--font-sans, Arial, sans-serif); letter-spacing: 1.5px; }
         .about-map-pulse { fill: var(--blue-300); transform-box: fill-box; transform-origin: center; animation: about-map-pulse 1.8s ease-out infinite; }
-        @media (prefers-reduced-motion: reduce) { .about-map-pulse { animation: none; opacity: .35; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .about-map-pulse, .about-map-connection { animation: none; opacity: .55; transform: none; } }
         @media (max-width: 900px) {
           [data-r="cols2"] {
             grid-template-columns: minmax(0, 1fr) !important;

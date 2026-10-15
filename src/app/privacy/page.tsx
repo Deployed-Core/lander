@@ -26,7 +26,7 @@ const bodyText: React.CSSProperties = {
 export default function PrivacyPage() {
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <SiteNav tone="light" />
+      <SiteNav tone="navy-solid" />
 
       <section
         style={{

@@ -96,6 +96,15 @@ export default function Home() {
         @media (max-width:560px){
           [data-r="foot"]{grid-template-columns:minmax(0,1fr) !important}
         }
+        .hero-content {
+          transform: translateY(-16vh);
+        }
+
+        @media (max-width: 620px) {
+          .hero-content {
+            transform: none;
+          }
+        }
       `}</style>
 
       {/* ── Nav ── */}
@@ -107,28 +116,28 @@ export default function Home() {
         className="brand-field on-navy"
         style={{
           position: "relative",
-          minHeight: "calc(100vh - 70px)",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           overflow: "hidden",
         }}
       >
         <div
           data-r="cols2"
+          className="hero-content"
           style={{
             position: "relative",
             zIndex: 1,
-            transform: "translateY(clamp(66px, 3vh, 36px))",
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
-            padding: "clamp(48px,8vh,96px) 24px",
+            padding: "clamp(120px,16vw,200px) 24px clamp(80px,10vh,120px)",
             boxSizing: "border-box",
             display: "grid",
             gridTemplateColumns: "minmax(0,1.25fr) minmax(0,1fr)",
             gap: 48,
-            alignItems: "center",
+            alignItems: "end",
           }}
         >
           <div>

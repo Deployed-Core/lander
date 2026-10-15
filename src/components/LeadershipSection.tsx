@@ -50,8 +50,10 @@ export default function LeadershipSection() {
 						className="about-leadership-grid"
 						style={{
 							display: "grid",
-							gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-							gap: 24,
+							gridTemplateColumns: "repeat(2, minmax(0, 420px))",
+							gap: 100,
+							justifyItems: "center",
+							justifyContent: "space-between",
 						}}
 					>
 						{leaders.map((person) => (
@@ -63,11 +65,12 @@ export default function LeadershipSection() {
 									border: "1px solid var(--border-hairline)",
 									borderRadius: "var(--radius-md)",
 									background: "var(--paper-000)",
+									maxWidth: 320,
 								}}
 							>
 								<div
 									style={{
-										aspectRatio: "4 / 3",
+										aspectRatio: "auto",
 										overflow: "hidden",
 										background: "var(--surface-sunken)",
 									}}
@@ -78,7 +81,8 @@ export default function LeadershipSection() {
 										style={{
 											width: "100%",
 											height: "100%",
-											objectFit: "cover",
+											objectFit: "contain",
+											objectPosition: "center",
 											display: "block",
 										}}
 									/>
