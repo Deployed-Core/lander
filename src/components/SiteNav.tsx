@@ -25,12 +25,26 @@ export default function SiteNav({
   const activeColor = navy ? "var(--blue-300)" : "var(--blue-600)";
   const col = (name: string) => (active === name ? activeColor : body);
   const wt = (name: string) => (active === name ? "500" : "400");
-
-  const barBg = solid ? "#00051e" : navy ? "transparent" : "rgba(249,246,243,.92)";
-  const barBorder = solid ? "1px solid rgba(255,255,255,.09)" : navy ? "0" : "1px solid var(--border-hairline)";
-  const panelBg = navy ? "rgba(0,5,30,.94)" : "rgba(249,246,243,.98)";
   const hairline = navy ? "rgba(255,255,255,.10)" : "var(--border-hairline)";
-  const cardBorder = navy ? "rgba(255,255,255,.12)" : "var(--border-hairline)";
+    const barBg = solid
+    ? "#00051e"
+    : navy
+      ? "transparent"
+      : "rgba(255,255,255,.98)";
+
+  const barBorder = solid
+    ? "1px solid rgba(255,255,255,.09)"
+    : navy
+      ? "0"
+      : "1px solid rgba(15,23,42,.12)";
+
+  const panelBg = navy
+    ? "rgba(0,5,30,.98)"
+    : "rgba(255,255,255,.99)";
+
+  const cardBorder = navy
+    ? "rgba(255,255,255,.16)"
+    : "rgba(15,23,42,.16)";
   const cardBg = navy ? "rgba(255,255,255,.04)" : "var(--paper-000)";
   const glassBg = navy ? "rgba(255,255,255,.07)" : "rgba(255,255,255,.55)";
   const glassBgHover = navy ? "rgba(255,255,255,.12)" : "rgba(255,255,255,.78)";
@@ -59,6 +73,7 @@ export default function SiteNav({
         backdropFilter: "var(--blur-glass)",
         WebkitBackdropFilter: "var(--blur-glass)",
         borderBottom: barBorder,
+        boxShadow: navy ? "none" : "0 8px 24px rgba(15,23,42,.06)",
       }}
     >
       <style>{`
@@ -102,59 +117,213 @@ export default function SiteNav({
           </Link>
         )}
       </div>
+      {(menu === "core" || menu === "industries" || menu === "company") && (() => {
+        const menuContent = {
+          core: {
+            featured: {
+              href: "/the-deployed-fit",
+              eyebrow: "THE DEPLOYED FIT",
+              title: "Where we create the most leverage",
+            },
+            links: [
+              {
+                href: "/strategy",
+                title: "Strategy",
+                description: "Drive your AI transformation",
+              },
+              {
+                href: "/deployment",
+                title: "Deployment",
+                description: "Locally embedded teams who ship",
+              },
+            ],
+          },
+          industries: {
+            featured: {
+              href: "/banking",
+              eyebrow: "INDUSTRIES",
+              title: "AI transformation for banking",
+            },
+            links: [
+              {
+                href: "/healthcare",
+                title: "Healthcare",
+                description: "Build better outcomes with AI",
+              },
+              {
+                href: "/utilities",
+                title: "Utilities",
+                description: "Modernize essential services",
+              },
+            ],
+          },
+          company: {
+            featured: {
+              href: "/about",
+              eyebrow: "COMPANY",
+              title: "Meet Deployed",
+            },
+            links: [
+              {
+                href: "/careers",
+                title: "Careers",
+                description: "Join the team",
+              },
+              {
+                href: "/contact",
+                title: "Get in touch",
+                description: "Talk with our team",
+              },
+            ],
+          },
+        }[menu];
 
-      {menu === "core" && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: "100%", background: panelBg, borderTop: `1px solid ${hairline}`, borderBottom: `1px solid ${hairline}`, backdropFilter: "var(--blur-glass)", WebkitBackdropFilter: "var(--blur-glass)", animation: "nav-fade var(--dur-base) var(--ease-out) both" }}>
-          <div style={{ maxWidth: 1160, margin: "0 auto", padding: "26px 24px 30px", display: "grid", gridTemplateColumns: "minmax(0,1.15fr) minmax(0,1fr)", gap: 18 }}>
-            <Link href="/the-deployed-fit" onClick={() => setMenu(null)} style={{ borderRadius: "var(--radius-md)", padding: 26, background: glassBg, display: "flex", flexDirection: "column", justifyContent: "flex-end", minHeight: 150, transition: "background var(--dur-fast) var(--ease-out)", borderBottom: 0 }} onMouseEnter={e => (e.currentTarget.style.background = glassBgHover)} onMouseLeave={e => (e.currentTarget.style.background = glassBg)}>
-              <div style={{ font: "var(--eyebrow)", letterSpacing: "var(--eyebrow-track)", textTransform: "uppercase", color: linkMuted }}>The Deployed fit</div>
-              <div style={{ font: "var(--display-3)", letterSpacing: "var(--display-track)", color: strong, marginTop: 12 }}>Where we create the most leverage</div>
-            </Link>
-            <div style={{ display: "grid", gap: 18 }}>
-              <Link href="/strategy" onClick={() => setMenu(null)} style={{ borderRadius: "var(--radius-md)", padding: "20px 22px", background: glassBg, display: "block", transition: "background var(--dur-fast) var(--ease-out)", borderBottom: 0 }} onMouseEnter={e => (e.currentTarget.style.background = glassBgHover)} onMouseLeave={e => (e.currentTarget.style.background = glassBg)}>
-                <div style={{ font: "var(--heading-2)", color: strong }}>Strategy</div>
-                <div style={{ font: "var(--body-sm)", color: linkMuted, marginTop: 5 }}>Drive your AI transformation</div>
+        return (
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: "100%",
+              background: panelBg,
+              borderTop: `1px solid ${hairline}`,
+              borderBottom: `1px solid ${hairline}`,
+              backdropFilter: "var(--blur-glass)",
+              WebkitBackdropFilter: "var(--blur-glass)",
+              animation: "nav-fade var(--dur-base) var(--ease-out) both",
+              boxShadow: navy ? "0 16px 36px rgba(0,0,0,.24)" : "0 16px 36px rgba(15,23,42,.12)",
+            }}
+          >
+            <div
+              style={{
+                maxWidth: 1160,
+                margin: "0 auto",
+                padding: "26px 24px 30px",
+                display: "grid",
+                gridTemplateColumns: "minmax(0, 1.15fr) minmax(0, 1fr)",
+                gap: 18,
+              }}
+            >
+              <Link
+                href={menuContent.featured.href}
+                onClick={() => setMenu(null)}
+                style={{
+                  minHeight: 190,
+                  boxSizing: "border-box",
+                  border: `1px solid ${cardBorder}`,
+                  borderRadius: "var(--radius-md)",
+                  padding: 26,
+                  background: glassBg,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                  transition: "background var(--dur-fast) var(--ease-out)",
+                  borderBottomWidth: 1,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = glassBgHover;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = glassBg;
+                }}
+              >
+                <span
+                  style={{
+                    font: "var(--eyebrow)",
+                    letterSpacing: "var(--eyebrow-track)",
+                    textTransform: "uppercase",
+                    color: linkMuted,
+                  }}
+                >
+                  {menuContent.featured.eyebrow}
+                </span>
+                <span
+                  style={{
+                    font: "var(--display-3)",
+                    letterSpacing: "var(--display-track)",
+                    color: strong,
+                    marginTop: 12,
+                  }}
+                >
+                  {menuContent.featured.title}
+                </span>
+                <img
+                  src={arrow}
+                  alt=""
+                  style={{
+                    width: 15,
+                    height: 14,
+                    display: "block",
+                    opacity: 0.65,
+                    marginTop: 18,
+                  }}
+                />
               </Link>
-              <Link href="/deployment" onClick={() => setMenu(null)} style={{ borderRadius: "var(--radius-md)", padding: "20px 22px", background: glassBg, display: "block", transition: "background var(--dur-fast) var(--ease-out)", borderBottom: 0 }} onMouseEnter={e => (e.currentTarget.style.background = glassBgHover)} onMouseLeave={e => (e.currentTarget.style.background = glassBg)}>
-                <div style={{ font: "var(--heading-2)", color: strong }}>Deployment</div>
-                <div style={{ font: "var(--body-sm)", color: linkMuted, marginTop: 5 }}>Locally embedded teams who ship</div>
-              </Link>
+
+              <div style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 18 }}>
+                {menuContent.links.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMenu(null)}
+                    style={{
+                      boxSizing: "border-box",
+                      border: `1px solid ${cardBorder}`,
+                      borderRadius: "var(--radius-md)",
+                      padding: "20px 22px",
+                      background: cardBg,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      transition: "background var(--dur-fast) var(--ease-out)",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = glassBgHover;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = cardBg;
+                    }}
+                  >
+                    <span>
+                      <span
+                        style={{
+                          display: "block",
+                          font: "var(--heading-2)",
+                          color: strong,
+                        }}
+                      >
+                        {item.title}
+                      </span>
+                      <span
+                        style={{
+                          display: "block",
+                          font: "var(--body-sm)",
+                          color: linkMuted,
+                          marginTop: 5,
+                        }}
+                      >
+                        {item.description}
+                      </span>
+                    </span>
+                    <img
+                      src={arrow}
+                      alt=""
+                      style={{
+                        width: 15,
+                        height: 14,
+                        display: "block",
+                        opacity: 0.55,
+                        flexShrink: 0,
+                      }}
+                    />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
-      {menu === "industries" && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: "100%", background: panelBg, borderTop: `1px solid ${hairline}`, borderBottom: `1px solid ${hairline}`, backdropFilter: "var(--blur-glass)", WebkitBackdropFilter: "var(--blur-glass)", animation: "nav-fade var(--dur-base) var(--ease-out) both" }}>
-          <div style={{ maxWidth: 1160, margin: "0 auto", padding: "26px 24px 30px", display: "grid", gridTemplateColumns: "repeat(2,minmax(0,1fr))", gap: 16 }}>
-            {[
-              { href: "/banking", label: "Banking" },
-              { href: "/healthcare", label: "Healthcare" },
-              { href: "/utilities", label: "Utilities" },
-            ].map(item => (
-              <Link key={item.href} href={item.href} onClick={() => setMenu(null)} style={{ border: `1px solid ${cardBorder}`, borderRadius: "var(--radius-md)", padding: "20px 22px", background: cardBg, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
-                <span style={{ font: "var(--heading-2)", color: strong }}>{item.label}</span>
-                <img src={arrow} alt="" style={{ width: 15, height: 14, display: "block", opacity: 0.55 }} />
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {menu === "company" && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: "100%", background: panelBg, borderTop: `1px solid ${hairline}`, borderBottom: `1px solid ${hairline}`, backdropFilter: "var(--blur-glass)", WebkitBackdropFilter: "var(--blur-glass)", animation: "nav-fade var(--dur-base) var(--ease-out) both" }}>
-          <div style={{ maxWidth: 1160, margin: "0 auto", padding: "22px 24px 26px", display: "grid", gap: 2 }}>
-            <Link href="/about" onClick={() => setMenu(null)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "14px 4px", borderBottom: `1px solid ${hairline}` }}>
-              <span style={{ font: "var(--heading-2)", color: strong }}>About us</span>
-              <img src={arrow} alt="" style={{ width: 15, height: 14, display: "block", opacity: 0.5 }} />
-            </Link>
-            <Link href="/careers" onClick={() => setMenu(null)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "14px 4px", borderBottom: 0 }}>
-              <span style={{ font: "var(--heading-2)", color: strong }}>Careers</span>
-              <img src={arrow} alt="" style={{ width: 15, height: 14, display: "block", opacity: 0.5 }} />
-            </Link>
-          </div>
-        </div>
-      )}
+        );
+      })()}
 
       {menu === "mobile" && (
         <div style={{ position: "absolute", left: 0, right: 0, top: "100%", background: panelBg, borderTop: `1px solid ${hairline}`, borderBottom: `1px solid ${hairline}`, backdropFilter: "var(--blur-glass)", WebkitBackdropFilter: "var(--blur-glass)", animation: "nav-fade var(--dur-base) var(--ease-out) both", maxHeight: "calc(100vh - 70px)", overflowY: "auto" }}>

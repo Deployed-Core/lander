@@ -110,7 +110,7 @@ export default function StrategyPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <SiteNav active="Core" tone="light" />
+      <SiteNav active="Core" tone="navy-solid" />
 
       {/* Hero */}
       <section

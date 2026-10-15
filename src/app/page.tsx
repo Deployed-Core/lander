@@ -96,6 +96,15 @@ export default function Home() {
         @media (max-width:560px){
           [data-r="foot"]{grid-template-columns:minmax(0,1fr) !important}
         }
+        .hero-content {
+          transform: translateY(-16vh);
+        }
+
+        @media (max-width: 620px) {
+          .hero-content {
+            transform: none;
+          }
+        }
       `}</style>
 
       {/* ── Nav ── */}
@@ -116,6 +125,7 @@ export default function Home() {
       >
         <div
           data-r="cols2"
+          className="hero-content"
           style={{
             position: "relative",
             zIndex: 1,
