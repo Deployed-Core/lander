@@ -2,7 +2,9 @@
 
 import { useState, FormEvent } from "react";
 import Link from "next/link";
-import SiteNav from "@/components/SiteNav";
+import ContactNav from "@/components/ContactNav";
+import CompactFooter from "@/components/CompactFooter";
+import ContactFooter from "@/components/ContactFooter";
 
 const industryOptions = [
   "Healthcare & hospitality",
@@ -126,6 +128,7 @@ export default function ContactPage() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* Two-column split */}
+      <ContactNav active="Company" tone="navy-solid" showCta={false} />
       <div
         className="contact-grid"
         style={{
@@ -143,8 +146,6 @@ export default function ContactPage() {
             flexDirection: "column",
           }}
         >
-          <SiteNav tone="navy" showCta={false} />
-
           <div
             style={{
               flex: 1,
@@ -211,27 +212,6 @@ export default function ContactPage() {
                 </a>
               </div>
             </div>
-          </div>
-
-          {/* Privacy note */}
-          <div
-            style={{
-              padding: "var(--space-6) clamp(32px, 5vw, 80px)",
-              font: "var(--body-sm)",
-              color: "rgba(249,246,243,.38)",
-            }}
-          >
-            Your data is processed in accordance with our{" "}
-            <Link
-              href="/privacy"
-              style={{
-                color: "rgba(249,246,243,.55)",
-                textDecoration: "underline",
-              }}
-            >
-              privacy policy
-            </Link>
-            . We will never share your information with third parties.
           </div>
         </div>
 
@@ -541,16 +521,36 @@ export default function ContactPage() {
                 </button>
               </div>
             )}
+            {/* Privacy note */}
+            <div
+              style={{
+                width: "100%",
+                boxSizing: "border-box",
+                marginTop: "var(--space-6)",
+                font: "var(--body-sm)",
+                lineHeight: 1.5,
+                color: "var(--text-muted)",
+              }}
+            >
+              Your data is processed in accordance with our{" "}
+              <Link
+                href="/privacy"
+                style={{
+                  color: "var(--blue-700)",
+                  textDecoration: "underline",
+                  textUnderlineOffset: 3,
+                }}
+              >
+                privacy policy
+              </Link>
+              . We will never share your information with third parties.
+            </div>
           </div>
         </div>
       </div>
-
+      <ContactFooter />
       <style>{`
-        .contact-left > div:first-child > div {
-          padding-left: clamp(32px, 5vw, 80px) !important;
-          padding-right: clamp(32px, 5vw, 80px) !important;
-          max-width: none !important;
-        }
+        
         @media (max-width: 900px) {
           .contact-grid {
             grid-template-columns: 1fr !important;

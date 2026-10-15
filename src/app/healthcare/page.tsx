@@ -45,7 +45,7 @@ export default function HealthcarePage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <SiteNav active="Industries" tone="navy" />
+      <SiteNav active="Industries" tone="navy-solid" />
 
       {/* Hero */}
       <section

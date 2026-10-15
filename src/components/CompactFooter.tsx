@@ -28,7 +28,9 @@ export default function CompactFooter() {
           flexWrap: "wrap",
         }}
       >
+        <Link href="/" style={{ display: "flex", alignItems: "center", borderBottom: 0 }}>
         <img src="/assets/logo-horizontal-white.png" alt="Deployed" style={{ width: 150, minWidth: 130, display: "block" }} />
+        </Link>
         <span style={{ font: "var(--eyebrow)", letterSpacing: "var(--eyebrow-track)", textTransform: "uppercase", color: "rgba(249,246,243,.6)" }}>
           Reach optimal AI density within your org
         </span>

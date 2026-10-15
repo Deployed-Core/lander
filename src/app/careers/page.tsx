@@ -44,7 +44,7 @@ export default function CareersPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <SiteNav active="Company" tone="light" />
+      <SiteNav active="Company" tone="navy-solid" />
 
       {/* Hero */}
       <section
