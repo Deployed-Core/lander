@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import CompactFooter from "@/components/CompactFooter";
+import SiteFooter from "@/components/SiteFooter";
 
 const PRINCIPLES: { title: string; body: string[] }[] = [
   {
@@ -527,7 +527,7 @@ export default function StrategyPage() {
         </div>
       </section>
 
-      <CompactFooter />
+      <SiteFooter id="strategy" />
 
       <style>{`
         @keyframes dep-open {
@@ -551,6 +551,15 @@ export default function StrategyPage() {
           }
           [data-r="side"] > * {
             position: static !important;
+          }
+          footer#strategy > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 560px) {
+          footer#strategy > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>

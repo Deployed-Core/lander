@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import CompactFooter from "@/components/CompactFooter";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function DeploymentPage() {
   useEffect(() => {
@@ -45,7 +45,7 @@ export default function DeploymentPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
-      <SiteNav active="Core" tone="light" />
+      <SiteNav active="Core" tone="navy-solid" />
 
       {/* Hero */}
       <section
@@ -745,7 +745,7 @@ export default function DeploymentPage() {
         </div>
       </section>
 
-      <CompactFooter />
+      <SiteFooter id="deployment" />
 
       <style>{`
         @media (max-width: 900px) {
@@ -777,11 +777,18 @@ export default function DeploymentPage() {
           .phase-iterate-grid > div {
             grid-column: auto !important;
           }
+          footer#deployment > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
         }
         @media (max-width: 560px) {
           .phase-grid {
             grid-template-columns: minmax(0, 1fr) !important;
             gap: 28px !important;
+          }
+          footer#deployment > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>

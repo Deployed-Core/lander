@@ -3,7 +3,6 @@
 import { useState, FormEvent } from "react";
 import Link from "next/link";
 import ContactNav from "@/components/ContactNav";
-import CompactFooter from "@/components/CompactFooter";
 import ContactFooter from "@/components/ContactFooter";
 
 const industryOptions = [
@@ -548,7 +547,7 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      <ContactFooter />
+      <ContactFooter id="contactfooter" />
       <style>{`
         
         @media (max-width: 900px) {
@@ -557,6 +556,15 @@ export default function ContactPage() {
           }
           .form-row {
             grid-template-columns: 1fr !important;
+          }
+          footer#contactfooter > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 560px) {
+          footer#contactfooter > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>

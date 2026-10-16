@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function BipPage() {
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
-      <SiteNav tone="light" />
+      <SiteNav tone="navy-solid" />
 
       <section
         style={{
