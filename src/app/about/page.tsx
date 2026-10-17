@@ -5,8 +5,8 @@ import type { GeoJsonObject } from "geojson";
 import { ComposableMap, Geographies, Geography, Line, Marker } from "react-simple-maps";
 import worldMap from "world-atlas/countries-110m.json";
 import SiteNav from "@/components/SiteNav";
-import CompactFooter from "@/components/CompactFooter";
 import LeadershipSection from "@/components/LeadershipSection";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function AboutPage() {
   const locations = [
@@ -375,7 +375,7 @@ export default function AboutPage() {
         </div>
       </section>
       <LeadershipSection />
-      <CompactFooter />
+      <SiteFooter id="about" />
 
       <style>{`
         @keyframes about-map-pulse {
@@ -391,11 +391,24 @@ export default function AboutPage() {
         .about-map-marker { fill: var(--blue-300); }
         .about-map-marker text { fill: var(--paper-000); font: 600 11px var(--font-sans, Arial, sans-serif); letter-spacing: 1.5px; }
         .about-map-pulse { fill: var(--blue-300); transform-box: fill-box; transform-origin: center; animation: about-map-pulse 1.8s ease-out infinite; }
+        footer#about > [data-r="foot"],
+        footer#about > [data-r="foot"] + div {
+          max-width: 1160px !important;
+        }
         @media (prefers-reduced-motion: reduce) { .about-map-pulse, .about-map-connection { animation: none; opacity: .55; transform: none; } }
         @media (max-width: 900px) {
           [data-r="cols2"] {
             grid-template-columns: minmax(0, 1fr) !important;
             gap: 32px !important;
+          }
+          footer#about > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 560px) {
+          footer#about > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import SiteNav from "@/components/SiteNav";
-import CompactFooter from "@/components/CompactFooter";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function CareersPage() {
   useEffect(() => {
@@ -306,13 +306,22 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <CompactFooter />
+      <SiteFooter id="careers" />
 
       <style>{`
         @media (max-width: 900px) {
           [data-r="cols2"] {
             grid-template-columns: minmax(0, 1fr) !important;
             gap: 32px !important;
+          }
+          footer#careers > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 560px) {
+          footer#careers > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>

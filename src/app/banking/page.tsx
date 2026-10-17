@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import CompactFooter from "@/components/CompactFooter";
+import SiteFooter from "@/components/SiteFooter";
 
 export default function BankingPage() {
   useEffect(() => {
@@ -688,7 +688,7 @@ export default function BankingPage() {
         </div>
       </section>
 
-      <CompactFooter />
+      <SiteFooter id="banking" />
 
       <style>{`
         @media (max-width: 900px) {
@@ -720,6 +720,19 @@ export default function BankingPage() {
           [data-r="hero"] {
             min-height: 0 !important;
             padding: 120px 24px 64px !important;
+          }
+          footer#banking > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        footer#banking > [data-r="foot"],
+        footer#banking > [data-r="foot"] + div {
+          max-width: 1160px !important;
+        }
+        @media (max-width: 560px) {
+          footer#banking > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>

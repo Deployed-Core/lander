@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
-import CompactFooter from "@/components/CompactFooter";
+import SiteFooter from "@/components/SiteFooter";
 
 const rotatingLines = [
   "The workflow everyone complains about.",
@@ -523,7 +523,7 @@ export default function TheDeployedFitPage() {
         </Link>
       </section>
 
-      <CompactFooter />
+      <SiteFooter id="deployedfit" />
 
       <style>{`
         @media (max-width: 900px) {
@@ -535,6 +535,15 @@ export default function TheDeployedFitPage() {
           }
           [data-r="bento-bottom"] {
             grid-template-columns: 1fr !important;
+          }
+          footer#deployedfit > [data-r="foot"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 32px !important;
+          }
+        }
+        @media (max-width: 560px) {
+          footer#deployedfit > [data-r="foot"] {
+            grid-template-columns: minmax(0, 1fr) !important;
           }
         }
       `}</style>
