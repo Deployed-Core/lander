@@ -11,7 +11,7 @@ const leaders = [
 		title: "Co-founder & CTO",
 		image: "/assets/prince_raj.jpeg",
 		linkedin: "https://www.linkedin.com/in/rajweb3/",
-		x: "https://x.com/rajweb3_",
+		x: "https://x.com/prinjiro",
 	},
 ];
 
