@@ -71,7 +71,7 @@ export type ContentBlock =
   | { type: "invitation"; title: string; description: string }
   | { type: "pull-quote"; text: string }
   | { type: "equation"; text: string }
-  | { type: "references"; items: { text: string; url: string }[] }
+  | { type: "references"; label?: string; note?: string; items: { title?: string; text: string; url: string; description?: string; logo?: string }[] }
   | {
       type: "figure-comparison";
       label: string;
@@ -146,6 +146,7 @@ export interface BlogPost {
   };
   gradient: string;
   coverImage?: string;
+  coverPosition?: string;
   keywords: string[];
   content: ContentBlock[];
 }
@@ -168,6 +169,113 @@ const princeRaj = {
 };
 
 export const posts: BlogPost[] = [
+  {
+    slug: "deployed-launches-in-the-uae",
+    date: "17 Oct 2026",
+    isoDate: "2026-10-17",
+    title: "Deployed launches in the UAE",
+    tag: "Industry",
+    description:
+      "Bringing applied AI and embedded solution engineering to UAE businesses",
+    readingTime: 2,
+    author: deployedTeam,
+    gradient:
+      "linear-gradient(135deg, #031430 0%, #0d3b8e 50%, #1a6bc4 100%)",
+    coverImage: "/assets/blog-deployed-launches-in-the-uae-preview.png",
+    coverPosition: "center 80%",
+    keywords: [
+      "UAE AI",
+      "applied AI",
+      "enterprise AI",
+      "agentic systems",
+      "embedded deployment",
+      "AI transformation",
+      "Deployed UAE launch",
+    ],
+    content: [
+      {
+        type: "paragraph",
+        text: "Deployed is launching in the UAE to help SMBs and enterprises improve how their businesses operate with AI and agentic systems. We bring together business strategy and embedded solution engineering, working alongside teams to turn operational priorities into systems they can use every day.",
+        lead: true,
+      },
+      {
+        type: "paragraph",
+        text: "Our expansion builds on experience serving enterprises in healthcare, banking and utilities. That experience shapes our focus on understanding how each business operates and embedding AI into established workflows, with clear accountability for performance. We bring this practical perspective to our work with UAE businesses.",
+      },
+      {
+        type: "heading",
+        text: "AI is becoming part of everyday operations.",
+        id: "ai-everyday-operations",
+      },
+      {
+        type: "paragraph",
+        text: "Across the UAE, AI is becoming part of the work that keeps businesses running. In banking, advanced analytics helps relationship managers understand customers and act on relevant opportunities. Utilities are using AI to handle customer enquiries in Arabic and English, while logistics operators use it to identify bottlenecks in the movement of goods. These deployments point to a practical opportunity: helping people make better decisions and increasing the capacity of existing operations.",
+      },
+      {
+        type: "paragraph",
+        text: "Extending that progress across an organisation takes sustained work. Regional research shows that broad AI adoption has yet to translate consistently into deployment at scale. A useful capability still needs access to the right data, a place in the workflow and a team responsible for its performance. For business leaders, the next step is deciding where AI can make a meaningful difference and what must change for that improvement to last.",
+      },
+      {
+        type: "heading",
+        text: "Start with the business outcome.",
+        id: "start-with-business-outcome",
+      },
+      {
+        type: "paragraph",
+        text: "That is where Deployed focuses. We start with the business outcome and work backwards. Our teams map how work gets done, identify constraints and establish a baseline before recommending what to build. The starting point might be a healthcare provider looking to improve patient follow-ups, a financial services team seeking faster case handling, or a utility aiming for more consistent service. Each engagement begins with a specific operational need and an agreed measure of success.",
+      },
+      {
+        type: "paragraph",
+        text: "We then work alongside the people responsible for that process to build and integrate AI into the systems they already use. Deployment includes defining where an agent can act, when a person should review its work and how exceptions are handled. Once the workflow is in use, we measure its performance against the agreed baseline and refine it with the team. The aim is an improvement that holds up in daily operations.",
+      },
+      {
+        type: "heading",
+        text: "A procedural change. Shared ownership.",
+        id: "procedural-change-shared-ownership",
+      },
+      {
+        type: "paragraph",
+        text: "We see AI transformation as a procedural change. It changes how decisions are made, how responsibilities are assigned and how people spend their time. The organisation brings its understanding of the business; Deployed brings the engineering and delivery discipline to put that knowledge to work. This shared ownership is central to our approach.",
+      },
+      {
+        type: "invitation",
+        title: "Bring us a workflow worth improving.",
+        description:
+          "We are bringing this approach to businesses across the UAE. If your team has a workflow to improve or an AI initiative ready for deployment, we would welcome a conversation. Initial evaluations and scope discovery are offered at no charge, so we can begin by understanding the opportunity and defining what success should look like.",
+      },
+      {
+        type: "references",
+        label: "Insights from",
+        note: "Supporting sources for the market context in the article. Examples describe deployments by other organisations and do not imply a relationship with Deployed.",
+        items: [
+          {
+            logo: "/assets/logo-mckinsey.svg",
+            title: "McKinsey & Company",
+            text: "How a UAE bank transformed to lead with AI and advanced analytics",
+            url: "https://www.mckinsey.com.br/en/our-insights/how-a-uae-bank-transformed-to-lead-with-ai-and-advanced-analytics",
+            description:
+              "The Emirates NBD case describes analytics embedded in existing applications, including insights used by relationship managers.",
+          },
+          {
+            logo: "/assets/logo-dewa.webp",
+            title: "DEWA",
+            text: "Rammas virtual employee handled 1.6 million enquiries in 2025",
+            url: "https://dewa.gov.ae/en/about-us/media-publications/latest-news/2026/1/dewas-virtual-employee-rammas-handled",
+            description:
+              "DEWA reports that its virtual assistant handled more than 1.6 million enquiries in Arabic and English during 2025.",
+          },
+          {
+            logo: "/assets/logo-dp-world.svg",
+            title: "DP World",
+            text: "Is artificial intelligence the key to resilient supply chains",
+            url: "https://www.dpworld.com/en/insights/is-artificial-intelligence-the-key-to-resilient-supply-chains",
+            description:
+              "AI-enabled terminal systems at Jafza in Dubai track container movements, equipment and vehicles to identify bottlenecks.",
+          },
+        ],
+      },
+    ],
+  },
   {
     slug: "modus-operandi",
     date: "14 Sept 2026",
