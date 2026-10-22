@@ -71,6 +71,12 @@ export type ContentBlock =
   | { type: "invitation"; title: string; description: string }
   | { type: "pull-quote"; text: string }
   | { type: "equation"; text: string }
+  | {
+      type: "case-study";
+      company: string;
+      deck: string;
+      body: string[];
+    }
   | { type: "references"; label?: string; note?: string; items: { title?: string; text: string; url: string; description?: string; logo?: string }[] }
   | {
       type: "figure-comparison";
@@ -168,11 +174,20 @@ const princeRaj = {
   linkedIn: "https://www.linkedin.com/in/princexraj/",
 };
 
+const dibyoMajumder = {
+  name: "Dibyo Majumder",
+  role: "Co-founder & CEO",
+  avatar: "DM",
+  avatarImage: "/assets/dibyo-majumder.jpeg",
+  url: "https://www.deployed.md",
+  linkedIn: "https://www.linkedin.com/in/dibyo-majumder/",
+};
+
 export const posts: BlogPost[] = [
   {
     slug: "deployed-launches-in-the-uae",
-    date: "17 Oct 2026",
-    isoDate: "2026-10-17",
+    date: "24 Oct 2026",
+    isoDate: "2026-10-24",
     title: "Deployed launches in the UAE",
     tag: "Industry",
     description:
@@ -271,6 +286,227 @@ export const posts: BlogPost[] = [
             url: "https://www.dpworld.com/en/insights/is-artificial-intelligence-the-key-to-resilient-supply-chains",
             description:
               "AI-enabled terminal systems at Jafza in Dubai track container movements, equipment and vehicles to identify bottlenecks.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ai-strategy-for-enterprises-and-smbs",
+    date: "21 Oct 2026",
+    isoDate: "2026-10-21",
+    title: "AI Strategy for Enterprises & SMBs: Start with the Process",
+    tag: "Industry",
+    description:
+      "How existing operations become the foundation for AI-enabled productivity and scale — Deployed's perspective on process-first AI strategy, supported by enterprise and SMB workflow stories from Komatsu, Hiscox, C.H. Robinson, and more.",
+    readingTime: 6,
+    author: dibyoMajumder,
+    gradient:
+      "linear-gradient(135deg, #0a1628 0%, #1a3a6e 50%, #2563eb 100%)",
+    coverImage: "/assets/blog-ai-strategy-for-enterprises-and-smbs-preview.png",
+    keywords: [
+      "AI strategy",
+      "enterprise AI",
+      "SMB AI",
+      "AI workflow redesign",
+      "process automation",
+      "AI deployment",
+      "operational efficiency",
+      "AI productivity",
+      "Dibyo Majumder",
+      "Komatsu AI",
+      "Hiscox AI",
+      "C.H. Robinson AI agents",
+      "Permanente Medical Group AI",
+      "Incra Group AI",
+      "McKinsey State of AI",
+      "workflow automation",
+      "AI transformation",
+      "embedded AI",
+      "cognitive automation",
+    ],
+    content: [
+      {
+        type: "paragraph",
+        text: "Every business has a process that its team knows takes more effort than it should. It may be the quotation that sits in an inbox, the invoice entered into several systems, or the routine request that needs an experienced employee’s attention before it can move forward. The work gets done, but at a cost that becomes harder to absorb as the business grows.",
+        lead: true,
+      },
+      {
+        type: "quote",
+        text: "That is where we believe AI strategy begins: with a process already in production and an operational inefficiency worth resolving. Understanding that process gives the strategy its purpose. The products, models, and systems come into focus once the business knows what it wants to improve.",
+      },
+      {
+        type: "paragraph",
+        text: "For enterprises and SMBs, this makes AI enablement a question of how the organisation works. Where does effort accumulate? What keeps a task waiting? Why does serving more customers require more people doing the same work? Behind these questions is a practical ambition: improve productivity so the business can grow without a proportional expansion of its workforce.",
+      },
+      {
+        type: "heading",
+        text: "The cognitive work inside the process",
+        id: "the-cognitive-work-inside-the-process",
+      },
+      {
+        type: "paragraph",
+        text: "A process often looks straightforward from a distance. Inside it, people are gathering context, interpreting information, deciding what matters, and working out what to do next. They then carry that decision into another system or pass the work to someone else. Much of what appears to be administration contains small acts of cognition repeated throughout the day.",
+      },
+      {
+        type: "paragraph",
+        text: "AI creates an opportunity to redistribute that effort. From predictive systems to generative AI and decision modelling, its capabilities can support work that draws on human cognition: recognising patterns, understanding documents, generating responses, and evaluating possible next steps. The opportunity becomes clearer when those capabilities are considered against the actual demands of a process.",
+      },
+      {
+        type: "paragraph",
+        text: "An answer, however, is often only part of the work. The result still needs to reach the customer, update a record, trigger an approval, or initiate another activity. Connecting AI’s cognitive capabilities with the ability to act allows a workflow to progress across these steps. The system can interpret what has arrived, prepare what is needed, and carry the work forward within the authority it has been given.",
+      },
+      {
+        type: "paragraph",
+        text: "These two foundations—supporting cognition and enabling action—give AI strategy much of its practical reach. The appropriate combination depends on the operation. A recommendation may be sufficient in one setting; another may benefit from a workflow that completes routine tasks autonomously and brings exceptions to a person. The strategy lies in designing that relationship around the outcome the business needs.",
+      },
+      {
+        type: "heading",
+        text: "From executing tasks to reviewing work",
+        id: "from-executing-tasks-to-reviewing-work",
+      },
+      {
+        type: "paragraph",
+        text: "As more preparation and routine execution move into the workflow, the human role changes with them. People can move from performing every task to reviewing prepared work, supervising progress, and exercising judgment where it matters most. Their expertise remains central, but it can support a greater volume of work because less of their day is consumed by getting each task ready for a decision.",
+      },
+      {
+        type: "paragraph",
+        text: "For a smaller business, this can release capacity that previously sat with a few overextended people. For an enterprise, it can improve a process repeated across teams, locations, and thousands of transactions. In both cases, the value comes from changing the relationship between the work required and the resources needed to complete it.",
+      },
+      {
+        type: "heading",
+        text: "Making the workflow work in production",
+        id: "making-the-workflow-work-in-production",
+      },
+      {
+        type: "paragraph",
+        text: "That change has to hold up inside everyday operations. The team’s knowledge, existing systems, working habits, and unusual cases all shape whether a workflow succeeds. Working alongside the people who own the process makes those realities part of the design. At Deployed, this is why we see AI transformation as a procedural change, with implementation embedded in the operation it is intended to improve.",
+      },
+      {
+        type: "paragraph",
+        text: "The commercial test follows the same logic. A baseline establishes what completing the work costs today—in time, labour, errors, or delayed service. The redesigned workflow must improve that position after accounting for its own running costs, maintenance, and human review. Capacity released becomes valuable when the business uses it to serve customers better, handle more work, or reduce the cost of delivery.",
+      },
+      {
+        type: "quote",
+        text: "This is the operating model we see AI enabling: people applying their expertise across a larger body of work, supported by systems that can understand enough to help and act within a defined scope. The organisation gains room to scale because the effort required for each additional customer or transaction becomes smaller.",
+      },
+      {
+        type: "heading",
+        text: "What this looks like in practice",
+        id: "what-this-looks-like-in-practice",
+      },
+      {
+        type: "paragraph",
+        text: "Published deployments show what this can look like in practice. The following businesses began with different operating constraints, but each changed a complete piece of work and reported a concrete result.",
+      },
+      {
+        type: "case-study",
+        company: "Komatsu Australia",
+        deck: "Removing repeated work from invoice processing",
+        body: [
+          "A three-person parts team was reading supplier invoices, entering data into spreadsheets, checking purchase orders, and entering information again into a legacy mainframe. Delays carried through to receiving and shipping parts.",
+          "Komatsu connected AI document extraction with automated validation and data entry, including integration with a mainframe that had no API.",
+          "A 2023 Microsoft customer story reported 1,100 invoices processed in three weeks and estimated annual savings of <strong>300 hours</strong> for one supplier. The existing operation gained capacity through a workflow built around its systems.",
+        ],
+      },
+      {
+        type: "case-study",
+        company: "Hiscox",
+        deck: "Giving underwriters work that is ready to review",
+        body: [
+          "Preparing an insurance quote involved extracting and assembling information from broker submissions before an underwriter could assess it.",
+          "Hiscox combined its underwriting platform with generative AI to process eligible risks and prepare a broker email with pricing and other details for underwriter review.",
+          "The workflow went live in August 2024, initially covering specified renewals in its sabotage and terrorism business, with quotes available within minutes. Preparation became faster while specialist judgment remained with the underwriter.",
+        ],
+      },
+      {
+        type: "case-study",
+        company: "Incra Group",
+        deck: "Creating capacity inside a smaller professional team",
+        body: [
+          "The Australian accounting and advisory firm was winning clients faster than it could hire accountants. Compliance preparation and reconciliations were consuming the time of skilled staff.",
+          "It introduced AI into tax, accounting, and client-service workflows, retaining professional review and judgment.",
+          "Its provider, Combinely, reports more than <strong>1,000 automated tasks</strong> monthly and a <strong>39%</strong> reduction in manual data processing across deployed workflows. The change gave a team of more than 20 people additional capacity within its core service delivery. These results are vendor-reported.",
+        ],
+      },
+      {
+        type: "case-study",
+        company: "C.H. Robinson",
+        deck: "Turning incoming requests into executable work",
+        body: [
+          "Freight requests arrive through emails and attachments that someone must interpret before preparing a quote or creating an order.",
+          "C.H. Robinson deployed agents that carry those requests into pricing and order creation.",
+          "In a 2025 release, it reported quotes in <strong>32 seconds</strong> and order creation in about <strong>90 seconds</strong>. Its orders agent was processing 5,500 truckload orders a day and saving <strong>600 labour hours daily</strong>, according to the company. The workflow connects understanding a request to completing the operational steps that follow.",
+        ],
+      },
+      {
+        type: "case-study",
+        company: "The Permanente Medical Group",
+        deck: "Giving physicians time back within care",
+        body: [
+          "Documenting patient visits added work during appointments and after the working day.",
+          "Ambient AI scribes were introduced to draft notes from physician–patient conversations, reducing the documentation burden while physicians retained responsibility for care.",
+          "An April 2025 analysis covered 7,260 physicians and more than 2.5 million encounters, reporting savings equivalent to <strong>1,794 working days</strong>. Among surveyed physicians, <strong>84%</strong> reported a positive effect on patient interactions. A change to an administrative workflow also created more room for the interaction at the centre of the service.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "These stories reflect a broader finding. In McKinsey’s March 2025 State of AI survey, workflow redesign had the strongest relationship with reported EBIT impact from generative AI among 25 organisational attributes examined. Only 21% of respondents whose organisations used generative AI said they had fundamentally redesigned at least some workflows. The survey establishes an association, rather than causation, but reinforces the importance of how AI is embedded into work.",
+      },
+      {
+        type: "heading",
+        text: "Where to begin",
+        id: "where-to-begin",
+      },
+      {
+        type: "paragraph",
+        text: "For a business deciding where to begin, the opportunity is often already visible to its team. There is work they repeat, information they struggle to assemble, or a queue they cannot clear as demand grows. Understanding that constraint gives AI strategy a useful starting point. Resolving it through a workflow the team can operate, measure, and own is how the strategy becomes part of the business.",
+      },
+      {
+        type: "references",
+        label: "Sources and reporting notes",
+        items: [
+          {
+            title: "Komatsu Australia",
+            text: "Komatsu Australia achieves end-to-end automation with Power Automate (7 June 2023)",
+            url: "https://www.microsoft.com/en/customers/story/1628106064451804013-komatsu-australia-manufacturing-power-automate",
+            description:
+              "Annual savings are a company estimate for one supplier.",
+          },
+          {
+            title: "Hiscox",
+            text: "Generative AI-enhanced lead underwriting model goes live (12 August 2024)",
+            url: "https://www.hiscoxgroup.com//news/press-releases/2024/12-08-24",
+            description:
+              "Results apply to the stated initial deployment scope.",
+          },
+          {
+            title: "Incra Group",
+            text: "Incra Group customer story — Combinely",
+            url: "https://www.combinely.ai/customers/incra-group",
+            description:
+              "Performance figures are vendor-reported; the 39% reduction applies to manual data processing across deployed workflows.",
+          },
+          {
+            title: "C.H. Robinson",
+            text: "AI Fleet Surpasses 30 Agents (2025)",
+            url: "https://www.chrobinson.com/en-us/about-us/newsroom/news/2025/ch-robinson-scales-fleet-of-ai-agents-past-30/",
+            description:
+              "Processing volumes, turnaround times, and labour savings are company-reported.",
+          },
+          {
+            title: "The Permanente Medical Group",
+            text: "AI scribes save physicians time, improve patient interactions and work satisfaction (7 April 2025)",
+            url: "https://permanente.org/analysis-ai-scribes-save-physicians-time-improve-patient-interactions-and-work-satisfaction/",
+            description:
+              "Analysis published in NEJM Catalyst. Patient-interaction results reflect surveyed physicians.",
+          },
+          {
+            title: "McKinsey & Company",
+            text: "The state of AI: How organizations are rewiring to capture value (12 March 2025)",
+            url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-how-organizations-are-rewiring-to-capture-value",
+            description:
+              "Findings reflect survey associations and self-reported outcomes.",
           },
         ],
       },

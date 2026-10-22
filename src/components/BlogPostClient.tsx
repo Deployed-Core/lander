@@ -404,6 +404,84 @@ export default function BlogPostClient({ slug }: { slug: string }) {
             padding: 20px !important;
           }
         }
+        .blog-case-study {
+          border-top: 1px solid var(--border-hairline);
+          max-width: 700px;
+        }
+        .blog-case-study:last-of-type {
+          border-bottom: 1px solid var(--border-hairline);
+          margin-bottom: var(--space-8);
+        }
+        .blog-case-study__summary {
+          list-style: none;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: var(--space-6);
+          padding: var(--space-6) 0;
+        }
+        .blog-case-study__summary::-webkit-details-marker { display: none; }
+        .blog-case-study__summary::marker { content: ""; }
+        .blog-case-study__heading {
+          display: block;
+          min-width: 0;
+        }
+        .blog-case-study__company {
+          display: block;
+          font-family: var(--font-display);
+          font-size: clamp(22px, 2.6vw, 26px);
+          font-weight: 600;
+          line-height: 1.25;
+          letter-spacing: -0.5px;
+          color: var(--text-strong);
+        }
+        .blog-case-study__deck {
+          display: block;
+          font: var(--body-md);
+          color: var(--text-muted);
+          line-height: 1.5;
+          margin-top: var(--space-2);
+        }
+        .blog-case-study__toggle {
+          width: 30px;
+          height: 30px;
+          border: 1px solid var(--border-hairline);
+          border-radius: 50%;
+          flex-shrink: 0;
+          display: grid;
+          place-items: center;
+          color: var(--blue-600);
+          font-family: Arial, sans-serif;
+          font-size: 23px;
+          line-height: 1;
+        }
+        .blog-case-study__toggle::before { content: "+"; }
+        .blog-case-study[open] .blog-case-study__toggle::before { content: "\\2212"; }
+        .blog-case-study__summary:hover .blog-case-study__company {
+          color: var(--blue-600);
+        }
+        .blog-case-study__body {
+          padding: 0 0 var(--space-6);
+        }
+        .blog-case-study__body p {
+          font: var(--body-md);
+          color: var(--text-body);
+          line-height: 1.85;
+          margin: 0 0 var(--space-4);
+        }
+        .blog-case-study__body p:last-child {
+          margin-bottom: 0;
+        }
+        .blog-case-study__body strong {
+          font-weight: 700;
+          color: var(--text-strong);
+        }
+        @media (max-width: 800px) {
+          .blog-case-study__company { font-size: 22px; }
+          .blog-case-study__summary { gap: var(--space-4); padding: var(--space-5) 0; }
+          .blog-case-study__deck { font-size: 15px; }
+        }
       `}</style>
 
       {/* Scroll progress bar */}
@@ -2321,6 +2399,29 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                       {block.caption}
                     </figcaption>
                   </figure>
+                );
+              case "case-study":
+                return (
+                  <details
+                    key={i}
+                    className="blog-case-study"
+                  >
+                    <summary className="blog-case-study__summary">
+                      <span className="blog-case-study__heading">
+                        <span className="blog-case-study__company">{block.company}</span>
+                        <span className="blog-case-study__deck">{block.deck}</span>
+                      </span>
+                      <span className="blog-case-study__toggle" aria-hidden="true" />
+                    </summary>
+                    <div className="blog-case-study__body">
+                      {block.body.map((para, j) => (
+                        <p
+                          key={j}
+                          dangerouslySetInnerHTML={{ __html: para }}
+                        />
+                      ))}
+                    </div>
+                  </details>
                 );
               case "invitation":
                 return (

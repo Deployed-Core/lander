@@ -114,7 +114,7 @@ export default function BlogPage() {
         }
       `}</style>
 
-      <SiteNav active="Blog" tone="navy-solid" />
+      <SiteNav active="Blog" tone="light" />
 
       {/* Hero / eyebrow */}
       <section
