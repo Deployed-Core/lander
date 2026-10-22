@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import SiteFooter from "@/components/SiteFooter";
 import { posts } from "@/data/posts";
 
@@ -114,6 +115,7 @@ export default function BlogPage() {
         }
       `}</style>
 
+      <AnnouncementBar tone="light" />
       <SiteNav active="Blog" tone="light" />
 
       {/* Hero / eyebrow */}

@@ -1,43 +1,64 @@
 import Link from "next/link";
 
-export default function AnnouncementBar({ tone = "light" }: { tone?: "light" | "navy" }) {
-  const navy = tone === "navy";
+export default function AnnouncementBar({ tone = "light" }: { tone?: "light" | "navy" | "navy-solid" }) {
+  const dark = tone === "navy" || tone === "navy-solid";
   return (
     <div
       style={{
-        background: navy ? "var(--blue-950)" : "var(--paper-050)",
-        color: navy ? "var(--paper-050)" : "var(--text-body)",
+        background: dark
+          ? "var(--paper-050)"
+          : "var(--blue-950)",
+        color: dark ? "var(--text-strong)" : "var(--paper-050)",
+        borderBottom: dark ? "1px solid var(--border-hairline)" : "none",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         gap: 14,
-        padding: "11px 24px",
+        padding: "10px 24px",
         font: "var(--body-sm)",
         textAlign: "center",
-        borderBottom: navy ? "none" : "1px solid var(--border-hairline)",
       }}
     >
-      <span>Now taking Q4 deployment engagements</span>
-      <Link
-        href="/contact"
+      <span
         style={{
-          color: navy ? "var(--blue-300)" : "var(--text-strong)",
           display: "inline-flex",
           alignItems: "center",
-          gap: 7,
+          gap: 10,
+          fontWeight: 600,
+        }}
+      >
+        <span
+          style={{
+            background: dark
+              ? "rgba(10, 37, 64, 0.08)"
+              : "rgba(255, 255, 255, 0.14)",
+            color: dark ? "var(--blue-700)" : "var(--blue-200)",
+            font: "var(--label)",
+            letterSpacing: "var(--label-track)",
+            padding: "3px 10px",
+            borderRadius: "var(--radius-pill)",
+            lineHeight: 1.4,
+          }}
+        >
+          Latest
+        </span>
+        State of AI in Healthcare — 2026
+      </span>
+      <Link
+        href="/report/state-of-ai-in-healthcare-2026"
+        style={{
+          color: dark ? "var(--text-link)" : "var(--blue-300)",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 5,
           font: "var(--label)",
           letterSpacing: "var(--label-track)",
           borderBottom: 0,
+          whiteSpace: "nowrap",
         }}
       >
-        Get in touch
-        {!navy && (
-          <img
-            src="/assets/icon-arrow-navy.png"
-            alt=""
-            style={{ width: 13, height: 12, display: "block" }}
-          />
-        )}
+        Read More
+        <span aria-hidden="true" style={{ fontSize: 14 }}>&rarr;</span>
       </Link>
     </div>
   );

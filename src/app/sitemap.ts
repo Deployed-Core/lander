@@ -1,5 +1,6 @@
 import { MetadataRoute } from "next";
 import { posts } from "@/data/posts";
+import { reports } from "@/data/reports";
 
 const BASE = "https://www.deployed.md";
 
@@ -34,5 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...pages, ...blogPages];
+  const reportPages: MetadataRoute.Sitemap = reports.map((report) => ({
+    url: `${BASE}/report/${report.slug}`,
+    lastModified: report.isoDate,
+    changeFrequency: "yearly" as const,
+    priority: 0.85,
+  }));
+
+  return [...pages, ...blogPages, ...reportPages];
 }

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 const PRINCIPLES: { title: string; body: string[] }[] = [
   {
@@ -110,6 +111,7 @@ export default function StrategyPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav active="Core" tone="navy-solid" />
 
       {/* Hero */}

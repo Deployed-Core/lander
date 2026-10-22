@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 const rotatingLines = [
   "The workflow everyone complains about.",
@@ -64,6 +65,7 @@ export default function TheDeployedFitPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav active="Core" tone="navy-solid" />
 
       {/* Hero */}

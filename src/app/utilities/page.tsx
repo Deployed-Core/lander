@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function UtilitiesPage() {
   useEffect(() => {
@@ -45,6 +46,7 @@ export default function UtilitiesPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav active="Industries" tone="navy-solid" />
 
       {/* Hero */}

@@ -7,6 +7,7 @@ import worldMap from "world-atlas/countries-110m.json";
 import SiteNav from "@/components/SiteNav";
 import LeadershipSection from "@/components/LeadershipSection";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function AboutPage() {
   const locations = [
@@ -54,6 +55,7 @@ export default function AboutPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav active="Company" tone="navy-solid" />
 
       {/* Hero */}

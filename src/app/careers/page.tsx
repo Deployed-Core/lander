@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function CareersPage() {
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function CareersPage() {
 
   return (
     <div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav active="Company" tone="navy-solid" />
 
       {/* Hero */}

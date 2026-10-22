@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export const metadata: Metadata = {
   title: "Knowledge base — In progress",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function BipPage() {
   return (
     <div style={{ background: "var(--surface-page)", minHeight: "100vh" }}>
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav tone="navy-solid" />
 
       <section

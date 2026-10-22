@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export const metadata: Metadata = {
 	title: "Privacy Policy",
@@ -26,6 +27,7 @@ const bodyText: React.CSSProperties = {
 export default function PrivacyPage() {
 	return (
 		<div style={{ background: "var(--paper-050)", minHeight: "100vh" }}>
+			<AnnouncementBar tone="navy-solid" />
 			<SiteNav tone="navy-solid" />
 
 			<section

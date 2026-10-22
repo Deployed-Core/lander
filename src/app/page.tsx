@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
+import AnnouncementBar from "@/components/AnnouncementBar";
 
 export default function Home() {
   useEffect(() => {
@@ -108,6 +109,7 @@ export default function Home() {
       `}</style>
 
       {/* ── Nav ── */}
+      <AnnouncementBar tone="navy-solid" />
       <SiteNav tone="navy-solid" />
 
       {/* ── Hero ── */}
