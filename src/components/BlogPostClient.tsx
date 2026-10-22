@@ -11,6 +11,150 @@ import {
   type ContentBlock,
 } from "@/data/posts";
 
+function ReferenceLogos({
+  items,
+}: {
+  items: { logo?: string; title?: string; text: string; url: string; description?: string }[];
+}) {
+  const [active, setActive] = useState<number | null>(null);
+
+  return (
+    <>
+      <div className="ref-logos-row">
+        {items.map((ref, j) => (
+          <div
+            key={j}
+            className="ref-logo-pill"
+            data-active={active === j}
+            onMouseEnter={() => setActive(j)}
+            onMouseLeave={() => setActive(null)}
+            onClick={() => setActive(active === j ? null : j)}
+          >
+            <div className="ref-logo-pill__logo">
+              {ref.logo && (
+                <img
+                  src={ref.logo}
+                  alt={ref.title || ""}
+                  className="ref-logo-pill__img"
+                />
+              )}
+            </div>
+            <div className="ref-logo-pill__body">
+              <p className="ref-logo-pill__desc">
+                {ref.description || ref.text}
+              </p>
+              <a
+                href={ref.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="ref-logo-pill__link"
+              >
+                Read more &rarr;
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+      <style>{`
+        .ref-logos-row {
+          display: flex;
+          gap: var(--space-3);
+          align-items: stretch;
+        }
+        .ref-logo-pill {
+          display: flex;
+          align-items: center;
+          gap: var(--space-5);
+          flex: 1 1 0;
+          min-width: 0;
+          background: var(--surface-card);
+          border: 1px solid var(--border-hairline);
+          border-radius: var(--radius-lg);
+          padding: var(--space-5) var(--space-6);
+          cursor: pointer;
+          transition: flex 0.35s ease, border-color 0.2s, box-shadow 0.2s;
+          overflow: hidden;
+        }
+        .ref-logo-pill[data-active="true"] {
+          flex: 3.5 1 0;
+          border-color: var(--border-subtle);
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .ref-logo-pill__logo {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+        }
+        .ref-logo-pill__img {
+          width: 70%;
+          max-height: 44px;
+          object-fit: contain;
+          opacity: 0.55;
+          transition: opacity 0.2s;
+        }
+        .ref-logo-pill[data-active="true"] .ref-logo-pill__logo {
+          width: auto;
+        }
+        .ref-logo-pill[data-active="true"] .ref-logo-pill__img {
+          width: auto;
+          height: 32px;
+        }
+        .ref-logo-pill[data-active="true"] .ref-logo-pill__img {
+          opacity: 1;
+        }
+        .ref-logo-pill__body {
+          flex: 1 1 0;
+          min-width: 0;
+          overflow: hidden;
+          opacity: 0;
+          max-width: 0;
+          transition: opacity 0.25s ease 0.05s, max-width 0.35s ease;
+        }
+        .ref-logo-pill[data-active="true"] .ref-logo-pill__body {
+          opacity: 1;
+          max-width: 500px;
+        }
+        .ref-logo-pill__desc {
+          font: var(--body-sm);
+          color: var(--text-body);
+          line-height: 1.55;
+          margin: 0 0 var(--space-2) 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .ref-logo-pill__link {
+          font: var(--body-sm);
+          color: var(--blue-600);
+          text-decoration: none;
+          white-space: nowrap;
+        }
+        .ref-logo-pill__link:hover {
+          border-bottom: 1px solid var(--blue-600);
+        }
+        @media (max-width: 600px) {
+          .ref-logos-row {
+            flex-direction: column;
+          }
+          .ref-logo-pill[data-active="true"] {
+            flex: 1 1 auto;
+          }
+          .ref-logo-pill__body {
+            max-width: 0;
+          }
+          .ref-logo-pill[data-active="true"] .ref-logo-pill__body {
+            max-width: 100%;
+          }
+        }
+      `}</style>
+    </>
+  );
+}
+
 export default function BlogPostClient({ slug }: { slug: string }) {
   const post = getPostBySlug(slug)!;
   const related = getRelatedPosts(slug);
@@ -344,6 +488,7 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
+                objectPosition: post.coverPosition || "center",
               }}
             />
           ) : (
@@ -1539,7 +1684,33 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                     {block.text}
                   </div>
                 );
-              case "references":
+              case "references": {
+                const hasLogos = block.items.some((r) => r.logo);
+                if (hasLogos) {
+                  return (
+                    <section
+                      key={i}
+                      style={{
+                        marginTop: "var(--space-10)",
+                        paddingTop: "var(--space-8)",
+                        borderTop: "1px solid var(--border-hairline)",
+                      }}
+                    >
+                      <h3
+                        style={{
+                          font: "var(--label)",
+                          letterSpacing: "var(--label-track)",
+                          textTransform: "uppercase",
+                          color: "var(--text-muted)",
+                          marginBottom: "var(--space-6)",
+                        }}
+                      >
+                        {block.label || "References"}
+                      </h3>
+                      <ReferenceLogos items={block.items} />
+                    </section>
+                  );
+                }
                 return (
                   <section
                     key={i}
@@ -1555,17 +1726,29 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                         letterSpacing: "var(--label-track)",
                         textTransform: "uppercase",
                         color: "var(--text-muted)",
-                        marginBottom: "var(--space-4)",
+                        marginBottom: block.note ? "var(--space-2)" : "var(--space-4)",
                       }}
                     >
-                      References
+                      {block.label || "References"}
                     </h3>
+                    {block.note && (
+                      <p
+                        style={{
+                          font: "var(--body-sm)",
+                          color: "var(--text-muted)",
+                          lineHeight: 1.6,
+                          marginBottom: "var(--space-4)",
+                        }}
+                      >
+                        {block.note}
+                      </p>
+                    )}
                     <ol
                       style={{
                         margin: 0,
                         paddingLeft: "var(--space-5)",
                         display: "grid",
-                        gap: "var(--space-2)",
+                        gap: "var(--space-4)",
                       }}
                     >
                       {block.items.map((ref, j) => (
@@ -1577,6 +1760,17 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                             lineHeight: 1.6,
                           }}
                         >
+                          {ref.title && (
+                            <strong
+                              style={{
+                                display: "block",
+                                color: "var(--text-strong)",
+                                marginBottom: 4,
+                              }}
+                            >
+                              {ref.title}
+                            </strong>
+                          )}
                           <a
                             href={ref.url}
                             target="_blank"
@@ -1588,11 +1782,23 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                           >
                             {ref.text}
                           </a>
+                          {ref.description && (
+                            <span
+                              style={{
+                                display: "block",
+                                marginTop: 4,
+                                color: "var(--text-muted)",
+                              }}
+                            >
+                              {ref.description}
+                            </span>
+                          )}
                         </li>
                       ))}
                     </ol>
                   </section>
                 );
+              }
               case "figure-comparison":
                 return (
                   <figure
@@ -2490,16 +2696,30 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                       overflow: "hidden",
                     }}
                   >
-                    <div
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        background: "url(/assets/grain-512.png) repeat",
-                        backgroundSize: "512px 512px",
-                        opacity: 0.06,
-                        mixBlendMode: "soft-light",
-                      }}
-                    />
+                    {rp.coverImage ? (
+                      <img
+                        src={rp.coverImage}
+                        alt={rp.title}
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
+                        }}
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          position: "absolute",
+                          inset: 0,
+                          background: "url(/assets/grain-512.png) repeat",
+                          backgroundSize: "512px 512px",
+                          opacity: 0.06,
+                          mixBlendMode: "soft-light",
+                        }}
+                      />
+                    )}
                   </div>
                   <div
                     style={{
